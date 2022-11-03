@@ -6,39 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
-    <height>840</height>
+    <width>1086</width>
+    <height>849</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>809</width>
-    <height>714</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>16777196</width>
-    <height>16777215</height>
-   </size>
-  </property>
-  <property name="contextMenuPolicy">
-   <enum>Qt::NoContextMenu</enum>
-  </property>
-  <property name="acceptDrops">
-   <bool>false</bool>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: #8bd6cb;</string>
-  </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
+     <x>40</x>
+     <y>30</y>
      <width>201</width>
      <height>151</height>
     </rect>
@@ -103,11 +82,151 @@ font:bold;</string>
     </property>
    </widget>
   </widget>
+  <widget class="QLabel" name="label_16">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>750</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="icons/icons.qrc">:/icons/setting.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="containor">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>30</y>
+     <width>771</width>
+     <height>781</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="stats_frame">
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>220</y>
+       <width>181</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 50px;</string>
+     </property>
+     <property name="text">
+      <string>STATS</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="products_frame">
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>310</y>
+       <width>221</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 50px;</string>
+     </property>
+     <property name="text">
+      <string>products</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="categories_frame">
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>420</y>
+       <width>251</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 50px;</string>
+     </property>
+     <property name="text">
+      <string>categories</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="employees_frame">
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>290</y>
+       <width>251</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 50px;</string>
+     </property>
+     <property name="text">
+      <string>employees</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="sellings_frame_2">
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>290</y>
+       <width>191</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 50px;</string>
+     </property>
+     <property name="text">
+      <string>sellings</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="bills_frame">
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>290</y>
+       <width>181</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 50px;</string>
+     </property>
+     <property name="text">
+      <string>BILLS</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>20</y>
+     <x>250</x>
+     <y>30</y>
      <width>31</width>
      <height>801</height>
     </rect>
@@ -116,11 +235,30 @@ font:bold;</string>
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
+  <widget class="QLabel" name="label_17">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>800</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="icons/icons.qrc">:/icons/shutdown.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>190</y>
+     <x>40</x>
+     <y>200</y>
      <width>200</width>
      <height>521</height>
     </rect>
@@ -487,162 +625,6 @@ font:bold;</string>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="label_16">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>740</y>
-     <width>41</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="icons/icons.qrc">:/icons/setting.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_17">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>790</y>
-     <width>41</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="icons/icons.qrc">:/icons/shutdown.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QStackedWidget" name="containor">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>20</y>
-     <width>771</width>
-     <height>781</height>
-    </rect>
-   </property>
-   <widget class="QWidget" name="stats_frame">
-    <widget class="QLabel" name="label_18">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>220</y>
-       <width>181</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
-     </property>
-     <property name="text">
-      <string>STATS</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="products_frame">
-    <widget class="QLabel" name="label_19">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>310</y>
-       <width>221</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
-     </property>
-     <property name="text">
-      <string>products</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="categories_frame">
-    <widget class="QLabel" name="label_20">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>420</y>
-       <width>251</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
-     </property>
-     <property name="text">
-      <string>categories</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="employees_frame">
-    <widget class="QLabel" name="label_21">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>290</y>
-       <width>251</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
-     </property>
-     <property name="text">
-      <string>employees</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="sellings_frame_2">
-    <widget class="QLabel" name="label_22">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>290</y>
-       <width>191</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
-     </property>
-     <property name="text">
-      <string>sellings</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="bills_frame">
-    <widget class="QLabel" name="label_23">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>290</y>
-       <width>181</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
-     </property>
-     <property name="text">
-      <string>BILLS</string>
-     </property>
-    </widget>
-   </widget>
   </widget>
  </widget>
  <resources>
