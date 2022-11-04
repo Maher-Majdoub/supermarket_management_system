@@ -212,7 +212,7 @@ QPushButton#login_btn:pressed{
 	color : #154c79;
 	font: bold;
 	font-size: 25px;	
-	backgound-color: rgba(0,0,0,0);
+	background-color: rgba(0,0,0,0);
 }
 QPushButton#close_btn:pressed{
 		padding-top: 5px;
@@ -237,7 +237,7 @@ QPushButton#close_btn:pressed{
 	color : #154c79;
 	font: bold;
 	font-size:40px;	
-	backgound-color: rgba(0,0,0,0);
+	background-color: rgba(0,0,0,0);
 }
 QPushButton#minimize_btn:pressed{
 		padding-top: 5px;
