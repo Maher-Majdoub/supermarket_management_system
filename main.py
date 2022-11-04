@@ -2,9 +2,14 @@
 this is the main program
 the project is not finished yet
 """
+#pyrcc5 icons.qrc -o icons.py
+
 
 #imports
-from PyQt5 import QtCore, QtGui, QtWidgets, uic 
+import sys
+from gui.icons import icons
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5.QtGui import QIcon
 import sys
 
 
@@ -31,14 +36,12 @@ class LOGIN(QtWidgets.QWidget):
 class Controller:
     def __init__(self):
         pass
-
-        
+  
     def show_login(self):
 
         self.login = LOGIN()
         self.login.switch_window.connect(self.show_admin_panel)
         self.login.show()
-
 
     def show_admin_panel(self):
         self.admin_panel = Ui()
