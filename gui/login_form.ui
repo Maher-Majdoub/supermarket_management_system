@@ -121,7 +121,7 @@ font : bold;</string>
      <string>LOGIN</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="user_name">
     <property name="geometry">
      <rect>
       <x>310</x>
@@ -141,7 +141,7 @@ font-size: 18px;</string>
      <string>User Name</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="passwd">
     <property name="geometry">
      <rect>
       <x>310</x>
@@ -156,6 +156,9 @@ border-bottom: 3px solid #154c79;
 color: #1c100b;
 padding-bottom: 7px;
 font-size: 18px;</string>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
     <property name="placeholderText">
      <string>Password</string>

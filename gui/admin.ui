@@ -24,7 +24,7 @@
 	background-color:rgb(37, 150, 190);
 }
 QLabel[statusTip = &quot;this&quot;]{
-	color:#black;
+	color:black;
 }
 QHBoxLayout{
 	background-color:black;
