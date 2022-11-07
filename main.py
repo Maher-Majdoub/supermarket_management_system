@@ -7,6 +7,7 @@ the project is not finished yet
 
 #imports
 import sys
+from src.style_sheets import *
 from gui.icons import icons
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtGui import QIcon
@@ -14,11 +15,29 @@ import sys
 import mysql.connector
 
 
+def switch_btn_clicked(form, frame, lbl):
+    form.containor.setCurrentWidget(frame)
+    lbl.setProperty("enabled", "false")
+    for i in range (form.options.count()):
+        label = form.options.itemAt(i).widget()
+        if label != lbl:
+            label.setEnabled(True)
+    form.setStyleSheet(admin_form_style_sheet)
+
+
 class Admin(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
         uic.loadUi('.\\gui\\admin.ui', self)
         self.show()
+        self.containor.setCurrentWidget(self.stats_frame)
+        self.stats_btn.clicked.connect(lambda : switch_btn_clicked(self, self.stats_frame, self.stats_lbl))
+        self.products_btn.clicked.connect(lambda : switch_btn_clicked(self, self.products_frame, self.products_lbl))
+        self.categories_btn.clicked.connect(lambda : switch_btn_clicked(self, self.categories_frame, self.categories_lbl))
+        self.employees_btn.clicked.connect(lambda : switch_btn_clicked(self, self.employees_frame, self.employees_lbl))
+        self.sellings_btn.clicked.connect(lambda : switch_btn_clicked(self, self.sellings_frame, self.sellings_lbl))
+        self.bills_btn.clicked.connect(lambda : switch_btn_clicked(self, self.bills_frame, self.bills_lbl))
+
 
 class Login(QtWidgets.QWidget):
     switch_window = QtCore.pyqtSignal()
@@ -28,20 +47,21 @@ class Login(QtWidgets.QWidget):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         uic.loadUi('.\\gui\\login_form.ui', self)
         self.login_btn.clicked.connect(self.login)
+        self.close_btn.clicked.connect(self.close)
+        self.minimize_btn.clicked.connect(self.showMinimized)
 
     def login(self):
         self.switch_window.emit()
-
 
 
 class Controller:
     def __init__(self):
         pass
   
-    def check_entries(x,y): return True
+    def check_entries(x,y): #verfying the inputs
+        return True
 
     def show_login(self):
-
         self.login = Login()
         self.login.switch_window.connect(self.show_user_panel)
         self.login.show()
@@ -69,12 +89,12 @@ class Controller:
         cursor = mydb.cursor()
 
         #geting the role of the user from the db
-        get_role = "select role from accounts where user_name = %s and password = %s"
+        get_role = "SELECT role FROM accounts WHERE user_name = %s AND password = %s" 
         cursor.execute(get_role, (user_name, password))
 
         try:
             role = cursor.fetchone()[0]
-        except TypeError: #in case that theres no an acc 
+        except TypeError: #in case that theres not an acc 
             role = None
 
 
@@ -88,7 +108,6 @@ class Controller:
             print('acc introuvable')
         else:
             print('invalid role')
-
 
 
 if __name__ == '__main__':

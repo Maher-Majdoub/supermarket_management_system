@@ -37,6 +37,10 @@ QFrame[statusTip = &quot;option&quot;][enabled = &quot;true&quot;]:hover{
 	background-color: rgba(110, 110, 110, 120);
 	border-left: 6px solid #000;
  }
+QFrame[statusTip = &quot;option&quot;][enabled = &quot;false&quot;]{
+	background-color: rgba(110, 110, 110, 120);
+	border-left: 6px solid #000;
+ }
 </string>
   </property>
   <widget class="QGroupBox" name="groupBox">
@@ -140,7 +144,7 @@ font:bold;</string>
     <string notr="true">background-color:rgb(37, 150, 190)</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -217,7 +221,7 @@ font:bold;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="sellings_frame_2">
+   <widget class="QWidget" name="sellings_frame">
     <widget class="QLabel" name="label_22">
      <property name="geometry">
       <rect>
@@ -298,9 +302,12 @@ font:bold;</string>
      <height>511</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="options">
     <item>
      <widget class="QFrame" name="stats_lbl">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="statusTip">
        <string>option</string>
       </property>
@@ -407,7 +414,7 @@ background-color: rgba(0,0,0,0);
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="product_lbl">
+     <widget class="QFrame" name="products_lbl">
       <property name="statusTip">
        <string>option</string>
       </property>
@@ -508,7 +515,7 @@ color:red;
         <cstring>this</cstring>
        </property>
       </widget>
-      <widget class="QPushButton" name="product_btn">
+      <widget class="QPushButton" name="products_btn">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -530,6 +537,9 @@ background-color: rgba(0,0,0,0);
     </item>
     <item>
      <widget class="QFrame" name="categories_lbl">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="statusTip">
        <string>option</string>
       </property>
@@ -927,7 +937,7 @@ background-color: rgba(0,0,0,0);
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QPushButton" name="billls_btn">
+      <widget class="QPushButton" name="bills_btn">
        <property name="geometry">
         <rect>
          <x>0</x>
