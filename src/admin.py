@@ -5,7 +5,7 @@ class Admin(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
         uic.loadUi('.\\gui\\admin.ui', self)
-        self.show()
+        self.show() 
         self.containor.setCurrentWidget(self.stats_frame)
         self.stats_btn.clicked.connect(lambda : self.switch_btn_clicked(self.stats_frame, self.stats_lbl))
         self.products_btn.clicked.connect(lambda : self.switch_btn_clicked(self.products_frame, self.products_lbl))
