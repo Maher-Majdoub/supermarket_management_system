@@ -7,7 +7,8 @@ the project is not finished yet
 
 #imports
 import sys
-from src.style_sheets import *
+from src.admin import Admin
+from src.login import Login
 from gui.icons import icons
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtGui import QIcon
@@ -15,49 +16,7 @@ import sys
 import mysql.connector
 
 
-def switch_btn_clicked(form, frame, lbl):
-    form.containor.setCurrentWidget(frame)
-    lbl.setProperty("enabled", "false")
-    for i in range (form.options.count()):
-        label = form.options.itemAt(i).widget()
-        if label != lbl:
-            label.setEnabled(True)
-    form.setStyleSheet(admin_form_style_sheet)
-
-
-class Admin(QtWidgets.QWidget):
-    def __init__(self):
-        QtWidgets.QWidget.__init__(self)
-        uic.loadUi('.\\gui\\admin.ui', self)
-        self.show()
-        self.containor.setCurrentWidget(self.stats_frame)
-        self.stats_btn.clicked.connect(lambda : switch_btn_clicked(self, self.stats_frame, self.stats_lbl))
-        self.products_btn.clicked.connect(lambda : switch_btn_clicked(self, self.products_frame, self.products_lbl))
-        self.categories_btn.clicked.connect(lambda : switch_btn_clicked(self, self.categories_frame, self.categories_lbl))
-        self.employees_btn.clicked.connect(lambda : switch_btn_clicked(self, self.employees_frame, self.employees_lbl))
-        self.sellings_btn.clicked.connect(lambda : switch_btn_clicked(self, self.sellings_frame, self.sellings_lbl))
-        self.bills_btn.clicked.connect(lambda : switch_btn_clicked(self, self.bills_frame, self.bills_lbl))
-
-
-class Login(QtWidgets.QWidget):
-    switch_window = QtCore.pyqtSignal()
-    def __init__(self):
-        QtWidgets.QWidget.__init__(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        uic.loadUi('.\\gui\\login_form.ui', self)
-        self.login_btn.clicked.connect(self.login)
-        self.close_btn.clicked.connect(self.close)
-        self.minimize_btn.clicked.connect(self.showMinimized)
-
-    def login(self):
-        self.switch_window.emit()
-
-
 class Controller:
-    def __init__(self):
-        pass
-  
     def check_entries(x,y): #verfying the inputs
         return True
 
