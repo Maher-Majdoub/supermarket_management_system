@@ -57,11 +57,11 @@ class Controller:
             role = None
 
 
-        if role == '\'admin\'':   
+        if role == 'admin':   
             self.admin_panel = Admin()
             self.login.close()
             self.admin_panel.show()
-        elif role == '\'employee\'':
+        elif role == 'employee':
             print('hello')
         elif role == None:  #invalid user_name or password
             print('acc introuvable')

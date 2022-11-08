@@ -1,13 +1,17 @@
 <RCC>
   <qresource prefix="icons">
-    <file>setting.png</file>
-    <file>shutdown.png</file>
     <file>admin.png</file>
+    <file>employee_c.png</file>
     <file>sellings.png</file>
     <file>bill.png</file>
     <file>categories.png</file>
     <file>employee.png</file>
     <file>products.png</file>
     <file>stats.png</file>
+    <file>down-arrow.png</file>
+    <file>products_c.png</file>
+    <file>categories_c.png</file>
+    <file>logout.png</file>
+    <file>settings.png</file>
   </qresource>
 </RCC>
