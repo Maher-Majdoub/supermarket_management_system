@@ -1,7 +1,5 @@
 from .style_sheets import *
-from gui.icons import icons
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from PyQt5.QtGui import QIcon
+from PyQt5 import QtWidgets, uic
 
 class Admin(QtWidgets.QWidget):
     def __init__(self):

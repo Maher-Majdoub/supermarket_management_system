@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5 import QtCore, QtWidgets, uic
 
 class Login(QtWidgets.QWidget):
     switch_window = QtCore.pyqtSignal()

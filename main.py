@@ -10,7 +10,7 @@ import sys
 from src.admin import Admin
 from src.login import Login
 from gui.icons import icons
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 import sys
 import mysql.connector
