@@ -20,7 +20,7 @@ mydb = mysql.connector.connect(
     host = 'localhost',
     user = 'root',
     passwd = 'admin',
-    database = 'supermarket_db'
+    database = 'supermarket'
 )
 
 
@@ -49,20 +49,29 @@ class Controller:
         cursor = mydb.cursor()
 
         #geting the role of the user from the db
-        get_role = "SELECT role FROM accounts WHERE user_name = %s AND password = %s" 
+        get_role = "SELECT account_id, role FROM accounts WHERE user_name = %s AND password = %s" 
         cursor.execute(get_role, (user_name, password))
 
+        role = None
         try:
-            role = cursor.fetchone()[0]
+            info = cursor.fetchone()
+            id = info[0]
+            role = info[1]
         except TypeError: #in case that theres not an acc 
-            role = None
+            pass
 
 
-        if role == 'admin':   
-            self.admin_panel = Admin(mydb)
+        if role == 'admin':
+            cursor.execute("SELECT first_name, last_name FROM admins WHERE %s = account_id",(id,))      
+            info = cursor.fetchone()                  
+            name = info[0] + ' ' + info[1]
+            self.admin_panel = Admin(mydb,name)            
+            self.admin_panel.show()     
+
             self.login.close()
-            self.admin_panel.show()
-        elif role == 'employee':
+
+
+        elif role == 'seller':
             print('hello')
         elif role == None:  #invalid user_name or password
             print('acc introuvable')

@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QSizePolicy, QStackedWidget, QTableWidget, QTableWidgetItem,
     QTextEdit, QVBoxLayout, QWidget)
 import icons_rc
+import icons_rc
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -537,73 +538,73 @@ class Ui_Form(object):
         self.tableWidget_3.setMinimumSize(QSize(511, 401))
         self.tableWidget_3.setMaximumSize(QSize(511, 401))
         self.containor.addWidget(self.users_frame)
-        self.sellings_frame = QWidget()
-        self.sellings_frame.setObjectName(u"sellings_frame")
-        self.label_44 = QLabel(self.sellings_frame)
+        self.incomes_frame = QWidget()
+        self.incomes_frame.setObjectName(u"incomes_frame")
+        self.label_44 = QLabel(self.incomes_frame)
         self.label_44.setObjectName(u"label_44")
         self.label_44.setGeometry(QRect(110, 70, 141, 131))
         self.label_44.setPixmap(QPixmap(u":/icons/sellings_c.png"))
         self.label_44.setScaledContents(True)
-        self.label_45 = QLabel(self.sellings_frame)
+        self.label_45 = QLabel(self.incomes_frame)
         self.label_45.setObjectName(u"label_45")
-        self.label_45.setGeometry(QRect(140, 10, 81, 31))
+        self.label_45.setGeometry(QRect(140, 10, 91, 31))
         self.label_45.setStyleSheet(u"color: #154c79;\n"
 "font-size: 20px;\n"
 "font: bold;\n"
 "")
-        self.label_46 = QLabel(self.sellings_frame)
+        self.label_46 = QLabel(self.incomes_frame)
         self.label_46.setObjectName(u"label_46")
         self.label_46.setGeometry(QRect(330, 50, 31, 31))
         self.label_46.setFont(font)
-        self.categorie_id_9 = QLineEdit(self.sellings_frame)
+        self.categorie_id_9 = QLineEdit(self.incomes_frame)
         self.categorie_id_9.setObjectName(u"categorie_id_9")
         self.categorie_id_9.setGeometry(QRect(440, 40, 161, 41))
         self.categorie_id_9.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_47 = QLabel(self.sellings_frame)
+        self.label_47 = QLabel(self.incomes_frame)
         self.label_47.setObjectName(u"label_47")
         self.label_47.setGeometry(QRect(330, 100, 91, 31))
         self.label_47.setFont(font)
-        self.label_48 = QLabel(self.sellings_frame)
+        self.label_48 = QLabel(self.incomes_frame)
         self.label_48.setObjectName(u"label_48")
         self.label_48.setGeometry(QRect(670, 50, 41, 31))
         self.label_48.setFont(font)
-        self.label_49 = QLabel(self.sellings_frame)
+        self.label_49 = QLabel(self.incomes_frame)
         self.label_49.setObjectName(u"label_49")
         self.label_49.setGeometry(QRect(670, 100, 91, 31))
         self.label_49.setFont(font)
-        self.categorie_id_10 = QLineEdit(self.sellings_frame)
+        self.categorie_id_10 = QLineEdit(self.incomes_frame)
         self.categorie_id_10.setObjectName(u"categorie_id_10")
         self.categorie_id_10.setGeometry(QRect(440, 90, 161, 41))
         self.categorie_id_10.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.categorie_id_11 = QLineEdit(self.sellings_frame)
+        self.categorie_id_11 = QLineEdit(self.incomes_frame)
         self.categorie_id_11.setObjectName(u"categorie_id_11")
         self.categorie_id_11.setGeometry(QRect(780, 40, 161, 41))
         self.categorie_id_11.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.categorie_id_12 = QLineEdit(self.sellings_frame)
+        self.categorie_id_12 = QLineEdit(self.incomes_frame)
         self.categorie_id_12.setObjectName(u"categorie_id_12")
         self.categorie_id_12.setGeometry(QRect(780, 90, 161, 41))
         self.categorie_id_12.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.sellings_search_btn = QPushButton(self.sellings_frame)
+        self.sellings_search_btn = QPushButton(self.incomes_frame)
         self.sellings_search_btn.setObjectName(u"sellings_search_btn")
         self.sellings_search_btn.setGeometry(QRect(810, 170, 131, 41))
         self.sellings_search_btn.setStyleSheet(u"")
-        self.sellings_delete_btn = QPushButton(self.sellings_frame)
+        self.sellings_delete_btn = QPushButton(self.incomes_frame)
         self.sellings_delete_btn.setObjectName(u"sellings_delete_btn")
         self.sellings_delete_btn.setGeometry(QRect(660, 170, 131, 41))
         self.sellings_delete_btn.setStyleSheet(u"")
-        self.tableWidget_4 = QTableWidget(self.sellings_frame)
+        self.tableWidget_4 = QTableWidget(self.incomes_frame)
         if (self.tableWidget_4.columnCount() < 4):
             self.tableWidget_4.setColumnCount(4)
         __qtablewidgetitem15 = QTableWidgetItem()
@@ -705,7 +706,7 @@ class Ui_Form(object):
         self.tableWidget_4.verticalHeader().setHighlightSections(True)
         self.tableWidget_4.verticalHeader().setProperty("showSortIndicator", False)
         self.tableWidget_4.verticalHeader().setStretchLastSection(False)
-        self.containor.addWidget(self.sellings_frame)
+        self.containor.addWidget(self.incomes_frame)
         self.expenses_frame = QWidget()
         self.expenses_frame.setObjectName(u"expenses_frame")
         self.label_50 = QLabel(self.expenses_frame)
@@ -938,7 +939,7 @@ class Ui_Form(object):
         self.label_10.setAlignment(Qt.AlignCenter)
         self.categories_btn = QPushButton(self.categories_lbl)
         self.categories_btn.setObjectName(u"categories_btn")
-        self.categories_btn.setGeometry(QRect(10, -10, 221, 81))
+        self.categories_btn.setGeometry(QRect(10, 0, 221, 81))
         self.categories_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
@@ -973,11 +974,11 @@ class Ui_Form(object):
 
         self.options.addWidget(self.users_lbl)
 
-        self.sellings_lbl = QFrame(self.verticalLayoutWidget)
-        self.sellings_lbl.setObjectName(u"sellings_lbl")
-        self.sellings_lbl.setFrameShape(QFrame.StyledPanel)
-        self.sellings_lbl.setFrameShadow(QFrame.Raised)
-        self.label_13 = QLabel(self.sellings_lbl)
+        self.incomes_lbl = QFrame(self.verticalLayoutWidget)
+        self.incomes_lbl.setObjectName(u"incomes_lbl")
+        self.incomes_lbl.setFrameShape(QFrame.StyledPanel)
+        self.incomes_lbl.setFrameShadow(QFrame.Raised)
+        self.label_13 = QLabel(self.incomes_lbl)
         self.label_13.setObjectName(u"label_13")
         self.label_13.setGeometry(QRect(20, 10, 51, 51))
         self.label_13.setMaximumSize(QSize(51, 51))
@@ -985,21 +986,21 @@ class Ui_Form(object):
         self.label_13.setFont(font4)
         self.label_13.setPixmap(QPixmap(u":/icons/sellings.png"))
         self.label_13.setScaledContents(True)
-        self.label_12 = QLabel(self.sellings_lbl)
+        self.label_12 = QLabel(self.incomes_lbl)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(70, 10, 141, 51))
         self.label_12.setBaseSize(QSize(50, 20))
         self.label_12.setFont(font3)
         self.label_12.setAutoFillBackground(False)
         self.label_12.setAlignment(Qt.AlignCenter)
-        self.sellings_btn = QPushButton(self.sellings_lbl)
-        self.sellings_btn.setObjectName(u"sellings_btn")
-        self.sellings_btn.setGeometry(QRect(0, 0, 231, 81))
-        self.sellings_btn.setStyleSheet(u"\n"
+        self.incomes_btn = QPushButton(self.incomes_lbl)
+        self.incomes_btn.setObjectName(u"incomes_btn")
+        self.incomes_btn.setGeometry(QRect(0, 0, 231, 81))
+        self.incomes_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
 
-        self.options.addWidget(self.sellings_lbl)
+        self.options.addWidget(self.incomes_lbl)
 
         self.expenses_lbl = QFrame(self.verticalLayoutWidget)
         self.expenses_lbl.setObjectName(u"expenses_lbl")
@@ -1057,7 +1058,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.containor.setCurrentIndex(3)
+        self.containor.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -1238,7 +1239,7 @@ class Ui_Form(object):
         ___qtablewidgetitem14 = self.tableWidget_3.horizontalHeaderItem(4)
         ___qtablewidgetitem14.setText(QCoreApplication.translate("Form", u"Role", None));
         self.label_44.setText("")
-        self.label_45.setText(QCoreApplication.translate("Form", u"Sellings", None))
+        self.label_45.setText(QCoreApplication.translate("Form", u"Incomes", None))
         self.label_46.setText(QCoreApplication.translate("Form", u"ID", None))
         self.categorie_id_9.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
         self.label_47.setText(QCoreApplication.translate("Form", u"Seller Name", None))
@@ -1383,14 +1384,14 @@ class Ui_Form(object):
         self.label_11.setText("")
         self.users_btn.setText("")
 #if QT_CONFIG(statustip)
-        self.sellings_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
+        self.incomes_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
 #endif // QT_CONFIG(statustip)
         self.label_13.setText("")
 #if QT_CONFIG(statustip)
         self.label_12.setStatusTip(QCoreApplication.translate("Form", u"this", None))
 #endif // QT_CONFIG(statustip)
-        self.label_12.setText(QCoreApplication.translate("Form", u"Sellings", None))
-        self.sellings_btn.setText("")
+        self.label_12.setText(QCoreApplication.translate("Form", u"Incomes", None))
+        self.incomes_btn.setText("")
 #if QT_CONFIG(statustip)
         self.expenses_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
 #endif // QT_CONFIG(statustip)

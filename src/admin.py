@@ -4,11 +4,13 @@ from PyQt5.QtCore import QDate
 import time
 
 class Admin(QtWidgets.QWidget):
-    def __init__(self, db):
+    def __init__(self, db, name):
         self.db = db   #db = data_base
+        self.name = name
         QtWidgets.QWidget.__init__(self)
         uic.loadUi('.\\gui\\admin.ui', self)
         self.show() 
+        self.admin_name_lbl.setText(name)
         self.containor.setCurrentWidget(self.stats_frame)
         tm = time.localtime()
         self.expense_date.setDate(QDate(tm.tm_year, tm.tm_mon, tm.tm_mday))  #Current date set as default
@@ -16,7 +18,7 @@ class Admin(QtWidgets.QWidget):
         self.products_btn.clicked.connect(lambda : self.switch_btn_clicked(self.products_frame, self.products_lbl))
         self.categories_btn.clicked.connect(lambda : self.switch_btn_clicked(self.categories_frame, self.categories_lbl))
         self.users_btn.clicked.connect(lambda : self.switch_btn_clicked(self.users_frame, self.users_lbl))
-        self.sellings_btn.clicked.connect(lambda : self.switch_btn_clicked(self.sellings_frame, self.sellings_lbl))
+        self.incomes_btn.clicked.connect(lambda : self.switch_btn_clicked(self.incomes_frame, self.incomes_lbl))
         self.expenses_btn.clicked.connect(lambda : self.switch_btn_clicked(self.expenses_frame, self.expenses_lbl))
 
         #users frame
@@ -53,25 +55,33 @@ class Admin(QtWidgets.QWidget):
     def add(self):
         #verify all inputs
 
-        id = self.users_id
+        id = self.users_id.text()
         first_name = self.users_first_name.text()
         last_name = self.users_last_name.text()
         birth_date = self.users_birth_date
         phone_number = self.users_phone_number.text()
         adress = self.users_adress.toPlainText()
         salary = self.users_salary.text()
+        user_name = self.users_user_name.text()
+        password = self.users_password.text()
         role = self.users_role.currentText().lower()
 
-        if role == 'admin':
+
+        try:
             cursor = self.db.cursor()
-            add_acc = 'INSERT INTO accounts VALUES (12,"fln","fln","admin")'
-            add_admin = 'INSERT INTO admins (acount_id, first_name, last_name, birth_date, phone_number, adress) VALUES (12, "dfsqdfs", "sdfsdf", "1998-01-01", "324134", "qdsf")'
-            try:
-                cursor.execute(add_acc)
-                cursor.execute(add_admin)
+            add_acc = 'INSERT INTO accounts VALUES (%s, %s, %s, %s)'        
+            cursor.execute(add_acc,(id, user_name, password, role))
+            if role == 'admin':
+                add_admin = 'INSERT INTO admins VALUES (%s, %s, %s, "2003-01-01", %s, %s, %s, %s)'
+                cursor.execute(add_admin, (id, first_name, last_name, phone_number, salary, 'male', adress))
                 self.db.commit()
-            except:
-                print("something went wrong!")
+            elif role == 'seller':
+                add_admin = 'INSERT INTO sellers VALUES (%s, %s, %s, "2003-01-01", %s, %s, %s, %s)'
+                cursor.execute(add_admin, (id, first_name, last_name, phone_number, salary, 'male', adress))
+                self.db.commit()
+        except:
+            print("something went wrong")
+
 
 
     def delete(self):
