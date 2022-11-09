@@ -15,6 +15,14 @@ from PyQt5.QtGui import QIcon
 import sys
 import mysql.connector
 
+#connecting to db
+mydb = mysql.connector.connect(
+    host = 'localhost',
+    user = 'root',
+    passwd = 'admin',
+    database = 'supermarket_db'
+)
+
 
 class Controller:
     def check_entries(x,y): #verfying the inputs
@@ -37,13 +45,6 @@ class Controller:
             #tell the user to enter valid informations
             return
 
-        #connecting to db
-        mydb = mysql.connector.connect(
-            host = 'localhost',
-            user = 'root',
-            passwd = 'admin',
-            database = 'supermarket_db'
-        )
         #initialisate the cursor
         cursor = mydb.cursor()
 
@@ -58,7 +59,7 @@ class Controller:
 
 
         if role == 'admin':   
-            self.admin_panel = Admin()
+            self.admin_panel = Admin(mydb)
             self.login.close()
             self.admin_panel.show()
         elif role == 'employee':

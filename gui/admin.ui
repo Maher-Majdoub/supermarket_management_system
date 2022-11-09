@@ -9,9 +9,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1244</width>
-    <height>796</height>
+    <width>1250</width>
+    <height>790</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1250</width>
+    <height>790</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1250</width>
+    <height>790</height>
+   </size>
   </property>
   <property name="acceptDrops">
    <bool>false</bool>
@@ -131,10 +143,43 @@ font:bold;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:#fff;</string>
+    <string notr="true">QStackedWidget{
+	background-color:#fff;
+}
+QPushButton[statusTip = &quot;btn_frm&quot;]{
+	background-color : #154c79;
+	color: rgba(255 , 255, 255, 210);
+	border-radius: 10px;
+	font-size: 15px;
+	font : bold;
+ }
+QPushButton[statusTip = &quot;btn_frm&quot;]:hover{
+	background-color : rgba(0, 21, 76, 200);
+	color: rgba(255 , 255, 255, 210);
+	border-radius: 10px;
+	font-size: 15px;
+	font : bold;
+ }
+QPushButton[statusTip = &quot;btn_frm&quot;]:pressed{
+	background-color : rgba(0, 21, 76, 200);
+	color: rgba(255 , 255, 255, 210);
+	border-radius: 13px;
+	font-size: 15px;
+	padding-top: 2px;
+	font : bold;
+ }
+QTableWidget{
+	alternate-background-color: rgba(21, 76, 121, 120);
+	background-color: rgba(21, 76, 121, 80);
+}
+
+</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -380,29 +425,11 @@ font-size: 18px;</string>
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#add_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#add_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#add_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Add</string>
@@ -417,29 +444,11 @@ QPushButton#add_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#update_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#update_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#update_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Update</string>
@@ -454,29 +463,11 @@ QPushButton#update_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#delete_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#delete_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#delete_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Delete</string>
@@ -559,29 +550,11 @@ QComboBox::down-arrow {
        <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#clear_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#clear_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#clear_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Clear</string>
@@ -634,29 +607,11 @@ font: bold;
        <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#products_search_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#products_search_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#products_search_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>search</string>
@@ -803,29 +758,11 @@ font-size: 18px;</string>
        <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#categories_clear_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_clear_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_clear_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Clear</string>
@@ -840,29 +777,11 @@ QPushButton#categories_clear_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#categories_add_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_add_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_add_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Add</string>
@@ -877,29 +796,11 @@ QPushButton#categories_add_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#categories_update_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_update_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_update_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Update</string>
@@ -914,29 +815,11 @@ QPushButton#categories_update_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#categories_delete_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_delete_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_delete_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Delete</string>
@@ -1016,29 +899,11 @@ QPushButton#categories_delete_btn:pressed{
        <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#categories_search_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_search_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#categories_search_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>search</string>
@@ -1063,7 +928,7 @@ font-size: 18px;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="employees_frame">
+   <widget class="QWidget" name="users_frame">
     <widget class="QLabel" name="label_31">
      <property name="geometry">
       <rect>
@@ -1079,10 +944,10 @@ font-size: 18px;</string>
       </font>
      </property>
      <property name="text">
-      <string>Employee ID</string>
+      <string>User ID</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_2">
+    <widget class="QLineEdit" name="users_id">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1090,6 +955,9 @@ font-size: 18px;</string>
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1137,7 +1005,7 @@ font-size: 18px;</string>
       <string>Last Name</string>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dateEdit">
+    <widget class="QDateEdit" name="users_birth_date">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1161,7 +1029,7 @@ font-size: 18px;</string>
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_3">
+    <widget class="QLineEdit" name="users_first_name">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1169,6 +1037,9 @@ font-size: 18px;</string>
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1180,7 +1051,7 @@ font-size: 18px;</string>
       <string>Enter First Name</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_4">
+    <widget class="QLineEdit" name="users_last_name">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1188,6 +1059,9 @@ font-size: 18px;</string>
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1235,7 +1109,7 @@ font-size: 18px;</string>
       <string>Gender</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="users_male">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1251,8 +1125,11 @@ font-size: 18px;</string>
      <property name="text">
       <string>Male</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="users_female">
      <property name="geometry">
       <rect>
        <x>240</x>
@@ -1272,9 +1149,9 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_36">
      <property name="geometry">
       <rect>
-       <x>600</x>
+       <x>630</x>
        <y>0</y>
-       <width>211</width>
+       <width>161</width>
        <height>31</height>
       </rect>
      </property>
@@ -1285,7 +1162,7 @@ font: bold;
 </string>
      </property>
      <property name="text">
-      <string>Employee's Account</string>
+      <string>User's Account</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_37">
@@ -1306,7 +1183,7 @@ font: bold;
       <string>User Name</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_5">
+    <widget class="QLineEdit" name="users_user_name">
      <property name="geometry">
       <rect>
        <x>630</x>
@@ -1314,6 +1191,9 @@ font: bold;
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1343,7 +1223,7 @@ font-size: 18px;</string>
       <string>Password</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_6">
+    <widget class="QLineEdit" name="users_password">
      <property name="geometry">
       <rect>
        <x>630</x>
@@ -1351,6 +1231,9 @@ font-size: 18px;</string>
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1380,7 +1263,7 @@ font-size: 18px;</string>
       <string>Role</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="users_role">
      <property name="geometry">
       <rect>
        <x>630</x>
@@ -1423,7 +1306,7 @@ border: 2px solid #154c79;</string>
       <string>Phone Number</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_7">
+    <widget class="QLineEdit" name="users_phone_number">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1431,6 +1314,9 @@ border: 2px solid #154c79;</string>
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1460,7 +1346,7 @@ font-size: 18px;</string>
       <string>Salary</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_8">
+    <widget class="QLineEdit" name="users_salary">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1468,6 +1354,9 @@ font-size: 18px;</string>
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1497,7 +1386,7 @@ font-size: 18px;</string>
       <string>Adress</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="QTextEdit" name="users_adress">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -1505,6 +1394,9 @@ font-size: 18px;</string>
        <width>241</width>
        <height>71</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: 2px solid #154c79;
@@ -1537,9 +1429,9 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_43">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>220</x>
        <y>0</y>
-       <width>111</width>
+       <width>61</width>
        <height>31</height>
       </rect>
      </property>
@@ -1550,10 +1442,10 @@ font: bold;
 </string>
      </property>
      <property name="text">
-      <string>Employees</string>
+      <string>Users</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Employees_add_btn">
+    <widget class="QPushButton" name="users_add_btn">
      <property name="geometry">
       <rect>
        <x>550</x>
@@ -1562,35 +1454,17 @@ font: bold;
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#Employees_add_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#Employees_add_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#Employees_add_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Add</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="employees_update_btn">
+    <widget class="QPushButton" name="users_update_btn">
      <property name="geometry">
       <rect>
        <x>660</x>
@@ -1599,35 +1473,17 @@ QPushButton#Employees_add_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#employees_update_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_update_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_update_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Update</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="employees_delete_btn">
+    <widget class="QPushButton" name="users_delete_btn">
      <property name="geometry">
       <rect>
        <x>770</x>
@@ -1636,35 +1492,17 @@ QPushButton#employees_update_btn:pressed{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#employees_delete_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_delete_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_delete_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="employees_clear_btn">
+    <widget class="QPushButton" name="users_clear_btn">
      <property name="geometry">
       <rect>
        <x>330</x>
@@ -1673,35 +1511,17 @@ QPushButton#employees_delete_btn:pressed{
        <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#employees_clear_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_clear_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_clear_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Clear</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="employees_search_btn">
+    <widget class="QPushButton" name="users_search_btn">
      <property name="geometry">
       <rect>
        <x>240</x>
@@ -1710,29 +1530,11 @@ QPushButton#employees_clear_btn:pressed{
        <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton#employees_search_btn{
-	background-color : #154c79;
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_search_btn:hover{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 10px;
-	font-size: 15px;
-	font : bold;
-}
-QPushButton#employees_search_btn:pressed{
-	background-color : rgba(0, 21, 76, 200);
-	color: rgba(255 , 255, 255, 210);
-	border-radius: 13px;
-	font-size: 15px;
-	padding-top: 2px;
-	font : bold;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Search</string>
@@ -1792,38 +1594,893 @@ QPushButton#employees_search_btn:pressed{
     </widget>
    </widget>
    <widget class="QWidget" name="sellings_frame">
-    <widget class="QLabel" name="label_22">
+    <widget class="QLabel" name="label_44">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>70</y>
+       <width>141</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="icons/icons.qrc">:/icons/sellings_c.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_45">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #154c79;
+font-size: 20px;
+font: bold;
+</string>
+     </property>
+     <property name="text">
+      <string>Sellings</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_46">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>50</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="categorie_id_9">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>40</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter User Name</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_47">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>100</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Seller Name</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_48">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>50</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Date</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_49">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>100</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Total price</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="categorie_id_10">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>90</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter User Name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="categorie_id_11">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>40</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter User Name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="categorie_id_12">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>90</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter User Name</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="sellings_search_btn">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>170</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="sellings_delete_btn">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>170</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidget_4">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>240</y>
+       <width>921</width>
+       <height>491</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Nirmala UI Semilight</family>
+       <stylestrategy>PreferDefault</stylestrategy>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="tabletTracking">
+      <bool>true</bool>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Panel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="tabKeyNavigation">
+      <bool>true</bool>
+     </property>
+     <property name="showDropIndicator" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="dragDropOverwriteMode">
+      <bool>false</bool>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::NoDragDrop</enum>
+     </property>
+     <property name="defaultDropAction">
+      <enum>Qt::IgnoreAction</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="textElideMode">
+      <enum>Qt::ElideMiddle</enum>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>216</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>216</number>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>40</number>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string/>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>Sell ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Seller Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Total</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="expenses_frame">
+    <widget class="QLabel" name="label_50">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>70</y>
+       <width>141</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="icons/icons.qrc">:/icons/bills_c.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_51">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>20</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #154c79;
+font-size: 20px;
+font: bold;
+</string>
+     </property>
+     <property name="text">
+      <string>Expenses</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="expense_delete_btn">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>630</y>
+       <width>91</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="expense_id">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>250</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly</set>
+     </property>
+     <property name="placeholderText">
+      <string>Enter Id</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_52">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>51</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_53">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>320</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Ammount</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidget_5">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>20</y>
+       <width>631</width>
+       <height>661</height>
+      </rect>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::PreventContextMenu</enum>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Category</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Price</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Quantity</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="expense_clear_btn">
      <property name="geometry">
       <rect>
        <x>230</x>
-       <y>290</y>
-       <width>191</width>
-       <height>81</height>
+       <y>570</y>
+       <width>71</width>
+       <height>31</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
      <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
-      <string>sellings</string>
+      <string>Clear</string>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="bills_frame">
-    <widget class="QLabel" name="label_23">
+    <widget class="QPushButton" name="expense_update_btn">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>290</y>
-       <width>181</width>
-       <height>81</height>
+       <x>110</x>
+       <y>630</y>
+       <width>91</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Update</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="expense_search_btn">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>570</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>search</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="expense_description">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>470</y>
+       <width>191</width>
+       <height>91</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font-size: 50px;</string>
+      <string notr="true">border: 2px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter Description</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_54">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>470</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
-      <string>BILLS</string>
+      <string>Description</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="expense_ammount">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>310</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly</set>
+     </property>
+     <property name="placeholderText">
+      <string>Enter Ammount</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="expense_add_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>630</y>
+       <width>91</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>btn_frm</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="expense_type">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>370</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #154c79;
+font-size: 18px;
+border: 2px solid #154c79;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Salary</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>birra3</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_55">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>370</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Type</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="expense_date">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>420</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="accelerated">
+      <bool>false</bool>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_56">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>420</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Date</string>
      </property>
     </widget>
    </widget>
@@ -1963,7 +2620,7 @@ QPushButton#employees_search_btn:pressed{
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>221</width>
+         <width>231</width>
          <height>81</height>
         </rect>
        </property>
@@ -2085,7 +2742,7 @@ color:red;
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>221</width>
+         <width>231</width>
          <height>81</height>
         </rect>
        </property>
@@ -2190,8 +2847,8 @@ background-color: rgba(0,0,0,0);
       <widget class="QPushButton" name="categories_btn">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
+         <x>10</x>
+         <y>-10</y>
          <width>221</width>
          <height>81</height>
         </rect>
@@ -2208,7 +2865,7 @@ background-color: rgba(0,0,0,0);
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="employees_lbl">
+     <widget class="QFrame" name="users_lbl">
       <property name="statusTip">
        <string>option</string>
       </property>
@@ -2248,7 +2905,7 @@ background-color: rgba(0,0,0,0);
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Employees</string>
+        <string>Users</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -2291,12 +2948,12 @@ background-color: rgba(0,0,0,0);
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QPushButton" name="employees_btn">
+      <widget class="QPushButton" name="users_btn">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>221</width>
+         <width>231</width>
          <height>81</height>
         </rect>
        </property>
@@ -2400,7 +3057,7 @@ background-color: rgba(0,0,0,0);
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>221</width>
+         <width>231</width>
          <height>81</height>
         </rect>
        </property>
@@ -2416,7 +3073,7 @@ background-color: rgba(0,0,0,0);
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="bills_lbl">
+     <widget class="QFrame" name="expenses_lbl">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2460,7 +3117,7 @@ background-color: rgba(0,0,0,0);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="icons/icons.qrc">:/icons/bill.png</pixmap>
+        <pixmap resource="icons/icons.qrc">:/icons/bills.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -2496,18 +3153,18 @@ background-color: rgba(0,0,0,0);
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Billls</string>
+        <string>Expenses</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QPushButton" name="bills_btn">
+      <widget class="QPushButton" name="expenses_btn">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>221</width>
+         <width>231</width>
          <height>81</height>
         </rect>
        </property>
@@ -2548,7 +3205,11 @@ background-color: rgba(0,0,0,0);
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/icons/logout.png);</string>
+    <string notr="true">QPushButton{
+	border-image: url(:/icons/logout.png);
+}
+QPushButton:pressed{
+}</string>
    </property>
    <property name="text">
     <string/>

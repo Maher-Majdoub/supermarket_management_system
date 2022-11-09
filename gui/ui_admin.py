@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QDateEdit,
-    QFrame, QGroupBox, QHeaderView, QLabel,
-    QLineEdit, QPushButton, QRadioButton, QSizePolicy,
-    QStackedWidget, QTableView, QTableWidget, QTableWidgetItem,
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
+    QDateEdit, QFrame, QGroupBox, QHeaderView,
+    QLabel, QLineEdit, QPushButton, QRadioButton,
+    QSizePolicy, QStackedWidget, QTableWidget, QTableWidgetItem,
     QTextEdit, QVBoxLayout, QWidget)
 import icons_rc
 
@@ -27,7 +27,9 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.setEnabled(True)
-        Form.resize(1244, 796)
+        Form.resize(1250, 790)
+        Form.setMinimumSize(QSize(1250, 790))
+        Form.setMaximumSize(QSize(1250, 790))
         Form.setAcceptDrops(False)
         Form.setAutoFillBackground(False)
         Form.setStyleSheet(u"QWidget#Form{\n"
@@ -61,11 +63,12 @@ class Ui_Form(object):
         self.label.setGeometry(QRect(60, 10, 91, 81))
         self.label.setPixmap(QPixmap(u":/icons/admin.png"))
         self.label.setScaledContents(True)
-        self.label_2 = QLabel(self.groupBox)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(50, 90, 121, 31))
-        self.label_2.setStyleSheet(u"font-size: 15px;\n"
+        self.admin_name_lbl = QLabel(self.groupBox)
+        self.admin_name_lbl.setObjectName(u"admin_name_lbl")
+        self.admin_name_lbl.setGeometry(QRect(30, 90, 151, 31))
+        self.admin_name_lbl.setStyleSheet(u"font-size: 15px;\n"
 "font: bold;")
+        self.admin_name_lbl.setAlignment(Qt.AlignCenter)
         self.label_3 = QLabel(self.groupBox)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(70, 120, 71, 20))
@@ -74,7 +77,38 @@ class Ui_Form(object):
         self.containor = QStackedWidget(Form)
         self.containor.setObjectName(u"containor")
         self.containor.setGeometry(QRect(260, 20, 961, 751))
-        self.containor.setStyleSheet(u"background-color:#fff;")
+        self.containor.setStyleSheet(u"QStackedWidget{\n"
+"	background-color:#fff;\n"
+"}\n"
+"QPushButton[statusTip = \"btn_frm\"]{\n"
+"	background-color : #154c79;\n"
+"	color: rgba(255 , 255, 255, 210);\n"
+"	border-radius: 10px;\n"
+"	font-size: 15px;\n"
+"	font : bold;\n"
+" }\n"
+"QPushButton[statusTip = \"btn_frm\"]:hover{\n"
+"	background-color : rgba(0, 21, 76, 200);\n"
+"	color: rgba(255 , 255, 255, 210);\n"
+"	border-radius: 10px;\n"
+"	font-size: 15px;\n"
+"	font : bold;\n"
+" }\n"
+"QPushButton[statusTip = \"btn_frm\"]:pressed{\n"
+"	background-color : rgba(0, 21, 76, 200);\n"
+"	color: rgba(255 , 255, 255, 210);\n"
+"	border-radius: 13px;\n"
+"	font-size: 15px;\n"
+"	padding-top: 2px;\n"
+"	font : bold;\n"
+" }\n"
+"QTableWidget{\n"
+"	alternate-background-color: rgba(21, 76, 121, 120);\n"
+"	background-color: rgba(21, 76, 121, 80);\n"
+"}\n"
+"\n"
+"")
+        self.containor.setInputMethodHints(Qt.ImhDialableCharactersOnly|Qt.ImhDigitsOnly|Qt.ImhEmailCharactersOnly|Qt.ImhFormattedNumbersOnly|Qt.ImhLatinOnly|Qt.ImhLowercaseOnly|Qt.ImhUppercaseOnly|Qt.ImhUrlCharactersOnly)
         self.stats_frame = QWidget()
         self.stats_frame.setObjectName(u"stats_frame")
         self.stats_frame.setAutoFillBackground(False)
@@ -161,78 +195,15 @@ class Ui_Form(object):
         self.add_btn = QPushButton(self.products_frame)
         self.add_btn.setObjectName(u"add_btn")
         self.add_btn.setGeometry(QRect(10, 640, 91, 41))
-        self.add_btn.setStyleSheet(u"QPushButton#add_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#add_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#add_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.add_btn.setStyleSheet(u"")
         self.update_btn = QPushButton(self.products_frame)
         self.update_btn.setObjectName(u"update_btn")
         self.update_btn.setGeometry(QRect(110, 640, 91, 41))
-        self.update_btn.setStyleSheet(u"QPushButton#update_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#update_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#update_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.update_btn.setStyleSheet(u"")
         self.delete_btn = QPushButton(self.products_frame)
         self.delete_btn.setObjectName(u"delete_btn")
         self.delete_btn.setGeometry(QRect(210, 640, 91, 41))
-        self.delete_btn.setStyleSheet(u"QPushButton#delete_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#delete_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#delete_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.delete_btn.setStyleSheet(u"")
         self.product_category = QComboBox(self.products_frame)
         self.product_category.addItem("")
         self.product_category.addItem("")
@@ -265,28 +236,7 @@ class Ui_Form(object):
         self.clear_btn = QPushButton(self.products_frame)
         self.clear_btn.setObjectName(u"clear_btn")
         self.clear_btn.setGeometry(QRect(230, 530, 71, 31))
-        self.clear_btn.setStyleSheet(u"QPushButton#clear_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#clear_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#clear_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.clear_btn.setStyleSheet(u"")
         self.label_16 = QLabel(self.products_frame)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(90, 60, 141, 131))
@@ -302,28 +252,7 @@ class Ui_Form(object):
         self.products_search_btn = QPushButton(self.products_frame)
         self.products_search_btn.setObjectName(u"products_search_btn")
         self.products_search_btn.setGeometry(QRect(150, 530, 71, 31))
-        self.products_search_btn.setStyleSheet(u"QPushButton#products_search_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#products_search_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#products_search_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.products_search_btn.setStyleSheet(u"")
         self.containor.addWidget(self.products_frame)
         self.categories_frame = QWidget()
         self.categories_frame.setObjectName(u"categories_frame")
@@ -365,113 +294,22 @@ class Ui_Form(object):
         self.label_30.setObjectName(u"label_30")
         self.label_30.setGeometry(QRect(20, 280, 51, 31))
         self.label_30.setFont(font)
-        self.categorie_price = QLineEdit(self.categories_frame)
-        self.categorie_price.setObjectName(u"categorie_price")
-        self.categorie_price.setGeometry(QRect(110, 390, 191, 41))
-        self.categorie_price.setStyleSheet(u"border: none;\n"
-"border-bottom: 3px solid #154c79;\n"
-"color: #154c79;\n"
-"font-size: 18px;")
         self.categories_clear_btn = QPushButton(self.categories_frame)
         self.categories_clear_btn.setObjectName(u"categories_clear_btn")
-        self.categories_clear_btn.setGeometry(QRect(240, 460, 71, 31))
-        self.categories_clear_btn.setStyleSheet(u"QPushButton#categories_clear_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_clear_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_clear_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.categories_clear_btn.setGeometry(QRect(240, 510, 71, 31))
+        self.categories_clear_btn.setStyleSheet(u"")
         self.categories_add_btn = QPushButton(self.categories_frame)
         self.categories_add_btn.setObjectName(u"categories_add_btn")
         self.categories_add_btn.setGeometry(QRect(20, 570, 91, 41))
-        self.categories_add_btn.setStyleSheet(u"QPushButton#categories_add_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_add_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_add_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.categories_add_btn.setStyleSheet(u"")
         self.categories_update_btn = QPushButton(self.categories_frame)
         self.categories_update_btn.setObjectName(u"categories_update_btn")
         self.categories_update_btn.setGeometry(QRect(120, 570, 91, 41))
-        self.categories_update_btn.setStyleSheet(u"QPushButton#categories_update_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_update_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_update_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.categories_update_btn.setStyleSheet(u"")
         self.categories_delete_btn = QPushButton(self.categories_frame)
         self.categories_delete_btn.setObjectName(u"categories_delete_btn")
         self.categories_delete_btn.setGeometry(QRect(220, 570, 91, 41))
-        self.categories_delete_btn.setStyleSheet(u"QPushButton#categories_delete_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_delete_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_delete_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.categories_delete_btn.setStyleSheet(u"")
         self.tableWidget_2 = QTableWidget(self.categories_frame)
         if (self.tableWidget_2.columnCount() < 5):
             self.tableWidget_2.setColumnCount(5)
@@ -501,312 +339,506 @@ class Ui_Form(object):
         self.tableWidget_2.setCornerButtonEnabled(False)
         self.categories_search_btn = QPushButton(self.categories_frame)
         self.categories_search_btn.setObjectName(u"categories_search_btn")
-        self.categories_search_btn.setGeometry(QRect(160, 460, 71, 31))
-        self.categories_search_btn.setStyleSheet(u"QPushButton#categories_search_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_search_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#categories_search_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
+        self.categories_search_btn.setGeometry(QRect(160, 510, 71, 31))
+        self.categories_search_btn.setStyleSheet(u"")
+        self.textEdit_2 = QTextEdit(self.categories_frame)
+        self.textEdit_2.setObjectName(u"textEdit_2")
+        self.textEdit_2.setGeometry(QRect(110, 400, 191, 91))
+        self.textEdit_2.setStyleSheet(u"border: 2px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
         self.containor.addWidget(self.categories_frame)
-        self.employees_frame = QWidget()
-        self.employees_frame.setObjectName(u"employees_frame")
-        self.label_31 = QLabel(self.employees_frame)
+        self.users_frame = QWidget()
+        self.users_frame.setObjectName(u"users_frame")
+        self.label_31 = QLabel(self.users_frame)
         self.label_31.setObjectName(u"label_31")
         self.label_31.setGeometry(QRect(40, 240, 111, 31))
         self.label_31.setFont(font)
-        self.categorie_id_2 = QLineEdit(self.employees_frame)
-        self.categorie_id_2.setObjectName(u"categorie_id_2")
-        self.categorie_id_2.setGeometry(QRect(160, 230, 241, 41))
-        self.categorie_id_2.setStyleSheet(u"border: none;\n"
+        self.users_id = QLineEdit(self.users_frame)
+        self.users_id.setObjectName(u"users_id")
+        self.users_id.setGeometry(QRect(160, 230, 241, 41))
+        self.users_id.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_32 = QLabel(self.employees_frame)
+        self.label_32 = QLabel(self.users_frame)
         self.label_32.setObjectName(u"label_32")
         self.label_32.setGeometry(QRect(40, 300, 91, 31))
         self.label_32.setFont(font)
-        self.label_33 = QLabel(self.employees_frame)
+        self.label_33 = QLabel(self.users_frame)
         self.label_33.setObjectName(u"label_33")
         self.label_33.setGeometry(QRect(40, 360, 91, 31))
         self.label_33.setFont(font)
-        self.dateEdit = QDateEdit(self.employees_frame)
-        self.dateEdit.setObjectName(u"dateEdit")
-        self.dateEdit.setGeometry(QRect(160, 420, 241, 31))
-        self.dateEdit.setAcceptDrops(False)
-        self.dateEdit.setAccelerated(False)
-        self.dateEdit.setCalendarPopup(True)
-        self.categorie_id_3 = QLineEdit(self.employees_frame)
-        self.categorie_id_3.setObjectName(u"categorie_id_3")
-        self.categorie_id_3.setGeometry(QRect(160, 290, 241, 41))
-        self.categorie_id_3.setStyleSheet(u"border: none;\n"
+        self.users_birth_date = QDateEdit(self.users_frame)
+        self.users_birth_date.setObjectName(u"users_birth_date")
+        self.users_birth_date.setGeometry(QRect(160, 420, 241, 31))
+        self.users_birth_date.setAcceptDrops(False)
+        self.users_birth_date.setStyleSheet(u"border: 2px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.users_birth_date.setAccelerated(False)
+        self.users_birth_date.setCalendarPopup(True)
+        self.users_first_name = QLineEdit(self.users_frame)
+        self.users_first_name.setObjectName(u"users_first_name")
+        self.users_first_name.setGeometry(QRect(160, 290, 241, 41))
+        self.users_first_name.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.categorie_id_4 = QLineEdit(self.employees_frame)
-        self.categorie_id_4.setObjectName(u"categorie_id_4")
-        self.categorie_id_4.setGeometry(QRect(160, 350, 241, 41))
-        self.categorie_id_4.setStyleSheet(u"border: none;\n"
+        self.users_last_name = QLineEdit(self.users_frame)
+        self.users_last_name.setObjectName(u"users_last_name")
+        self.users_last_name.setGeometry(QRect(160, 350, 241, 41))
+        self.users_last_name.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_34 = QLabel(self.employees_frame)
+        self.label_34 = QLabel(self.users_frame)
         self.label_34.setObjectName(u"label_34")
         self.label_34.setGeometry(QRect(40, 420, 91, 31))
         self.label_34.setFont(font)
-        self.label_35 = QLabel(self.employees_frame)
+        self.label_35 = QLabel(self.users_frame)
         self.label_35.setObjectName(u"label_35")
         self.label_35.setGeometry(QRect(40, 580, 61, 31))
         self.label_35.setFont(font)
-        self.radioButton = QRadioButton(self.employees_frame)
-        self.radioButton.setObjectName(u"radioButton")
-        self.radioButton.setGeometry(QRect(160, 580, 61, 31))
-        self.radioButton_2 = QRadioButton(self.employees_frame)
-        self.radioButton_2.setObjectName(u"radioButton_2")
-        self.radioButton_2.setGeometry(QRect(250, 580, 71, 31))
-        self.label_36 = QLabel(self.employees_frame)
+        self.users_male = QRadioButton(self.users_frame)
+        self.users_male.setObjectName(u"users_male")
+        self.users_male.setGeometry(QRect(160, 580, 71, 31))
+        self.users_male.setStyleSheet(u"color: #154c79;\n"
+"font-size: 18px;")
+        self.users_male.setChecked(True)
+        self.users_female = QRadioButton(self.users_frame)
+        self.users_female.setObjectName(u"users_female")
+        self.users_female.setGeometry(QRect(240, 580, 81, 31))
+        self.users_female.setStyleSheet(u"color: #154c79;\n"
+"font-size: 18px;")
+        self.label_36 = QLabel(self.users_frame)
         self.label_36.setObjectName(u"label_36")
-        self.label_36.setGeometry(QRect(630, 30, 211, 31))
+        self.label_36.setGeometry(QRect(630, 0, 161, 31))
         self.label_36.setStyleSheet(u"color: #154c79;\n"
 "font-size: 20px;\n"
 "font: bold;\n"
 "")
-        self.label_37 = QLabel(self.employees_frame)
+        self.label_37 = QLabel(self.users_frame)
         self.label_37.setObjectName(u"label_37")
-        self.label_37.setGeometry(QRect(560, 90, 91, 31))
+        self.label_37.setGeometry(QRect(530, 60, 91, 31))
         self.label_37.setFont(font)
-        self.categorie_id_5 = QLineEdit(self.employees_frame)
-        self.categorie_id_5.setObjectName(u"categorie_id_5")
-        self.categorie_id_5.setGeometry(QRect(660, 80, 241, 41))
-        self.categorie_id_5.setStyleSheet(u"border: none;\n"
+        self.users_user_name = QLineEdit(self.users_frame)
+        self.users_user_name.setObjectName(u"users_user_name")
+        self.users_user_name.setGeometry(QRect(630, 50, 241, 41))
+        self.users_user_name.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_38 = QLabel(self.employees_frame)
+        self.label_38 = QLabel(self.users_frame)
         self.label_38.setObjectName(u"label_38")
-        self.label_38.setGeometry(QRect(560, 160, 91, 31))
+        self.label_38.setGeometry(QRect(530, 140, 91, 31))
         self.label_38.setFont(font)
-        self.categorie_id_6 = QLineEdit(self.employees_frame)
-        self.categorie_id_6.setObjectName(u"categorie_id_6")
-        self.categorie_id_6.setGeometry(QRect(660, 150, 241, 41))
-        self.categorie_id_6.setStyleSheet(u"border: none;\n"
+        self.users_password = QLineEdit(self.users_frame)
+        self.users_password.setObjectName(u"users_password")
+        self.users_password.setGeometry(QRect(630, 130, 241, 41))
+        self.users_password.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_39 = QLabel(self.employees_frame)
+        self.label_39 = QLabel(self.users_frame)
         self.label_39.setObjectName(u"label_39")
-        self.label_39.setGeometry(QRect(560, 230, 51, 31))
+        self.label_39.setGeometry(QRect(530, 220, 51, 31))
         self.label_39.setFont(font)
-        self.comboBox = QComboBox(self.employees_frame)
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
-        self.comboBox.setGeometry(QRect(660, 230, 241, 21))
-        self.label_40 = QLabel(self.employees_frame)
+        self.users_role = QComboBox(self.users_frame)
+        self.users_role.addItem("")
+        self.users_role.addItem("")
+        self.users_role.setObjectName(u"users_role")
+        self.users_role.setGeometry(QRect(630, 220, 241, 31))
+        self.users_role.setStyleSheet(u"color: #154c79;\n"
+"font-size: 18px;\n"
+"border: 2px solid #154c79;")
+        self.label_40 = QLabel(self.users_frame)
         self.label_40.setObjectName(u"label_40")
         self.label_40.setGeometry(QRect(40, 470, 111, 31))
         self.label_40.setFont(font)
-        self.categorie_id_7 = QLineEdit(self.employees_frame)
-        self.categorie_id_7.setObjectName(u"categorie_id_7")
-        self.categorie_id_7.setGeometry(QRect(160, 460, 241, 41))
-        self.categorie_id_7.setStyleSheet(u"border: none;\n"
+        self.users_phone_number = QLineEdit(self.users_frame)
+        self.users_phone_number.setObjectName(u"users_phone_number")
+        self.users_phone_number.setGeometry(QRect(160, 460, 241, 41))
+        self.users_phone_number.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_41 = QLabel(self.employees_frame)
+        self.label_41 = QLabel(self.users_frame)
         self.label_41.setObjectName(u"label_41")
         self.label_41.setGeometry(QRect(40, 520, 81, 31))
         self.label_41.setFont(font)
-        self.categorie_id_8 = QLineEdit(self.employees_frame)
-        self.categorie_id_8.setObjectName(u"categorie_id_8")
-        self.categorie_id_8.setGeometry(QRect(160, 520, 241, 41))
-        self.categorie_id_8.setStyleSheet(u"border: none;\n"
+        self.users_salary = QLineEdit(self.users_frame)
+        self.users_salary.setObjectName(u"users_salary")
+        self.users_salary.setGeometry(QRect(160, 520, 241, 41))
+        self.users_salary.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.label_42 = QLabel(self.employees_frame)
+        self.label_42 = QLabel(self.users_frame)
         self.label_42.setObjectName(u"label_42")
         self.label_42.setGeometry(QRect(40, 630, 61, 31))
         self.label_42.setFont(font)
-        self.textEdit = QTextEdit(self.employees_frame)
-        self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setGeometry(QRect(160, 630, 241, 71))
-        self.label_21 = QLabel(self.employees_frame)
+        self.users_adress = QTextEdit(self.users_frame)
+        self.users_adress.setObjectName(u"users_adress")
+        self.users_adress.setGeometry(QRect(160, 630, 241, 71))
+        self.users_adress.setStyleSheet(u"border: 2px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.label_21 = QLabel(self.users_frame)
         self.label_21.setObjectName(u"label_21")
-        self.label_21.setGeometry(QRect(120, 80, 141, 131))
+        self.label_21.setGeometry(QRect(180, 50, 141, 131))
         self.label_21.setPixmap(QPixmap(u":/icons/employee_c.png"))
         self.label_21.setScaledContents(True)
-        self.label_43 = QLabel(self.employees_frame)
+        self.label_43 = QLabel(self.users_frame)
         self.label_43.setObjectName(u"label_43")
-        self.label_43.setGeometry(QRect(140, 30, 111, 31))
+        self.label_43.setGeometry(QRect(220, 0, 61, 31))
         self.label_43.setStyleSheet(u"color: #154c79;\n"
 "font-size: 20px;\n"
 "font: bold;\n"
 "")
-        self.tableView = QTableView(self.employees_frame)
-        self.tableView.setObjectName(u"tableView")
-        self.tableView.setGeometry(QRect(490, 350, 471, 401))
-        self.Employees_add_btn = QPushButton(self.employees_frame)
-        self.Employees_add_btn.setObjectName(u"Employees_add_btn")
-        self.Employees_add_btn.setGeometry(QRect(580, 290, 91, 41))
-        self.Employees_add_btn.setStyleSheet(u"QPushButton#Employees_add_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#Employees_add_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#Employees_add_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
-        self.employees_update_btn = QPushButton(self.employees_frame)
-        self.employees_update_btn.setObjectName(u"employees_update_btn")
-        self.employees_update_btn.setGeometry(QRect(690, 290, 91, 41))
-        self.employees_update_btn.setStyleSheet(u"QPushButton#employees_update_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_update_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_update_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
-        self.employees_delete_btn = QPushButton(self.employees_frame)
-        self.employees_delete_btn.setObjectName(u"employees_delete_btn")
-        self.employees_delete_btn.setGeometry(QRect(800, 290, 91, 41))
-        self.employees_delete_btn.setStyleSheet(u"QPushButton#employees_delete_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_delete_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_delete_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
-        self.employees_clear_btn = QPushButton(self.employees_frame)
-        self.employees_clear_btn.setObjectName(u"employees_clear_btn")
-        self.employees_clear_btn.setGeometry(QRect(330, 720, 71, 31))
-        self.employees_clear_btn.setStyleSheet(u"QPushButton#employees_clear_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_clear_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_clear_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
-        self.employees_search_btn = QPushButton(self.employees_frame)
-        self.employees_search_btn.setObjectName(u"employees_search_btn")
-        self.employees_search_btn.setGeometry(QRect(240, 720, 71, 31))
-        self.employees_search_btn.setStyleSheet(u"QPushButton#employees_search_btn{\n"
-"	background-color : #154c79;\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_search_btn:hover{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 10px;\n"
-"	font-size: 15px;\n"
-"	font : bold;\n"
-"}\n"
-"QPushButton#employees_search_btn:pressed{\n"
-"	background-color : rgba(0, 21, 76, 200);\n"
-"	color: rgba(255 , 255, 255, 210);\n"
-"	border-radius: 13px;\n"
-"	font-size: 15px;\n"
-"	padding-top: 2px;\n"
-"	font : bold;\n"
-"}")
-        self.containor.addWidget(self.employees_frame)
+        self.users_add_btn = QPushButton(self.users_frame)
+        self.users_add_btn.setObjectName(u"users_add_btn")
+        self.users_add_btn.setGeometry(QRect(550, 280, 91, 41))
+        self.users_add_btn.setStyleSheet(u"")
+        self.users_update_btn = QPushButton(self.users_frame)
+        self.users_update_btn.setObjectName(u"users_update_btn")
+        self.users_update_btn.setGeometry(QRect(660, 280, 91, 41))
+        self.users_update_btn.setStyleSheet(u"")
+        self.users_delete_btn = QPushButton(self.users_frame)
+        self.users_delete_btn.setObjectName(u"users_delete_btn")
+        self.users_delete_btn.setGeometry(QRect(770, 280, 91, 41))
+        self.users_delete_btn.setStyleSheet(u"")
+        self.users_clear_btn = QPushButton(self.users_frame)
+        self.users_clear_btn.setObjectName(u"users_clear_btn")
+        self.users_clear_btn.setGeometry(QRect(330, 720, 71, 31))
+        self.users_clear_btn.setStyleSheet(u"")
+        self.users_search_btn = QPushButton(self.users_frame)
+        self.users_search_btn.setObjectName(u"users_search_btn")
+        self.users_search_btn.setGeometry(QRect(240, 720, 71, 31))
+        self.users_search_btn.setStyleSheet(u"")
+        self.tableWidget_3 = QTableWidget(self.users_frame)
+        if (self.tableWidget_3.columnCount() < 5):
+            self.tableWidget_3.setColumnCount(5)
+        font1 = QFont()
+        font1.setStyleStrategy(QFont.PreferAntialias)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        __qtablewidgetitem10.setFont(font1);
+        self.tableWidget_3.setHorizontalHeaderItem(0, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.tableWidget_3.setHorizontalHeaderItem(1, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.tableWidget_3.setHorizontalHeaderItem(2, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.tableWidget_3.setHorizontalHeaderItem(3, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.tableWidget_3.setHorizontalHeaderItem(4, __qtablewidgetitem14)
+        self.tableWidget_3.setObjectName(u"tableWidget_3")
+        self.tableWidget_3.setGeometry(QRect(440, 340, 511, 401))
+        self.tableWidget_3.setMinimumSize(QSize(511, 401))
+        self.tableWidget_3.setMaximumSize(QSize(511, 401))
+        self.containor.addWidget(self.users_frame)
         self.sellings_frame = QWidget()
         self.sellings_frame.setObjectName(u"sellings_frame")
-        self.label_22 = QLabel(self.sellings_frame)
-        self.label_22.setObjectName(u"label_22")
-        self.label_22.setGeometry(QRect(230, 290, 191, 81))
-        self.label_22.setStyleSheet(u"font-size: 50px;")
+        self.label_44 = QLabel(self.sellings_frame)
+        self.label_44.setObjectName(u"label_44")
+        self.label_44.setGeometry(QRect(110, 70, 141, 131))
+        self.label_44.setPixmap(QPixmap(u":/icons/sellings_c.png"))
+        self.label_44.setScaledContents(True)
+        self.label_45 = QLabel(self.sellings_frame)
+        self.label_45.setObjectName(u"label_45")
+        self.label_45.setGeometry(QRect(140, 10, 81, 31))
+        self.label_45.setStyleSheet(u"color: #154c79;\n"
+"font-size: 20px;\n"
+"font: bold;\n"
+"")
+        self.label_46 = QLabel(self.sellings_frame)
+        self.label_46.setObjectName(u"label_46")
+        self.label_46.setGeometry(QRect(330, 50, 31, 31))
+        self.label_46.setFont(font)
+        self.categorie_id_9 = QLineEdit(self.sellings_frame)
+        self.categorie_id_9.setObjectName(u"categorie_id_9")
+        self.categorie_id_9.setGeometry(QRect(440, 40, 161, 41))
+        self.categorie_id_9.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.label_47 = QLabel(self.sellings_frame)
+        self.label_47.setObjectName(u"label_47")
+        self.label_47.setGeometry(QRect(330, 100, 91, 31))
+        self.label_47.setFont(font)
+        self.label_48 = QLabel(self.sellings_frame)
+        self.label_48.setObjectName(u"label_48")
+        self.label_48.setGeometry(QRect(670, 50, 41, 31))
+        self.label_48.setFont(font)
+        self.label_49 = QLabel(self.sellings_frame)
+        self.label_49.setObjectName(u"label_49")
+        self.label_49.setGeometry(QRect(670, 100, 91, 31))
+        self.label_49.setFont(font)
+        self.categorie_id_10 = QLineEdit(self.sellings_frame)
+        self.categorie_id_10.setObjectName(u"categorie_id_10")
+        self.categorie_id_10.setGeometry(QRect(440, 90, 161, 41))
+        self.categorie_id_10.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.categorie_id_11 = QLineEdit(self.sellings_frame)
+        self.categorie_id_11.setObjectName(u"categorie_id_11")
+        self.categorie_id_11.setGeometry(QRect(780, 40, 161, 41))
+        self.categorie_id_11.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.categorie_id_12 = QLineEdit(self.sellings_frame)
+        self.categorie_id_12.setObjectName(u"categorie_id_12")
+        self.categorie_id_12.setGeometry(QRect(780, 90, 161, 41))
+        self.categorie_id_12.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.sellings_search_btn = QPushButton(self.sellings_frame)
+        self.sellings_search_btn.setObjectName(u"sellings_search_btn")
+        self.sellings_search_btn.setGeometry(QRect(810, 170, 131, 41))
+        self.sellings_search_btn.setStyleSheet(u"")
+        self.sellings_delete_btn = QPushButton(self.sellings_frame)
+        self.sellings_delete_btn.setObjectName(u"sellings_delete_btn")
+        self.sellings_delete_btn.setGeometry(QRect(660, 170, 131, 41))
+        self.sellings_delete_btn.setStyleSheet(u"")
+        self.tableWidget_4 = QTableWidget(self.sellings_frame)
+        if (self.tableWidget_4.columnCount() < 4):
+            self.tableWidget_4.setColumnCount(4)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(0, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(1, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(2, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(3, __qtablewidgetitem18)
+        if (self.tableWidget_4.rowCount() < 18):
+            self.tableWidget_4.setRowCount(18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(0, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(1, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(2, __qtablewidgetitem21)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(3, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(4, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(5, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(6, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(7, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(8, __qtablewidgetitem27)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(9, __qtablewidgetitem28)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(10, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(11, __qtablewidgetitem30)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(12, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(13, __qtablewidgetitem32)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(14, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(15, __qtablewidgetitem34)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(16, __qtablewidgetitem35)
+        __qtablewidgetitem36 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(17, __qtablewidgetitem36)
+        self.tableWidget_4.setObjectName(u"tableWidget_4")
+        self.tableWidget_4.setEnabled(True)
+        self.tableWidget_4.setGeometry(QRect(20, 240, 921, 491))
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.tableWidget_4.sizePolicy().hasHeightForWidth())
+        self.tableWidget_4.setSizePolicy(sizePolicy1)
+        self.tableWidget_4.setBaseSize(QSize(0, 0))
+        font2 = QFont()
+        font2.setFamilies([u"Nirmala UI Semilight"])
+        font2.setStyleStrategy(QFont.PreferDefault)
+        self.tableWidget_4.setFont(font2)
+        self.tableWidget_4.setMouseTracking(True)
+        self.tableWidget_4.setTabletTracking(True)
+        self.tableWidget_4.setFocusPolicy(Qt.TabFocus)
+        self.tableWidget_4.setContextMenuPolicy(Qt.ActionsContextMenu)
+        self.tableWidget_4.setAcceptDrops(False)
+        self.tableWidget_4.setLayoutDirection(Qt.LeftToRight)
+        self.tableWidget_4.setAutoFillBackground(False)
+        self.tableWidget_4.setStyleSheet(u"")
+        self.tableWidget_4.setFrameShape(QFrame.Panel)
+        self.tableWidget_4.setFrameShadow(QFrame.Plain)
+        self.tableWidget_4.setLineWidth(0)
+        self.tableWidget_4.setAutoScroll(True)
+        self.tableWidget_4.setTabKeyNavigation(True)
+        self.tableWidget_4.setProperty("showDropIndicator", False)
+        self.tableWidget_4.setDragEnabled(False)
+        self.tableWidget_4.setDragDropOverwriteMode(False)
+        self.tableWidget_4.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.tableWidget_4.setDefaultDropAction(Qt.IgnoreAction)
+        self.tableWidget_4.setAlternatingRowColors(True)
+        self.tableWidget_4.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.tableWidget_4.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableWidget_4.setTextElideMode(Qt.ElideMiddle)
+        self.tableWidget_4.setShowGrid(True)
+        self.tableWidget_4.setGridStyle(Qt.SolidLine)
+        self.tableWidget_4.setSortingEnabled(True)
+        self.tableWidget_4.setWordWrap(True)
+        self.tableWidget_4.setCornerButtonEnabled(False)
+        self.tableWidget_4.setColumnCount(4)
+        self.tableWidget_4.horizontalHeader().setVisible(False)
+        self.tableWidget_4.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget_4.horizontalHeader().setMinimumSectionSize(216)
+        self.tableWidget_4.horizontalHeader().setDefaultSectionSize(216)
+        self.tableWidget_4.horizontalHeader().setProperty("showSortIndicator", True)
+        self.tableWidget_4.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget_4.verticalHeader().setVisible(False)
+        self.tableWidget_4.verticalHeader().setCascadingSectionResizes(False)
+        self.tableWidget_4.verticalHeader().setDefaultSectionSize(40)
+        self.tableWidget_4.verticalHeader().setHighlightSections(True)
+        self.tableWidget_4.verticalHeader().setProperty("showSortIndicator", False)
+        self.tableWidget_4.verticalHeader().setStretchLastSection(False)
         self.containor.addWidget(self.sellings_frame)
-        self.bills_frame = QWidget()
-        self.bills_frame.setObjectName(u"bills_frame")
-        self.label_23 = QLabel(self.bills_frame)
-        self.label_23.setObjectName(u"label_23")
-        self.label_23.setGeometry(QRect(340, 290, 181, 81))
-        self.label_23.setStyleSheet(u"font-size: 50px;")
-        self.containor.addWidget(self.bills_frame)
+        self.expenses_frame = QWidget()
+        self.expenses_frame.setObjectName(u"expenses_frame")
+        self.label_50 = QLabel(self.expenses_frame)
+        self.label_50.setObjectName(u"label_50")
+        self.label_50.setGeometry(QRect(100, 70, 141, 131))
+        self.label_50.setPixmap(QPixmap(u":/icons/bills_c.png"))
+        self.label_50.setScaledContents(True)
+        self.label_51 = QLabel(self.expenses_frame)
+        self.label_51.setObjectName(u"label_51")
+        self.label_51.setGeometry(QRect(120, 20, 101, 31))
+        self.label_51.setStyleSheet(u"color: #154c79;\n"
+"font-size: 20px;\n"
+"font: bold;\n"
+"")
+        self.expense_delete_btn = QPushButton(self.expenses_frame)
+        self.expense_delete_btn.setObjectName(u"expense_delete_btn")
+        self.expense_delete_btn.setGeometry(QRect(210, 630, 91, 41))
+        self.expense_delete_btn.setStyleSheet(u"")
+        self.expense_id = QLineEdit(self.expenses_frame)
+        self.expense_id.setObjectName(u"expense_id")
+        self.expense_id.setGeometry(QRect(110, 250, 191, 41))
+        self.expense_id.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.expense_id.setInputMethodHints(Qt.ImhDigitsOnly)
+        self.label_52 = QLabel(self.expenses_frame)
+        self.label_52.setObjectName(u"label_52")
+        self.label_52.setGeometry(QRect(10, 260, 51, 31))
+        self.label_52.setFont(font)
+        self.label_53 = QLabel(self.expenses_frame)
+        self.label_53.setObjectName(u"label_53")
+        self.label_53.setGeometry(QRect(10, 320, 81, 31))
+        self.label_53.setFont(font)
+        self.tableWidget_5 = QTableWidget(self.expenses_frame)
+        if (self.tableWidget_5.columnCount() < 5):
+            self.tableWidget_5.setColumnCount(5)
+        __qtablewidgetitem37 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(0, __qtablewidgetitem37)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(1, __qtablewidgetitem38)
+        __qtablewidgetitem39 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(2, __qtablewidgetitem39)
+        __qtablewidgetitem40 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(3, __qtablewidgetitem40)
+        __qtablewidgetitem41 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(4, __qtablewidgetitem41)
+        self.tableWidget_5.setObjectName(u"tableWidget_5")
+        self.tableWidget_5.setEnabled(True)
+        self.tableWidget_5.setGeometry(QRect(320, 20, 631, 661))
+        self.tableWidget_5.setContextMenuPolicy(Qt.PreventContextMenu)
+        self.tableWidget_5.setAcceptDrops(False)
+#if QT_CONFIG(statustip)
+        self.tableWidget_5.setStatusTip(u"")
+#endif // QT_CONFIG(statustip)
+        self.tableWidget_5.setLayoutDirection(Qt.LeftToRight)
+        self.tableWidget_5.setAutoFillBackground(True)
+        self.tableWidget_5.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.tableWidget_5.setAlternatingRowColors(True)
+        self.tableWidget_5.setGridStyle(Qt.SolidLine)
+        self.tableWidget_5.setCornerButtonEnabled(False)
+        self.expense_clear_btn = QPushButton(self.expenses_frame)
+        self.expense_clear_btn.setObjectName(u"expense_clear_btn")
+        self.expense_clear_btn.setGeometry(QRect(230, 570, 71, 31))
+        self.expense_clear_btn.setStyleSheet(u"")
+        self.expense_update_btn = QPushButton(self.expenses_frame)
+        self.expense_update_btn.setObjectName(u"expense_update_btn")
+        self.expense_update_btn.setGeometry(QRect(110, 630, 91, 41))
+        self.expense_update_btn.setStyleSheet(u"")
+        self.expense_search_btn = QPushButton(self.expenses_frame)
+        self.expense_search_btn.setObjectName(u"expense_search_btn")
+        self.expense_search_btn.setGeometry(QRect(150, 570, 71, 31))
+        self.expense_search_btn.setStyleSheet(u"")
+        self.expense_description = QTextEdit(self.expenses_frame)
+        self.expense_description.setObjectName(u"expense_description")
+        self.expense_description.setGeometry(QRect(110, 470, 191, 91))
+        self.expense_description.setStyleSheet(u"border: 2px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.label_54 = QLabel(self.expenses_frame)
+        self.label_54.setObjectName(u"label_54")
+        self.label_54.setGeometry(QRect(10, 470, 91, 31))
+        self.label_54.setFont(font)
+        self.expense_ammount = QLineEdit(self.expenses_frame)
+        self.expense_ammount.setObjectName(u"expense_ammount")
+        self.expense_ammount.setGeometry(QRect(110, 310, 191, 41))
+        self.expense_ammount.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.expense_ammount.setInputMethodHints(Qt.ImhDigitsOnly)
+        self.expense_add_btn = QPushButton(self.expenses_frame)
+        self.expense_add_btn.setObjectName(u"expense_add_btn")
+        self.expense_add_btn.setGeometry(QRect(10, 630, 91, 41))
+        self.expense_add_btn.setStyleSheet(u"")
+        self.expense_type = QComboBox(self.expenses_frame)
+        self.expense_type.addItem("")
+        self.expense_type.addItem("")
+        self.expense_type.setObjectName(u"expense_type")
+        self.expense_type.setGeometry(QRect(110, 370, 191, 31))
+        self.expense_type.setStyleSheet(u"color: #154c79;\n"
+"font-size: 18px;\n"
+"border: 2px solid #154c79;")
+        self.label_55 = QLabel(self.expenses_frame)
+        self.label_55.setObjectName(u"label_55")
+        self.label_55.setGeometry(QRect(10, 370, 81, 31))
+        self.label_55.setFont(font)
+        self.expense_date = QDateEdit(self.expenses_frame)
+        self.expense_date.setObjectName(u"expense_date")
+        self.expense_date.setGeometry(QRect(110, 420, 191, 31))
+        self.expense_date.setAcceptDrops(False)
+        self.expense_date.setStyleSheet(u"border: 2px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.expense_date.setAccelerated(False)
+        self.expense_date.setCalendarPopup(True)
+        self.label_56 = QLabel(self.expenses_frame)
+        self.label_56.setObjectName(u"label_56")
+        self.label_56.setGeometry(QRect(10, 420, 81, 31))
+        self.label_56.setFont(font)
+        self.containor.addWidget(self.expenses_frame)
         self.line = QFrame(Form)
         self.line.setObjectName(u"line")
         self.line.setGeometry(QRect(240, 20, 31, 761))
-        self.line.setStyleSheet(u"color: rgba(110,110,110,50)")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(3)
+        sizePolicy2.setHeightForWidth(self.line.sizePolicy().hasHeightForWidth())
+        self.line.setSizePolicy(sizePolicy2)
+        self.line.setFont(font)
+        self.line.setStyleSheet(u"color: #154c79;")
+        self.line.setFrameShadow(QFrame.Plain)
         self.line.setFrameShape(QFrame.VLine)
-        self.line.setFrameShadow(QFrame.Sunken)
         self.verticalLayoutWidget = QWidget(Form)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
         self.verticalLayoutWidget.setGeometry(QRect(10, 180, 241, 511))
@@ -822,11 +854,11 @@ class Ui_Form(object):
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(110, 10, 71, 51))
         self.label_5.setBaseSize(QSize(50, 20))
-        font1 = QFont()
-        font1.setFamilies([u"Segoe UI Semibold"])
-        font1.setPointSize(15)
-        font1.setBold(True)
-        self.label_5.setFont(font1)
+        font3 = QFont()
+        font3.setFamilies([u"Segoe UI Semibold"])
+        font3.setPointSize(15)
+        font3.setBold(True)
+        self.label_5.setFont(font3)
         self.label_5.setAutoFillBackground(False)
         self.label_5.setStyleSheet(u"")
         self.label_5.setAlignment(Qt.AlignCenter)
@@ -835,15 +867,15 @@ class Ui_Form(object):
         self.label_4.setGeometry(QRect(20, 10, 51, 51))
         self.label_4.setMaximumSize(QSize(51, 51))
         self.label_4.setBaseSize(QSize(30, 30))
-        font2 = QFont()
-        font2.setStrikeOut(False)
-        font2.setStyleStrategy(QFont.PreferDefault)
-        self.label_4.setFont(font2)
+        font4 = QFont()
+        font4.setStrikeOut(False)
+        font4.setStyleStrategy(QFont.PreferDefault)
+        self.label_4.setFont(font4)
         self.label_4.setPixmap(QPixmap(u":/icons/stats.png"))
         self.label_4.setScaledContents(True)
         self.stats_btn = QPushButton(self.stats_lbl)
         self.stats_btn.setObjectName(u"stats_btn")
-        self.stats_btn.setGeometry(QRect(0, 0, 221, 81))
+        self.stats_btn.setGeometry(QRect(0, 0, 231, 81))
         self.stats_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
@@ -859,14 +891,14 @@ class Ui_Form(object):
         self.label_7.setGeometry(QRect(20, 10, 51, 51))
         self.label_7.setMaximumSize(QSize(51, 51))
         self.label_7.setBaseSize(QSize(30, 30))
-        self.label_7.setFont(font2)
+        self.label_7.setFont(font4)
         self.label_7.setPixmap(QPixmap(u":/icons/products.png"))
         self.label_7.setScaledContents(True)
         self.label_6 = QLabel(self.products_lbl)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(80, 10, 131, 51))
         self.label_6.setBaseSize(QSize(50, 20))
-        self.label_6.setFont(font1)
+        self.label_6.setFont(font3)
         self.label_6.setToolTipDuration(-1)
         self.label_6.setAutoFillBackground(False)
         self.label_6.setStyleSheet(u"QLabel:pressed{\n"
@@ -877,7 +909,7 @@ class Ui_Form(object):
         self.label_6.setIndent(1)
         self.products_btn = QPushButton(self.products_lbl)
         self.products_btn.setObjectName(u"products_btn")
-        self.products_btn.setGeometry(QRect(0, 0, 221, 81))
+        self.products_btn.setGeometry(QRect(0, 0, 231, 81))
         self.products_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
@@ -894,52 +926,52 @@ class Ui_Form(object):
         self.label_8.setGeometry(QRect(20, 10, 51, 51))
         self.label_8.setMaximumSize(QSize(51, 51))
         self.label_8.setBaseSize(QSize(30, 30))
-        self.label_8.setFont(font2)
+        self.label_8.setFont(font4)
         self.label_8.setPixmap(QPixmap(u":/icons/categories.png"))
         self.label_8.setScaledContents(True)
         self.label_10 = QLabel(self.categories_lbl)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setGeometry(QRect(70, 10, 161, 51))
         self.label_10.setBaseSize(QSize(50, 20))
-        self.label_10.setFont(font1)
+        self.label_10.setFont(font3)
         self.label_10.setAutoFillBackground(False)
         self.label_10.setAlignment(Qt.AlignCenter)
         self.categories_btn = QPushButton(self.categories_lbl)
         self.categories_btn.setObjectName(u"categories_btn")
-        self.categories_btn.setGeometry(QRect(0, 0, 221, 81))
+        self.categories_btn.setGeometry(QRect(10, -10, 221, 81))
         self.categories_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
 
         self.options.addWidget(self.categories_lbl)
 
-        self.employees_lbl = QFrame(self.verticalLayoutWidget)
-        self.employees_lbl.setObjectName(u"employees_lbl")
-        self.employees_lbl.setFrameShape(QFrame.StyledPanel)
-        self.employees_lbl.setFrameShadow(QFrame.Raised)
-        self.label_9 = QLabel(self.employees_lbl)
+        self.users_lbl = QFrame(self.verticalLayoutWidget)
+        self.users_lbl.setObjectName(u"users_lbl")
+        self.users_lbl.setFrameShape(QFrame.StyledPanel)
+        self.users_lbl.setFrameShadow(QFrame.Raised)
+        self.label_9 = QLabel(self.users_lbl)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setGeometry(QRect(70, 10, 159, 51))
         self.label_9.setBaseSize(QSize(50, 20))
-        self.label_9.setFont(font1)
+        self.label_9.setFont(font3)
         self.label_9.setAutoFillBackground(False)
         self.label_9.setAlignment(Qt.AlignCenter)
-        self.label_11 = QLabel(self.employees_lbl)
+        self.label_11 = QLabel(self.users_lbl)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setGeometry(QRect(20, 10, 51, 51))
         self.label_11.setMaximumSize(QSize(51, 51))
         self.label_11.setBaseSize(QSize(30, 30))
-        self.label_11.setFont(font2)
+        self.label_11.setFont(font4)
         self.label_11.setPixmap(QPixmap(u":/icons/employee.png"))
         self.label_11.setScaledContents(True)
-        self.employees_btn = QPushButton(self.employees_lbl)
-        self.employees_btn.setObjectName(u"employees_btn")
-        self.employees_btn.setGeometry(QRect(0, 0, 221, 81))
-        self.employees_btn.setStyleSheet(u"\n"
+        self.users_btn = QPushButton(self.users_lbl)
+        self.users_btn.setObjectName(u"users_btn")
+        self.users_btn.setGeometry(QRect(0, 0, 231, 81))
+        self.users_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
 
-        self.options.addWidget(self.employees_lbl)
+        self.options.addWidget(self.users_lbl)
 
         self.sellings_lbl = QFrame(self.verticalLayoutWidget)
         self.sellings_lbl.setObjectName(u"sellings_lbl")
@@ -950,54 +982,76 @@ class Ui_Form(object):
         self.label_13.setGeometry(QRect(20, 10, 51, 51))
         self.label_13.setMaximumSize(QSize(51, 51))
         self.label_13.setBaseSize(QSize(30, 30))
-        self.label_13.setFont(font2)
+        self.label_13.setFont(font4)
         self.label_13.setPixmap(QPixmap(u":/icons/sellings.png"))
         self.label_13.setScaledContents(True)
         self.label_12 = QLabel(self.sellings_lbl)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(70, 10, 141, 51))
         self.label_12.setBaseSize(QSize(50, 20))
-        self.label_12.setFont(font1)
+        self.label_12.setFont(font3)
         self.label_12.setAutoFillBackground(False)
         self.label_12.setAlignment(Qt.AlignCenter)
         self.sellings_btn = QPushButton(self.sellings_lbl)
         self.sellings_btn.setObjectName(u"sellings_btn")
-        self.sellings_btn.setGeometry(QRect(0, 0, 221, 81))
+        self.sellings_btn.setGeometry(QRect(0, 0, 231, 81))
         self.sellings_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
 
         self.options.addWidget(self.sellings_lbl)
 
-        self.bills_lbl = QFrame(self.verticalLayoutWidget)
-        self.bills_lbl.setObjectName(u"bills_lbl")
-        self.bills_lbl.setEnabled(True)
-        self.bills_lbl.setFrameShape(QFrame.StyledPanel)
-        self.bills_lbl.setFrameShadow(QFrame.Raised)
-        self.label_15 = QLabel(self.bills_lbl)
+        self.expenses_lbl = QFrame(self.verticalLayoutWidget)
+        self.expenses_lbl.setObjectName(u"expenses_lbl")
+        self.expenses_lbl.setEnabled(True)
+        self.expenses_lbl.setFrameShape(QFrame.StyledPanel)
+        self.expenses_lbl.setFrameShadow(QFrame.Raised)
+        self.label_15 = QLabel(self.expenses_lbl)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setGeometry(QRect(20, 10, 51, 51))
         self.label_15.setMaximumSize(QSize(51, 51))
         self.label_15.setBaseSize(QSize(30, 30))
-        self.label_15.setFont(font2)
-        self.label_15.setPixmap(QPixmap(u":/icons/bill.png"))
+        self.label_15.setFont(font4)
+        self.label_15.setPixmap(QPixmap(u":/icons/bills.png"))
         self.label_15.setScaledContents(True)
-        self.label_14 = QLabel(self.bills_lbl)
+        self.label_14 = QLabel(self.expenses_lbl)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(60, 10, 151, 51))
         self.label_14.setBaseSize(QSize(50, 20))
-        self.label_14.setFont(font1)
+        self.label_14.setFont(font3)
         self.label_14.setAutoFillBackground(False)
         self.label_14.setAlignment(Qt.AlignCenter)
-        self.bills_btn = QPushButton(self.bills_lbl)
-        self.bills_btn.setObjectName(u"bills_btn")
-        self.bills_btn.setGeometry(QRect(0, 0, 221, 81))
-        self.bills_btn.setStyleSheet(u"\n"
+        self.expenses_btn = QPushButton(self.expenses_lbl)
+        self.expenses_btn.setObjectName(u"expenses_btn")
+        self.expenses_btn.setGeometry(QRect(0, 0, 231, 81))
+        self.expenses_btn.setStyleSheet(u"\n"
 "background-color: rgba(0,0,0,0);\n"
 "")
 
-        self.options.addWidget(self.bills_lbl)
+        self.options.addWidget(self.expenses_lbl)
 
+        self.pushButton = QPushButton(Form)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(20, 730, 31, 41))
+        font5 = QFont()
+        font5.setStrikeOut(False)
+        self.pushButton.setFont(font5)
+        self.pushButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.pushButton.setMouseTracking(False)
+        self.pushButton.setTabletTracking(False)
+        self.pushButton.setStyleSheet(u"QPushButton{\n"
+"	border-image: url(:/icons/logout.png);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"}")
+        self.pushButton_2 = QPushButton(Form)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(70, 730, 41, 41))
+        self.pushButton_2.setFont(font5)
+        self.pushButton_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.pushButton_2.setMouseTracking(False)
+        self.pushButton_2.setTabletTracking(False)
+        self.pushButton_2.setStyleSheet(u"border-image: url(:/icons/settings.png);")
 #if QT_CONFIG(shortcut)
 #endif // QT_CONFIG(shortcut)
 
@@ -1016,7 +1070,7 @@ class Ui_Form(object):
 #endif // QT_CONFIG(statustip)
         self.groupBox.setTitle("")
         self.label.setText("")
-        self.label_2.setText(QCoreApplication.translate("Form", u"Meher Majdoub", None))
+        self.admin_name_lbl.setText(QCoreApplication.translate("Form", u"admin name here", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"ADMIN", None))
         self.label_18.setText(QCoreApplication.translate("Form", u"STATS", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
@@ -1037,17 +1091,32 @@ class Ui_Form(object):
         self.product_name.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Name", None))
         self.product_price.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Price", None))
         self.product_quantity.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Quantity", None))
+#if QT_CONFIG(statustip)
+        self.add_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.add_btn.setText(QCoreApplication.translate("Form", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.update_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.update_btn.setText(QCoreApplication.translate("Form", u"Update", None))
+#if QT_CONFIG(statustip)
+        self.delete_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
         self.product_category.setItemText(0, QCoreApplication.translate("Form", u"computer", None))
         self.product_category.setItemText(1, QCoreApplication.translate("Form", u"fish", None))
         self.product_category.setItemText(2, QCoreApplication.translate("Form", u"gold", None))
         self.product_category.setItemText(3, QCoreApplication.translate("Form", u"phone", None))
 
+#if QT_CONFIG(statustip)
+        self.clear_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.clear_btn.setText(QCoreApplication.translate("Form", u"Clear", None))
         self.label_16.setText("")
         self.label_17.setText(QCoreApplication.translate("Form", u"Products", None))
+#if QT_CONFIG(statustip)
+        self.products_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.products_search_btn.setText(QCoreApplication.translate("Form", u"search", None))
         self.label_27.setText(QCoreApplication.translate("Form", u"Categories", None))
         self.label_20.setText("")
@@ -1056,10 +1125,21 @@ class Ui_Form(object):
         self.label_28.setText(QCoreApplication.translate("Form", u"Description", None))
         self.label_29.setText(QCoreApplication.translate("Form", u"Name", None))
         self.label_30.setText(QCoreApplication.translate("Form", u"ID", None))
-        self.categorie_price.setPlaceholderText(QCoreApplication.translate("Form", u"Enter description", None))
+#if QT_CONFIG(statustip)
+        self.categories_clear_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.categories_clear_btn.setText(QCoreApplication.translate("Form", u"Clear", None))
+#if QT_CONFIG(statustip)
+        self.categories_add_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.categories_add_btn.setText(QCoreApplication.translate("Form", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.categories_update_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.categories_update_btn.setText(QCoreApplication.translate("Form", u"Update", None))
+#if QT_CONFIG(statustip)
+        self.categories_delete_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.categories_delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
         ___qtablewidgetitem5 = self.tableWidget_2.horizontalHeaderItem(0)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"ID", None));
@@ -1071,39 +1151,198 @@ class Ui_Form(object):
         ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"Price", None));
         ___qtablewidgetitem9 = self.tableWidget_2.horizontalHeaderItem(4)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"Quantity", None));
+#if QT_CONFIG(statustip)
+        self.categories_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
         self.categories_search_btn.setText(QCoreApplication.translate("Form", u"search", None))
-        self.label_31.setText(QCoreApplication.translate("Form", u"Employee ID", None))
-        self.categorie_id_2.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
+        self.textEdit_2.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Description", None))
+        self.label_31.setText(QCoreApplication.translate("Form", u"User ID", None))
+#if QT_CONFIG(statustip)
+        self.users_id.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_id.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
         self.label_32.setText(QCoreApplication.translate("Form", u"First Name", None))
         self.label_33.setText(QCoreApplication.translate("Form", u"Last Name", None))
-        self.categorie_id_3.setPlaceholderText(QCoreApplication.translate("Form", u"Enter First Name", None))
-        self.categorie_id_4.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Last Name", None))
+#if QT_CONFIG(statustip)
+        self.users_first_name.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_first_name.setPlaceholderText(QCoreApplication.translate("Form", u"Enter First Name", None))
+#if QT_CONFIG(statustip)
+        self.users_last_name.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_last_name.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Last Name", None))
         self.label_34.setText(QCoreApplication.translate("Form", u"Birth Date", None))
         self.label_35.setText(QCoreApplication.translate("Form", u"Gender", None))
-        self.radioButton.setText(QCoreApplication.translate("Form", u"Male", None))
-        self.radioButton_2.setText(QCoreApplication.translate("Form", u"Female", None))
-        self.label_36.setText(QCoreApplication.translate("Form", u"Employee's Account", None))
+        self.users_male.setText(QCoreApplication.translate("Form", u"Male", None))
+        self.users_female.setText(QCoreApplication.translate("Form", u"Female", None))
+        self.label_36.setText(QCoreApplication.translate("Form", u"User's Account", None))
         self.label_37.setText(QCoreApplication.translate("Form", u"User Name", None))
-        self.categorie_id_5.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
+#if QT_CONFIG(statustip)
+        self.users_user_name.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_user_name.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
         self.label_38.setText(QCoreApplication.translate("Form", u"Password", None))
-        self.categorie_id_6.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Password", None))
+#if QT_CONFIG(statustip)
+        self.users_password.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_password.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Password", None))
         self.label_39.setText(QCoreApplication.translate("Form", u"Role", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"Employee", None))
+        self.users_role.setItemText(0, QCoreApplication.translate("Form", u"Admin", None))
+        self.users_role.setItemText(1, QCoreApplication.translate("Form", u"Seller", None))
 
         self.label_40.setText(QCoreApplication.translate("Form", u"Phone Number", None))
-        self.categorie_id_7.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Phone Number", None))
+#if QT_CONFIG(statustip)
+        self.users_phone_number.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_phone_number.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Phone Number", None))
         self.label_41.setText(QCoreApplication.translate("Form", u"Salary", None))
-        self.categorie_id_8.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Salary", None))
+#if QT_CONFIG(statustip)
+        self.users_salary.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_salary.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Salary", None))
         self.label_42.setText(QCoreApplication.translate("Form", u"Adress", None))
+#if QT_CONFIG(statustip)
+        self.users_adress.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.users_adress.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Adress", None))
         self.label_21.setText("")
-        self.label_43.setText(QCoreApplication.translate("Form", u"Employees", None))
-        self.Employees_add_btn.setText(QCoreApplication.translate("Form", u"Add", None))
-        self.employees_update_btn.setText(QCoreApplication.translate("Form", u"Update", None))
-        self.employees_delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
-        self.employees_clear_btn.setText(QCoreApplication.translate("Form", u"Clear", None))
-        self.employees_search_btn.setText(QCoreApplication.translate("Form", u"Search", None))
-        self.label_22.setText(QCoreApplication.translate("Form", u"sellings", None))
-        self.label_23.setText(QCoreApplication.translate("Form", u"BILLS", None))
+        self.label_43.setText(QCoreApplication.translate("Form", u"Users", None))
+#if QT_CONFIG(statustip)
+        self.users_add_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.users_add_btn.setText(QCoreApplication.translate("Form", u"Add", None))
+#if QT_CONFIG(statustip)
+        self.users_update_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.users_update_btn.setText(QCoreApplication.translate("Form", u"Update", None))
+#if QT_CONFIG(statustip)
+        self.users_delete_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.users_delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
+#if QT_CONFIG(statustip)
+        self.users_clear_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.users_clear_btn.setText(QCoreApplication.translate("Form", u"Clear", None))
+#if QT_CONFIG(statustip)
+        self.users_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.users_search_btn.setText(QCoreApplication.translate("Form", u"Search", None))
+        ___qtablewidgetitem10 = self.tableWidget_3.horizontalHeaderItem(0)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"ID", None));
+        ___qtablewidgetitem11 = self.tableWidget_3.horizontalHeaderItem(1)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"Name", None));
+        ___qtablewidgetitem12 = self.tableWidget_3.horizontalHeaderItem(2)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"Phone", None));
+        ___qtablewidgetitem13 = self.tableWidget_3.horizontalHeaderItem(3)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("Form", u"Salary", None));
+        ___qtablewidgetitem14 = self.tableWidget_3.horizontalHeaderItem(4)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("Form", u"Role", None));
+        self.label_44.setText("")
+        self.label_45.setText(QCoreApplication.translate("Form", u"Sellings", None))
+        self.label_46.setText(QCoreApplication.translate("Form", u"ID", None))
+        self.categorie_id_9.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
+        self.label_47.setText(QCoreApplication.translate("Form", u"Seller Name", None))
+        self.label_48.setText(QCoreApplication.translate("Form", u"Date", None))
+        self.label_49.setText(QCoreApplication.translate("Form", u"Total price", None))
+        self.categorie_id_10.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
+        self.categorie_id_11.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
+        self.categorie_id_12.setPlaceholderText(QCoreApplication.translate("Form", u"Enter User Name", None))
+#if QT_CONFIG(statustip)
+        self.sellings_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.sellings_search_btn.setText(QCoreApplication.translate("Form", u"Search", None))
+#if QT_CONFIG(statustip)
+        self.sellings_delete_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.sellings_delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
+        ___qtablewidgetitem15 = self.tableWidget_4.horizontalHeaderItem(0)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("Form", u"Sell ID", None));
+        ___qtablewidgetitem16 = self.tableWidget_4.horizontalHeaderItem(1)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("Form", u"Seller Name", None));
+        ___qtablewidgetitem17 = self.tableWidget_4.horizontalHeaderItem(2)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("Form", u"date", None));
+        ___qtablewidgetitem18 = self.tableWidget_4.horizontalHeaderItem(3)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("Form", u"Total", None));
+        ___qtablewidgetitem19 = self.tableWidget_4.verticalHeaderItem(0)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem20 = self.tableWidget_4.verticalHeaderItem(2)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem21 = self.tableWidget_4.verticalHeaderItem(3)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem22 = self.tableWidget_4.verticalHeaderItem(4)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem23 = self.tableWidget_4.verticalHeaderItem(5)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem24 = self.tableWidget_4.verticalHeaderItem(6)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem25 = self.tableWidget_4.verticalHeaderItem(7)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem26 = self.tableWidget_4.verticalHeaderItem(8)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem27 = self.tableWidget_4.verticalHeaderItem(9)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem28 = self.tableWidget_4.verticalHeaderItem(10)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem29 = self.tableWidget_4.verticalHeaderItem(11)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem30 = self.tableWidget_4.verticalHeaderItem(12)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem31 = self.tableWidget_4.verticalHeaderItem(13)
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem32 = self.tableWidget_4.verticalHeaderItem(14)
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem33 = self.tableWidget_4.verticalHeaderItem(15)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem34 = self.tableWidget_4.verticalHeaderItem(16)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem35 = self.tableWidget_4.verticalHeaderItem(17)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("Form", u"New Row", None));
+#if QT_CONFIG(statustip)
+        self.tableWidget_4.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.label_50.setText("")
+        self.label_51.setText(QCoreApplication.translate("Form", u"Expenses", None))
+#if QT_CONFIG(statustip)
+        self.expense_delete_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.expense_delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
+        self.expense_id.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
+        self.label_52.setText(QCoreApplication.translate("Form", u"ID", None))
+        self.label_53.setText(QCoreApplication.translate("Form", u"Ammount", None))
+        ___qtablewidgetitem36 = self.tableWidget_5.horizontalHeaderItem(0)
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("Form", u"ID", None));
+        ___qtablewidgetitem37 = self.tableWidget_5.horizontalHeaderItem(1)
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("Form", u"Name", None));
+        ___qtablewidgetitem38 = self.tableWidget_5.horizontalHeaderItem(2)
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("Form", u"Category", None));
+        ___qtablewidgetitem39 = self.tableWidget_5.horizontalHeaderItem(3)
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("Form", u"Price", None));
+        ___qtablewidgetitem40 = self.tableWidget_5.horizontalHeaderItem(4)
+        ___qtablewidgetitem40.setText(QCoreApplication.translate("Form", u"Quantity", None));
+#if QT_CONFIG(statustip)
+        self.expense_clear_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.expense_clear_btn.setText(QCoreApplication.translate("Form", u"Clear", None))
+#if QT_CONFIG(statustip)
+        self.expense_update_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.expense_update_btn.setText(QCoreApplication.translate("Form", u"Update", None))
+#if QT_CONFIG(statustip)
+        self.expense_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.expense_search_btn.setText(QCoreApplication.translate("Form", u"search", None))
+        self.expense_description.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Description", None))
+        self.label_54.setText(QCoreApplication.translate("Form", u"Description", None))
+        self.expense_ammount.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Ammount", None))
+#if QT_CONFIG(statustip)
+        self.expense_add_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
+#endif // QT_CONFIG(statustip)
+        self.expense_add_btn.setText(QCoreApplication.translate("Form", u"Add", None))
+        self.expense_type.setItemText(0, QCoreApplication.translate("Form", u"Salary", None))
+        self.expense_type.setItemText(1, QCoreApplication.translate("Form", u"birra3", None))
+
+        self.label_55.setText(QCoreApplication.translate("Form", u"Type", None))
+        self.label_56.setText(QCoreApplication.translate("Form", u"Date", None))
 #if QT_CONFIG(statustip)
         self.stats_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
 #endif // QT_CONFIG(statustip)
@@ -1135,14 +1374,14 @@ class Ui_Form(object):
         self.label_10.setText(QCoreApplication.translate("Form", u"Categories", None))
         self.categories_btn.setText("")
 #if QT_CONFIG(statustip)
-        self.employees_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
+        self.users_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(statustip)
         self.label_9.setStatusTip(QCoreApplication.translate("Form", u"this", None))
 #endif // QT_CONFIG(statustip)
-        self.label_9.setText(QCoreApplication.translate("Form", u"Employees", None))
+        self.label_9.setText(QCoreApplication.translate("Form", u"Users", None))
         self.label_11.setText("")
-        self.employees_btn.setText("")
+        self.users_btn.setText("")
 #if QT_CONFIG(statustip)
         self.sellings_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
 #endif // QT_CONFIG(statustip)
@@ -1153,13 +1392,15 @@ class Ui_Form(object):
         self.label_12.setText(QCoreApplication.translate("Form", u"Sellings", None))
         self.sellings_btn.setText("")
 #if QT_CONFIG(statustip)
-        self.bills_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
+        self.expenses_lbl.setStatusTip(QCoreApplication.translate("Form", u"option", None))
 #endif // QT_CONFIG(statustip)
         self.label_15.setText("")
 #if QT_CONFIG(statustip)
         self.label_14.setStatusTip(QCoreApplication.translate("Form", u"this", None))
 #endif // QT_CONFIG(statustip)
-        self.label_14.setText(QCoreApplication.translate("Form", u"Billls", None))
-        self.bills_btn.setText("")
+        self.label_14.setText(QCoreApplication.translate("Form", u"Expenses", None))
+        self.expenses_btn.setText("")
+        self.pushButton.setText("")
+        self.pushButton_2.setText("")
     # retranslateUi
 
