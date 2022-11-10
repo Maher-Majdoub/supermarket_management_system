@@ -65,9 +65,8 @@ class Controller:
             cursor.execute("SELECT first_name, last_name FROM admins WHERE %s = account_id",(id,))      
             info = cursor.fetchone()                  
             name = info[0] + ' ' + info[1]
-            self.admin_panel = Admin(mydb,name)            
+            self.admin_panel = Admin(mydb, name)            
             self.admin_panel.show()     
-
             self.login.close()
 
 

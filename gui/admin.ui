@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -932,8 +932,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_31">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>240</y>
+       <x>170</x>
+       <y>30</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -950,9 +950,9 @@ font-size: 18px;</string>
     <widget class="QLineEdit" name="users_id">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>230</y>
-       <width>241</width>
+       <x>270</x>
+       <y>20</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -972,8 +972,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_32">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>300</y>
+       <x>170</x>
+       <y>90</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -990,8 +990,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_33">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>360</y>
+       <x>170</x>
+       <y>150</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -1008,9 +1008,9 @@ font-size: 18px;</string>
     <widget class="QDateEdit" name="users_birth_date">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>420</y>
-       <width>241</width>
+       <x>130</x>
+       <y>200</y>
+       <width>171</width>
        <height>31</height>
       </rect>
      </property>
@@ -1032,9 +1032,9 @@ font-size: 18px;</string>
     <widget class="QLineEdit" name="users_first_name">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>290</y>
-       <width>241</width>
+       <x>270</x>
+       <y>80</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -1054,9 +1054,9 @@ font-size: 18px;</string>
     <widget class="QLineEdit" name="users_last_name">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>350</y>
-       <width>241</width>
+       <x>270</x>
+       <y>140</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -1076,8 +1076,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_34">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>420</y>
+       <x>10</x>
+       <y>200</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -1094,8 +1094,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_35">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>580</y>
+       <x>330</x>
+       <y>200</y>
        <width>61</width>
        <height>31</height>
       </rect>
@@ -1112,8 +1112,8 @@ font-size: 18px;</string>
     <widget class="QRadioButton" name="users_male">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>580</y>
+       <x>410</x>
+       <y>200</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -1132,8 +1132,8 @@ font-size: 18px;</string>
     <widget class="QRadioButton" name="users_female">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>580</y>
+       <x>490</x>
+       <y>200</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1168,8 +1168,8 @@ font: bold;
     <widget class="QLabel" name="label_37">
      <property name="geometry">
       <rect>
-       <x>530</x>
-       <y>60</y>
+       <x>580</x>
+       <y>50</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -1186,8 +1186,8 @@ font: bold;
     <widget class="QLineEdit" name="users_user_name">
      <property name="geometry">
       <rect>
-       <x>630</x>
-       <y>50</y>
+       <x>690</x>
+       <y>40</y>
        <width>241</width>
        <height>41</height>
       </rect>
@@ -1208,8 +1208,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_38">
      <property name="geometry">
       <rect>
-       <x>530</x>
-       <y>140</y>
+       <x>580</x>
+       <y>100</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -1226,8 +1226,8 @@ font-size: 18px;</string>
     <widget class="QLineEdit" name="users_password">
      <property name="geometry">
       <rect>
-       <x>630</x>
-       <y>130</y>
+       <x>690</x>
+       <y>90</y>
        <width>241</width>
        <height>41</height>
       </rect>
@@ -1248,8 +1248,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_39">
      <property name="geometry">
       <rect>
-       <x>530</x>
-       <y>220</y>
+       <x>580</x>
+       <y>160</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -1266,8 +1266,8 @@ font-size: 18px;</string>
     <widget class="QComboBox" name="users_role">
      <property name="geometry">
       <rect>
-       <x>630</x>
-       <y>220</y>
+       <x>690</x>
+       <y>160</y>
        <width>241</width>
        <height>31</height>
       </rect>
@@ -1291,8 +1291,8 @@ border: 2px solid #154c79;</string>
     <widget class="QLabel" name="label_40">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>470</y>
+       <x>10</x>
+       <y>250</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -1309,9 +1309,9 @@ border: 2px solid #154c79;</string>
     <widget class="QLineEdit" name="users_phone_number">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>460</y>
-       <width>241</width>
+       <x>130</x>
+       <y>240</y>
+       <width>171</width>
        <height>41</height>
       </rect>
      </property>
@@ -1331,8 +1331,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_41">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>520</y>
+       <x>10</x>
+       <y>300</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1349,9 +1349,9 @@ font-size: 18px;</string>
     <widget class="QLineEdit" name="users_salary">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>520</y>
-       <width>241</width>
+       <x>130</x>
+       <y>290</y>
+       <width>171</width>
        <height>41</height>
       </rect>
      </property>
@@ -1371,8 +1371,8 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_42">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>630</y>
+       <x>330</x>
+       <y>250</y>
        <width>61</width>
        <height>31</height>
       </rect>
@@ -1389,9 +1389,9 @@ font-size: 18px;</string>
     <widget class="QTextEdit" name="users_adress">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>630</y>
-       <width>241</width>
+       <x>400</x>
+       <y>250</y>
+       <width>171</width>
        <height>71</height>
       </rect>
      </property>
@@ -1410,7 +1410,7 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_21">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>10</x>
        <y>50</y>
        <width>141</width>
        <height>131</height>
@@ -1429,7 +1429,7 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_43">
      <property name="geometry">
       <rect>
-       <x>220</x>
+       <x>40</x>
        <y>0</y>
        <width>61</width>
        <height>31</height>
@@ -1448,9 +1448,9 @@ font: bold;
     <widget class="QPushButton" name="users_add_btn">
      <property name="geometry">
       <rect>
-       <x>550</x>
-       <y>280</y>
-       <width>91</width>
+       <x>700</x>
+       <y>210</y>
+       <width>71</width>
        <height>41</height>
       </rect>
      </property>
@@ -1467,9 +1467,9 @@ font: bold;
     <widget class="QPushButton" name="users_update_btn">
      <property name="geometry">
       <rect>
-       <x>660</x>
-       <y>280</y>
-       <width>91</width>
+       <x>780</x>
+       <y>210</y>
+       <width>71</width>
        <height>41</height>
       </rect>
      </property>
@@ -1486,9 +1486,9 @@ font: bold;
     <widget class="QPushButton" name="users_delete_btn">
      <property name="geometry">
       <rect>
-       <x>770</x>
-       <y>280</y>
-       <width>91</width>
+       <x>860</x>
+       <y>210</y>
+       <width>71</width>
        <height>41</height>
       </rect>
      </property>
@@ -1505,8 +1505,8 @@ font: bold;
     <widget class="QPushButton" name="users_clear_btn">
      <property name="geometry">
       <rect>
-       <x>330</x>
-       <y>720</y>
+       <x>580</x>
+       <y>290</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -1524,8 +1524,8 @@ font: bold;
     <widget class="QPushButton" name="users_search_btn">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>720</y>
+       <x>860</x>
+       <y>290</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -1540,12 +1540,12 @@ font: bold;
       <string>Search</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="tableWidget_3">
+    <widget class="QTableWidget" name="users_table">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>20</x>
        <y>340</y>
-       <width>511</width>
+       <width>921</width>
        <height>401</height>
       </rect>
      </property>
@@ -1557,10 +1557,28 @@ font: bold;
      </property>
      <property name="maximumSize">
       <size>
-       <width>511</width>
-       <height>401</height>
+       <width>999999</width>
+       <height>999999</height>
       </size>
      </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>131</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>131</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>37</number>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>51</number>
+     </attribute>
+     <attribute name="verticalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
      <column>
       <property name="text">
        <string>ID</string>
@@ -1578,12 +1596,27 @@ font: bold;
      </column>
      <column>
       <property name="text">
+       <string>Birth Date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Phone</string>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Salary</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>gender</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>adress</string>
       </property>
      </column>
      <column>
@@ -3248,7 +3281,7 @@ QPushButton:pressed{
  </widget>
  <resources>
   <include location="icons/icons.qrc"/>
-  <include location="../../../../.designer/backup/icons/icons.qrc"/>
+  <include location="icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
