@@ -1,8 +1,8 @@
 from .style_sheets import *
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QTableWidgetItem
-from PyQt5.QtCore import QDate
-import time
+from PyQt5.QtCore import QDate, Qt
+import time, datetime
 
 
 class Admin(QtWidgets.QWidget):
@@ -32,6 +32,7 @@ class Admin(QtWidgets.QWidget):
         self.users_delete_btn.clicked.connect(self.delete)
         #initialization the table
         self.initialize_table()
+        self.users_table.selectionModel().selectionChanged.connect(lambda: self.new_selection(self.users_table.currentRow()))
 
 
     #change the current frame when a switch btn clicked
@@ -63,10 +64,12 @@ class Admin(QtWidgets.QWidget):
         id = self.users_id.text()
         first_name = self.users_first_name.text()
         last_name = self.users_last_name.text()
-        birth_date = self.users_birth_date
+        birth_date = datetime.datetime.strptime(self.users_birth_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+        print(type(birth_date))
         phone_number = self.users_phone_number.text()
         adress = self.users_adress.toPlainText()
         salary = self.users_salary.text()
+        gender = 'male' if self.users_male.isChecked() else 'female'
         user_name = self.users_user_name.text()
         password = self.users_password.text()
         role = self.users_role.currentText().lower()
@@ -77,19 +80,39 @@ class Admin(QtWidgets.QWidget):
             add_acc = 'INSERT INTO accounts VALUES (%s, %s, %s, %s)'        
             cursor.execute(add_acc,(id, user_name, password, role))
             if role == 'admin':
-                add_admin = 'INSERT INTO admins VALUES (%s, %s, %s, "2003-01-01", %s, %s, %s, %s)'
-                cursor.execute(add_admin, (id, first_name, last_name, phone_number, salary, 'male', adress))
+                add_admin = 'INSERT INTO admins VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
+                cursor.execute(add_admin, (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                 self.db.commit()
             elif role == 'seller':
-                add_admin = 'INSERT INTO sellers VALUES (%s, %s, %s, "2003-01-01", %s, %s, %s, %s)'
-                cursor.execute(add_admin, (id, first_name, last_name, phone_number, salary, 'male', adress))
+                add_admin = 'INSERT INTO sellers VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
+                cursor.execute(add_admin, (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                 self.db.commit()
         except:
             print("something went wrong")
 
 
     def delete(self):
-        pass
+        #check if the acc is not this acc!
+
+        if self.users_id.text().strip() == '':
+            return
+
+        id = self.users_id.text()
+        if not(self.account_exist(id)): return
+        print(id)
+        
+        cursor = self.db.cursor(prepared=True)
+        cursor.execute("SELECT role FROM accounts WHERE (account_id = %s)", (id,))
+        role = cursor.fetchone()[0]
+        if role == 'admin':
+            cursor.execute('DELETE FROM admins WHERE (account_id = %s)', (id,))
+        elif role == 'seller':
+            cursor.execute('DELETE FROM sellers WHERE (account_id = %s)', (id,))
+        else:
+            return
+        cursor.execute('DELETE FROM accounts WHERE (account_id = %s)', (id,))
+        self.db.commit()
+        cursor = self.db.cursor()
 
     
     def initialize_table(self):
@@ -99,7 +122,7 @@ class Admin(QtWidgets.QWidget):
 
         try:
             cursor = self.db.cursor()
-            cursor.execute('SELECT * FROM admins JOIN accounts USING(account_id) UNION SELECT * FROM sellers JOIN accounts USING(account_id)')
+            cursor.execute('SELECT * FROM admins JOIN accounts USING(account_id) UNION SELECT * FROM sellers JOIN accounts USING(account_id) ORDER BY account_id')
             results = cursor.fetchall()
 
             
@@ -111,11 +134,30 @@ class Admin(QtWidgets.QWidget):
         for result in results:
             rowPosition = table.rowCount()
             table.insertRow(rowPosition)
-            table.setItem(rowPosition , 0, QTableWidgetItem(result[0]))
-            table.setItem(rowPosition , 1, QTableWidgetItem(result[1]+ ' ' + result[2]))
-            table.setItem(rowPosition , 2, QTableWidgetItem(result[3].strftime('%Y-%m-%d')))
-            table.setItem(rowPosition , 3, QTableWidgetItem(result[4]))
-            table.setItem(rowPosition , 4, QTableWidgetItem(format(result[5], ".15g")))
-            table.setItem(rowPosition , 5, QTableWidgetItem(result[6]))
-            table.setItem(rowPosition , 6, QTableWidgetItem(result[7]))
-            table.setItem(rowPosition , 7, QTableWidgetItem(result[10]))
+            print(result[0])
+            table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+            table.setItem(rowPosition , 1, QTableWidgetItem(result[1]))
+            table.setItem(rowPosition , 2, QTableWidgetItem(result[2]))
+            table.setItem(rowPosition , 3, QTableWidgetItem(result[3].strftime('%Y-%m-%d')))
+            table.setItem(rowPosition , 4, QTableWidgetItem(result[4]))
+            table.setItem(rowPosition , 5, QTableWidgetItem(format(result[5], ".15g")))
+            table.setItem(rowPosition , 6, QTableWidgetItem(result[6]))
+            table.setItem(rowPosition , 7, QTableWidgetItem(result[7]))
+            table.setItem(rowPosition , 8, QTableWidgetItem(result[10]))
+
+
+    def new_selection(self, current_row):
+        #display data from the selected row
+
+        self.users_id.setText(self.users_table.item(current_row,0).text())
+        self.users_first_name.setText(self.users_table.item(current_row,1).text()) 
+        self.users_last_name.setText(self.users_table.item(current_row,2).text()) 
+        self.users_birth_date.setDate(datetime.datetime.strptime(self.users_table.item(current_row,3).text(),'%Y-%m-%d').date())  #converting str object to date object
+        self.users_phone_number.setText(self.users_table.item(current_row,4).text())
+        self.users_salary.setText(self.users_table.item(current_row,5).text())
+        self.users_male.setChecked(True) if self.users_table.item(current_row,6).text() == 'male' else self.users_female.setChecked(True)
+        self.users_adress.setText(self.users_table.item(current_row,7).text())
+        self.users_role.setCurrentText(self.users_table.item(current_row,8).text().lower().capitalize())
+
+    def account_exist(self, id):
+        return True

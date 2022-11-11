@@ -1541,6 +1541,9 @@ font: bold;
      </property>
     </widget>
     <widget class="QTableWidget" name="users_table">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -1561,20 +1564,82 @@ font: bold;
        <height>999999</height>
       </size>
      </property>
+     <property name="font">
+      <font>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+     </property>
+     <property name="tabKeyNavigation">
+      <bool>false</bool>
+     </property>
+     <property name="showDropIndicator" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="dragDropOverwriteMode">
+      <bool>false</bool>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::NoDragDrop</enum>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="textElideMode">
+      <enum>Qt::ElideRight</enum>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>131</number>
+      <number>114</number>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>131</number>
+      <number>114</number>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>true</bool>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
+     <attribute name="verticalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>37</number>
+      <number>30</number>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderMinimumSectionSize">
       <number>51</number>
+     </attribute>
+     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderStretchLastSection">
       <bool>false</bool>
@@ -1591,7 +1656,12 @@ font: bold;
      </column>
      <column>
       <property name="text">
-       <string>Name</string>
+       <string>First Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Last Name</string>
       </property>
      </column>
      <column>
@@ -3279,6 +3349,72 @@ QPushButton:pressed{
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>users_id</tabstop>
+  <tabstop>users_first_name</tabstop>
+  <tabstop>users_last_name</tabstop>
+  <tabstop>users_birth_date</tabstop>
+  <tabstop>users_phone_number</tabstop>
+  <tabstop>users_salary</tabstop>
+  <tabstop>users_male</tabstop>
+  <tabstop>users_female</tabstop>
+  <tabstop>users_adress</tabstop>
+  <tabstop>users_user_name</tabstop>
+  <tabstop>users_password</tabstop>
+  <tabstop>users_role</tabstop>
+  <tabstop>users_add_btn</tabstop>
+  <tabstop>users_update_btn</tabstop>
+  <tabstop>users_delete_btn</tabstop>
+  <tabstop>users_clear_btn</tabstop>
+  <tabstop>users_search_btn</tabstop>
+  <tabstop>users_table</tabstop>
+  <tabstop>products_search_btn</tabstop>
+  <tabstop>categorie_name</tabstop>
+  <tabstop>categorie_id</tabstop>
+  <tabstop>categories_clear_btn</tabstop>
+  <tabstop>categories_add_btn</tabstop>
+  <tabstop>categories_update_btn</tabstop>
+  <tabstop>categories_delete_btn</tabstop>
+  <tabstop>tableWidget_2</tabstop>
+  <tabstop>categories_search_btn</tabstop>
+  <tabstop>textEdit_2</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>products_btn</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>stats_btn</tabstop>
+  <tabstop>incomes_btn</tabstop>
+  <tabstop>expenses_btn</tabstop>
+  <tabstop>product_id</tabstop>
+  <tabstop>product_name</tabstop>
+  <tabstop>product_price</tabstop>
+  <tabstop>categories_btn</tabstop>
+  <tabstop>users_btn</tabstop>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>product_quantity</tabstop>
+  <tabstop>add_btn</tabstop>
+  <tabstop>update_btn</tabstop>
+  <tabstop>delete_btn</tabstop>
+  <tabstop>product_category</tabstop>
+  <tabstop>clear_btn</tabstop>
+  <tabstop>categorie_id_9</tabstop>
+  <tabstop>categorie_id_10</tabstop>
+  <tabstop>categorie_id_11</tabstop>
+  <tabstop>categorie_id_12</tabstop>
+  <tabstop>sellings_search_btn</tabstop>
+  <tabstop>sellings_delete_btn</tabstop>
+  <tabstop>tableWidget_4</tabstop>
+  <tabstop>expense_delete_btn</tabstop>
+  <tabstop>expense_id</tabstop>
+  <tabstop>tableWidget_5</tabstop>
+  <tabstop>expense_clear_btn</tabstop>
+  <tabstop>expense_update_btn</tabstop>
+  <tabstop>expense_search_btn</tabstop>
+  <tabstop>expense_description</tabstop>
+  <tabstop>expense_ammount</tabstop>
+  <tabstop>expense_add_btn</tabstop>
+  <tabstop>expense_type</tabstop>
+  <tabstop>expense_date</tabstop>
+ </tabstops>
  <resources>
   <include location="icons/icons.qrc"/>
   <include location="icons/icons.qrc"/>
