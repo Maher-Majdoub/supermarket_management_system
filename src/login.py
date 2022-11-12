@@ -11,5 +11,6 @@ class Login(QtWidgets.QWidget):
         self.close_btn.clicked.connect(self.close)
         self.minimize_btn.clicked.connect(self.showMinimized)
 
+
     def login(self):
         self.switch_window.emit()

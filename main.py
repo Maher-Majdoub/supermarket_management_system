@@ -8,6 +8,7 @@ the project is not finished yet
 #imports
 import sys
 from src.admin import Admin
+from src.seller import Seller
 from src.login import Login
 from gui.icons import icons
 from PyQt5 import QtWidgets
@@ -73,7 +74,13 @@ class Controller:
 
 
         elif role == 'seller':
-            print('hello')
+            cursor.execute("SELECT first_name, last_name FROM sellers WHERE %s = account_id",(id,))      
+            info = cursor.fetchone()                  
+            name = info[0] + ' ' + info[1]
+            self.seller_panel = Seller(mydb, name)            
+            self.seller_panel.show()     
+            self.login.close()
+            #self.seller_panel.switch_window.connect(self.show_login)
         elif role == None:  #invalid user_name or password
             print('acc introuvable')
         else:
