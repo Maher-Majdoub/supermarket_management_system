@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -965,8 +965,11 @@ border-bottom: 3px solid #154c79;
 color: #154c79;
 font-size: 18px;</string>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="placeholderText">
-      <string>Enter Id</string>
+      <string>Id</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_32">
@@ -1429,7 +1432,7 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_43">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>50</x>
        <y>0</y>
        <width>61</width>
        <height>31</height>
@@ -1603,25 +1606,25 @@ font: bold;
       <bool>true</bool>
      </property>
      <property name="sortingEnabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>114</number>
+      <number>83</number>
      </attribute>
      <attribute name="horizontalHeaderHighlightSections">
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>114</number>
+      <number>83</number>
      </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
@@ -1656,7 +1659,7 @@ font: bold;
      </column>
      <column>
       <property name="text">
-       <string>First Name</string>
+       <string>Fist Name</string>
       </property>
      </column>
      <column>
@@ -1694,6 +1697,41 @@ font: bold;
        <string>Role</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>User Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Password</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLineEdit" name="users_search_id">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>290</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Id</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="incomes_frame">
@@ -3284,7 +3322,7 @@ background-color: rgba(0,0,0,0);
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="logout_btn">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -3378,7 +3416,7 @@ QPushButton:pressed{
   <tabstop>tableWidget_2</tabstop>
   <tabstop>categories_search_btn</tabstop>
   <tabstop>textEdit_2</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>logout_btn</tabstop>
   <tabstop>products_btn</tabstop>
   <tabstop>pushButton_2</tabstop>
   <tabstop>stats_btn</tabstop>

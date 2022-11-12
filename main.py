@@ -68,6 +68,8 @@ class Controller:
             self.admin_panel = Admin(mydb, name)            
             self.admin_panel.show()     
             self.login.close()
+            self.admin_panel.switch_window.connect(self.show_login)
+
 
 
         elif role == 'seller':
@@ -78,6 +80,7 @@ class Controller:
             print('invalid role')
 
 
+        
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     controller = Controller()
