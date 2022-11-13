@@ -28,13 +28,17 @@ class Admin(QtWidgets.QWidget):
 
         #users frame
         self.users_clear_btn.clicked.connect(lambda: self.clear(self.users_frame))
-        self.users_search_btn.clicked.connect(self.search)
-        self.users_update_btn.clicked.connect(self.update)
-        self.users_add_btn.clicked.connect(self.add)
-        self.users_delete_btn.clicked.connect(self.delete)
+        self.users_search_btn.clicked.connect(self.search_user)
+        self.users_update_btn.clicked.connect(self.update_user)
+        self.users_add_btn.clicked.connect(self.add_user)
+        self.users_delete_btn.clicked.connect(self.delete_user)
         #initialization the table
         self.update_table()
         self.users_table.selectionModel().selectionChanged.connect(lambda: self.new_selection(self.users_table.currentRow()))
+
+        #categories frame
+        self.categories_clear_btn.clicked.connect(lambda: self.clear(self.categories_frame))
+        self.categories_search_btn.clicked.connect(self.search_category)
     
     def logout(self):
         self.switch_window.emit()
@@ -56,10 +60,8 @@ class Admin(QtWidgets.QWidget):
         for children in frame.findChildren(QtWidgets.QWidget): 
             if children.statusTip() == 'del':
                 children.setText('')
-        
-        
-
-    def search(self):
+          
+    def search_user(self):
         id = self.users_search_id.text()
         if id == '':
             self.update_table()
@@ -78,7 +80,6 @@ class Admin(QtWidgets.QWidget):
                 print('error')
         
             self.clear_table()
-
             table.insertRow(0)
             table.setItem(0 , 0, QTableWidgetItem(str(infos[0])))
             table.setItem(0 , 1, QTableWidgetItem(infos[1]))
@@ -95,8 +96,7 @@ class Admin(QtWidgets.QWidget):
         else:
             print('no acc')        
                 
-
-    def update(self):
+    def update_user(self):
         selected_row = self.users_table.currentRow()
         id = self.users_id.text()
         first_name = self.users_first_name.text()
@@ -148,7 +148,7 @@ class Admin(QtWidgets.QWidget):
 
 
     #add a users
-    def add(self):
+    def add_user(self):
         #verify all inputs
 
         #id = self.users_id.text()
@@ -185,7 +185,7 @@ class Admin(QtWidgets.QWidget):
             print("something went wrong",e)
 
 
-    def delete(self):
+    def delete_user(self):
         #check if the acc is not this acc!
 
         if self.users_id.text().strip() == '':
@@ -208,6 +208,11 @@ class Admin(QtWidgets.QWidget):
         cursor = self.db.cursor()
         self.update_table()
 
+    def search_category(self):
+        cursor = self.db.cursor()
+        category_id = self.category_id.text()
+        cursor.execute('SELECT * FROM categories WHERE category_id = %s', (category_id,))
+        print(cursor.fetchone()) #µµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµ
 
     def clear_table(self):
         table = self.users_table

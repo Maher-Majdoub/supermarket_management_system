@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -657,7 +657,7 @@ font: bold;
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_name">
+    <widget class="QLineEdit" name="category_name">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -665,6 +665,9 @@ font: bold;
        <width>191</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -676,7 +679,7 @@ font-size: 18px;</string>
       <string>Enter Name</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id">
+    <widget class="QLineEdit" name="category_id">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -684,6 +687,9 @@ font-size: 18px;</string>
        <width>191</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -752,7 +758,7 @@ font-size: 18px;</string>
     <widget class="QPushButton" name="categories_clear_btn">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>230</x>
        <y>510</y>
        <width>71</width>
        <height>31</height>
@@ -864,6 +870,9 @@ font-size: 18px;</string>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>209</number>
+     </attribute>
      <column>
       <property name="text">
        <string>ID</string>
@@ -876,24 +885,14 @@ font-size: 18px;</string>
      </column>
      <column>
       <property name="text">
-       <string>Category</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Price</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Quantity</string>
+       <string>Description</string>
       </property>
      </column>
     </widget>
     <widget class="QPushButton" name="categories_search_btn">
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>150</x>
        <y>510</y>
        <width>71</width>
        <height>31</height>
@@ -917,6 +916,9 @@ font-size: 18px;</string>
        <width>191</width>
        <height>91</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: 2px solid #154c79;
@@ -3407,8 +3409,8 @@ QPushButton:pressed{
   <tabstop>users_search_btn</tabstop>
   <tabstop>users_table</tabstop>
   <tabstop>products_search_btn</tabstop>
-  <tabstop>categorie_name</tabstop>
-  <tabstop>categorie_id</tabstop>
+  <tabstop>category_name</tabstop>
+  <tabstop>category_id</tabstop>
   <tabstop>categories_clear_btn</tabstop>
   <tabstop>categories_add_btn</tabstop>
   <tabstop>categories_update_btn</tabstop>

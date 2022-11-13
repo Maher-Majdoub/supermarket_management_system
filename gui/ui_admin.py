@@ -269,17 +269,17 @@ class Ui_Form(object):
         self.label_20.setGeometry(QRect(90, 60, 141, 131))
         self.label_20.setPixmap(QPixmap(u":/icons/categories_c.png"))
         self.label_20.setScaledContents(True)
-        self.categorie_name = QLineEdit(self.categories_frame)
-        self.categorie_name.setObjectName(u"categorie_name")
-        self.categorie_name.setGeometry(QRect(110, 330, 191, 41))
-        self.categorie_name.setStyleSheet(u"border: none;\n"
+        self.category_name = QLineEdit(self.categories_frame)
+        self.category_name.setObjectName(u"category_name")
+        self.category_name.setGeometry(QRect(110, 330, 191, 41))
+        self.category_name.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
-        self.categorie_id = QLineEdit(self.categories_frame)
-        self.categorie_id.setObjectName(u"categorie_id")
-        self.categorie_id.setGeometry(QRect(110, 270, 191, 41))
-        self.categorie_id.setStyleSheet(u"border: none;\n"
+        self.category_id = QLineEdit(self.categories_frame)
+        self.category_id.setObjectName(u"category_id")
+        self.category_id.setGeometry(QRect(110, 270, 191, 41))
+        self.category_id.setStyleSheet(u"border: none;\n"
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
@@ -297,7 +297,7 @@ class Ui_Form(object):
         self.label_30.setFont(font)
         self.categories_clear_btn = QPushButton(self.categories_frame)
         self.categories_clear_btn.setObjectName(u"categories_clear_btn")
-        self.categories_clear_btn.setGeometry(QRect(240, 510, 71, 31))
+        self.categories_clear_btn.setGeometry(QRect(230, 510, 71, 31))
         self.categories_clear_btn.setStyleSheet(u"")
         self.categories_add_btn = QPushButton(self.categories_frame)
         self.categories_add_btn.setObjectName(u"categories_add_btn")
@@ -312,18 +312,14 @@ class Ui_Form(object):
         self.categories_delete_btn.setGeometry(QRect(220, 570, 91, 41))
         self.categories_delete_btn.setStyleSheet(u"")
         self.tableWidget_2 = QTableWidget(self.categories_frame)
-        if (self.tableWidget_2.columnCount() < 5):
-            self.tableWidget_2.setColumnCount(5)
+        if (self.tableWidget_2.columnCount() < 3):
+            self.tableWidget_2.setColumnCount(3)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(0, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(1, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
         self.tableWidget_2.setHorizontalHeaderItem(2, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(3, __qtablewidgetitem8)
-        __qtablewidgetitem9 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(4, __qtablewidgetitem9)
         self.tableWidget_2.setObjectName(u"tableWidget_2")
         self.tableWidget_2.setEnabled(True)
         self.tableWidget_2.setGeometry(QRect(320, 40, 631, 691))
@@ -338,9 +334,10 @@ class Ui_Form(object):
         self.tableWidget_2.setAlternatingRowColors(True)
         self.tableWidget_2.setGridStyle(Qt.SolidLine)
         self.tableWidget_2.setCornerButtonEnabled(False)
+        self.tableWidget_2.horizontalHeader().setDefaultSectionSize(209)
         self.categories_search_btn = QPushButton(self.categories_frame)
         self.categories_search_btn.setObjectName(u"categories_search_btn")
-        self.categories_search_btn.setGeometry(QRect(160, 510, 71, 31))
+        self.categories_search_btn.setGeometry(QRect(150, 510, 71, 31))
         self.categories_search_btn.setStyleSheet(u"")
         self.textEdit_2 = QTextEdit(self.categories_frame)
         self.textEdit_2.setObjectName(u"textEdit_2")
@@ -523,29 +520,29 @@ class Ui_Form(object):
             self.users_table.setColumnCount(11)
         font1 = QFont()
         font1.setStyleStrategy(QFont.PreferAntialias)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        __qtablewidgetitem8.setFont(font1);
+        self.users_table.setHorizontalHeaderItem(0, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.users_table.setHorizontalHeaderItem(1, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
-        __qtablewidgetitem10.setFont(font1);
-        self.users_table.setHorizontalHeaderItem(0, __qtablewidgetitem10)
+        self.users_table.setHorizontalHeaderItem(2, __qtablewidgetitem10)
         __qtablewidgetitem11 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(1, __qtablewidgetitem11)
+        self.users_table.setHorizontalHeaderItem(3, __qtablewidgetitem11)
         __qtablewidgetitem12 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(2, __qtablewidgetitem12)
+        self.users_table.setHorizontalHeaderItem(4, __qtablewidgetitem12)
         __qtablewidgetitem13 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(3, __qtablewidgetitem13)
+        self.users_table.setHorizontalHeaderItem(5, __qtablewidgetitem13)
         __qtablewidgetitem14 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(4, __qtablewidgetitem14)
+        self.users_table.setHorizontalHeaderItem(6, __qtablewidgetitem14)
         __qtablewidgetitem15 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(5, __qtablewidgetitem15)
+        self.users_table.setHorizontalHeaderItem(7, __qtablewidgetitem15)
         __qtablewidgetitem16 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(6, __qtablewidgetitem16)
+        self.users_table.setHorizontalHeaderItem(8, __qtablewidgetitem16)
         __qtablewidgetitem17 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(7, __qtablewidgetitem17)
+        self.users_table.setHorizontalHeaderItem(9, __qtablewidgetitem17)
         __qtablewidgetitem18 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(8, __qtablewidgetitem18)
-        __qtablewidgetitem19 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(9, __qtablewidgetitem19)
-        __qtablewidgetitem20 = QTableWidgetItem()
-        self.users_table.setHorizontalHeaderItem(10, __qtablewidgetitem20)
+        self.users_table.setHorizontalHeaderItem(10, __qtablewidgetitem18)
         self.users_table.setObjectName(u"users_table")
         self.users_table.setEnabled(True)
         self.users_table.setGeometry(QRect(20, 340, 921, 401))
@@ -566,7 +563,7 @@ class Ui_Form(object):
         self.users_table.setShowGrid(True)
         self.users_table.setSortingEnabled(False)
         self.users_table.setCornerButtonEnabled(False)
-        self.users_table.horizontalHeader().setVisible(True)
+        self.users_table.horizontalHeader().setVisible(False)
         self.users_table.horizontalHeader().setMinimumSectionSize(83)
         self.users_table.horizontalHeader().setDefaultSectionSize(83)
         self.users_table.horizontalHeader().setHighlightSections(False)
@@ -656,52 +653,52 @@ class Ui_Form(object):
         self.tableWidget_4 = QTableWidget(self.incomes_frame)
         if (self.tableWidget_4.columnCount() < 4):
             self.tableWidget_4.setColumnCount(4)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(0, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(1, __qtablewidgetitem20)
         __qtablewidgetitem21 = QTableWidgetItem()
-        self.tableWidget_4.setHorizontalHeaderItem(0, __qtablewidgetitem21)
+        self.tableWidget_4.setHorizontalHeaderItem(2, __qtablewidgetitem21)
         __qtablewidgetitem22 = QTableWidgetItem()
-        self.tableWidget_4.setHorizontalHeaderItem(1, __qtablewidgetitem22)
-        __qtablewidgetitem23 = QTableWidgetItem()
-        self.tableWidget_4.setHorizontalHeaderItem(2, __qtablewidgetitem23)
-        __qtablewidgetitem24 = QTableWidgetItem()
-        self.tableWidget_4.setHorizontalHeaderItem(3, __qtablewidgetitem24)
+        self.tableWidget_4.setHorizontalHeaderItem(3, __qtablewidgetitem22)
         if (self.tableWidget_4.rowCount() < 18):
             self.tableWidget_4.setRowCount(18)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(0, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.tableWidget_4.setVerticalHeaderItem(1, __qtablewidgetitem24)
         __qtablewidgetitem25 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(0, __qtablewidgetitem25)
+        self.tableWidget_4.setVerticalHeaderItem(2, __qtablewidgetitem25)
         __qtablewidgetitem26 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(1, __qtablewidgetitem26)
+        self.tableWidget_4.setVerticalHeaderItem(3, __qtablewidgetitem26)
         __qtablewidgetitem27 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(2, __qtablewidgetitem27)
+        self.tableWidget_4.setVerticalHeaderItem(4, __qtablewidgetitem27)
         __qtablewidgetitem28 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(3, __qtablewidgetitem28)
+        self.tableWidget_4.setVerticalHeaderItem(5, __qtablewidgetitem28)
         __qtablewidgetitem29 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(4, __qtablewidgetitem29)
+        self.tableWidget_4.setVerticalHeaderItem(6, __qtablewidgetitem29)
         __qtablewidgetitem30 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(5, __qtablewidgetitem30)
+        self.tableWidget_4.setVerticalHeaderItem(7, __qtablewidgetitem30)
         __qtablewidgetitem31 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(6, __qtablewidgetitem31)
+        self.tableWidget_4.setVerticalHeaderItem(8, __qtablewidgetitem31)
         __qtablewidgetitem32 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(7, __qtablewidgetitem32)
+        self.tableWidget_4.setVerticalHeaderItem(9, __qtablewidgetitem32)
         __qtablewidgetitem33 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(8, __qtablewidgetitem33)
+        self.tableWidget_4.setVerticalHeaderItem(10, __qtablewidgetitem33)
         __qtablewidgetitem34 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(9, __qtablewidgetitem34)
+        self.tableWidget_4.setVerticalHeaderItem(11, __qtablewidgetitem34)
         __qtablewidgetitem35 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(10, __qtablewidgetitem35)
+        self.tableWidget_4.setVerticalHeaderItem(12, __qtablewidgetitem35)
         __qtablewidgetitem36 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(11, __qtablewidgetitem36)
+        self.tableWidget_4.setVerticalHeaderItem(13, __qtablewidgetitem36)
         __qtablewidgetitem37 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(12, __qtablewidgetitem37)
+        self.tableWidget_4.setVerticalHeaderItem(14, __qtablewidgetitem37)
         __qtablewidgetitem38 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(13, __qtablewidgetitem38)
+        self.tableWidget_4.setVerticalHeaderItem(15, __qtablewidgetitem38)
         __qtablewidgetitem39 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(14, __qtablewidgetitem39)
+        self.tableWidget_4.setVerticalHeaderItem(16, __qtablewidgetitem39)
         __qtablewidgetitem40 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(15, __qtablewidgetitem40)
-        __qtablewidgetitem41 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(16, __qtablewidgetitem41)
-        __qtablewidgetitem42 = QTableWidgetItem()
-        self.tableWidget_4.setVerticalHeaderItem(17, __qtablewidgetitem42)
+        self.tableWidget_4.setVerticalHeaderItem(17, __qtablewidgetitem40)
         self.tableWidget_4.setObjectName(u"tableWidget_4")
         self.tableWidget_4.setEnabled(True)
         self.tableWidget_4.setGeometry(QRect(20, 240, 921, 491))
@@ -793,16 +790,16 @@ class Ui_Form(object):
         self.tableWidget_5 = QTableWidget(self.expenses_frame)
         if (self.tableWidget_5.columnCount() < 5):
             self.tableWidget_5.setColumnCount(5)
+        __qtablewidgetitem41 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(0, __qtablewidgetitem41)
+        __qtablewidgetitem42 = QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(1, __qtablewidgetitem42)
         __qtablewidgetitem43 = QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(0, __qtablewidgetitem43)
+        self.tableWidget_5.setHorizontalHeaderItem(2, __qtablewidgetitem43)
         __qtablewidgetitem44 = QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(1, __qtablewidgetitem44)
+        self.tableWidget_5.setHorizontalHeaderItem(3, __qtablewidgetitem44)
         __qtablewidgetitem45 = QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(2, __qtablewidgetitem45)
-        __qtablewidgetitem46 = QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(3, __qtablewidgetitem46)
-        __qtablewidgetitem47 = QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(4, __qtablewidgetitem47)
+        self.tableWidget_5.setHorizontalHeaderItem(4, __qtablewidgetitem45)
         self.tableWidget_5.setObjectName(u"tableWidget_5")
         self.tableWidget_5.setEnabled(True)
         self.tableWidget_5.setGeometry(QRect(320, 20, 631, 661))
@@ -1122,9 +1119,9 @@ class Ui_Form(object):
         QWidget.setTabOrder(self.users_clear_btn, self.users_search_btn)
         QWidget.setTabOrder(self.users_search_btn, self.users_table)
         QWidget.setTabOrder(self.users_table, self.products_search_btn)
-        QWidget.setTabOrder(self.products_search_btn, self.categorie_name)
-        QWidget.setTabOrder(self.categorie_name, self.categorie_id)
-        QWidget.setTabOrder(self.categorie_id, self.categories_clear_btn)
+        QWidget.setTabOrder(self.products_search_btn, self.category_name)
+        QWidget.setTabOrder(self.category_name, self.category_id)
+        QWidget.setTabOrder(self.category_id, self.categories_clear_btn)
         QWidget.setTabOrder(self.categories_clear_btn, self.categories_add_btn)
         QWidget.setTabOrder(self.categories_add_btn, self.categories_update_btn)
         QWidget.setTabOrder(self.categories_update_btn, self.categories_delete_btn)
@@ -1170,7 +1167,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.containor.setCurrentIndex(3)
+        self.containor.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -1233,8 +1230,14 @@ class Ui_Form(object):
         self.products_search_btn.setText(QCoreApplication.translate("Form", u"search", None))
         self.label_27.setText(QCoreApplication.translate("Form", u"Categories", None))
         self.label_20.setText("")
-        self.categorie_name.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Name", None))
-        self.categorie_id.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
+#if QT_CONFIG(statustip)
+        self.category_name.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.category_name.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Name", None))
+#if QT_CONFIG(statustip)
+        self.category_id.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.category_id.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
         self.label_28.setText(QCoreApplication.translate("Form", u"Description", None))
         self.label_29.setText(QCoreApplication.translate("Form", u"Name", None))
         self.label_30.setText(QCoreApplication.translate("Form", u"ID", None))
@@ -1259,15 +1262,14 @@ class Ui_Form(object):
         ___qtablewidgetitem6 = self.tableWidget_2.horizontalHeaderItem(1)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Name", None));
         ___qtablewidgetitem7 = self.tableWidget_2.horizontalHeaderItem(2)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Category", None));
-        ___qtablewidgetitem8 = self.tableWidget_2.horizontalHeaderItem(3)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"Price", None));
-        ___qtablewidgetitem9 = self.tableWidget_2.horizontalHeaderItem(4)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"Quantity", None));
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Description", None));
 #if QT_CONFIG(statustip)
         self.categories_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
 #endif // QT_CONFIG(statustip)
         self.categories_search_btn.setText(QCoreApplication.translate("Form", u"search", None))
+#if QT_CONFIG(statustip)
+        self.textEdit_2.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
         self.textEdit_2.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Description", None))
         self.label_31.setText(QCoreApplication.translate("Form", u"User ID", None))
 #if QT_CONFIG(statustip)
@@ -1340,28 +1342,28 @@ class Ui_Form(object):
         self.users_search_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
 #endif // QT_CONFIG(statustip)
         self.users_search_btn.setText(QCoreApplication.translate("Form", u"Search", None))
-        ___qtablewidgetitem10 = self.users_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"ID", None));
-        ___qtablewidgetitem11 = self.users_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"Fist Name", None));
-        ___qtablewidgetitem12 = self.users_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"Last Name", None));
-        ___qtablewidgetitem13 = self.users_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("Form", u"Birth Date", None));
-        ___qtablewidgetitem14 = self.users_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("Form", u"Phone", None));
-        ___qtablewidgetitem15 = self.users_table.horizontalHeaderItem(5)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("Form", u"Salary", None));
-        ___qtablewidgetitem16 = self.users_table.horizontalHeaderItem(6)
-        ___qtablewidgetitem16.setText(QCoreApplication.translate("Form", u"gender", None));
-        ___qtablewidgetitem17 = self.users_table.horizontalHeaderItem(7)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("Form", u"adress", None));
-        ___qtablewidgetitem18 = self.users_table.horizontalHeaderItem(8)
-        ___qtablewidgetitem18.setText(QCoreApplication.translate("Form", u"Role", None));
-        ___qtablewidgetitem19 = self.users_table.horizontalHeaderItem(9)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("Form", u"User Name", None));
-        ___qtablewidgetitem20 = self.users_table.horizontalHeaderItem(10)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("Form", u"Password", None));
+        ___qtablewidgetitem8 = self.users_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"ID", None));
+        ___qtablewidgetitem9 = self.users_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"Fist Name", None));
+        ___qtablewidgetitem10 = self.users_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"Last Name", None));
+        ___qtablewidgetitem11 = self.users_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"Birth Date", None));
+        ___qtablewidgetitem12 = self.users_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"Phone", None));
+        ___qtablewidgetitem13 = self.users_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("Form", u"Salary", None));
+        ___qtablewidgetitem14 = self.users_table.horizontalHeaderItem(6)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("Form", u"gender", None));
+        ___qtablewidgetitem15 = self.users_table.horizontalHeaderItem(7)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("Form", u"adress", None));
+        ___qtablewidgetitem16 = self.users_table.horizontalHeaderItem(8)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("Form", u"Role", None));
+        ___qtablewidgetitem17 = self.users_table.horizontalHeaderItem(9)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("Form", u"User Name", None));
+        ___qtablewidgetitem18 = self.users_table.horizontalHeaderItem(10)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("Form", u"Password", None));
 #if QT_CONFIG(statustip)
         self.users_table.setStatusTip("")
 #endif // QT_CONFIG(statustip)
@@ -1387,48 +1389,48 @@ class Ui_Form(object):
         self.sellings_delete_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
 #endif // QT_CONFIG(statustip)
         self.sellings_delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
-        ___qtablewidgetitem21 = self.tableWidget_4.horizontalHeaderItem(0)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("Form", u"Sell ID", None));
-        ___qtablewidgetitem22 = self.tableWidget_4.horizontalHeaderItem(1)
-        ___qtablewidgetitem22.setText(QCoreApplication.translate("Form", u"Seller Name", None));
-        ___qtablewidgetitem23 = self.tableWidget_4.horizontalHeaderItem(2)
-        ___qtablewidgetitem23.setText(QCoreApplication.translate("Form", u"date", None));
-        ___qtablewidgetitem24 = self.tableWidget_4.horizontalHeaderItem(3)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("Form", u"Total", None));
-        ___qtablewidgetitem25 = self.tableWidget_4.verticalHeaderItem(0)
+        ___qtablewidgetitem19 = self.tableWidget_4.horizontalHeaderItem(0)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("Form", u"Sell ID", None));
+        ___qtablewidgetitem20 = self.tableWidget_4.horizontalHeaderItem(1)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("Form", u"Seller Name", None));
+        ___qtablewidgetitem21 = self.tableWidget_4.horizontalHeaderItem(2)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("Form", u"date", None));
+        ___qtablewidgetitem22 = self.tableWidget_4.horizontalHeaderItem(3)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("Form", u"Total", None));
+        ___qtablewidgetitem23 = self.tableWidget_4.verticalHeaderItem(0)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem24 = self.tableWidget_4.verticalHeaderItem(2)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("Form", u"New Row", None));
+        ___qtablewidgetitem25 = self.tableWidget_4.verticalHeaderItem(3)
         ___qtablewidgetitem25.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem26 = self.tableWidget_4.verticalHeaderItem(2)
+        ___qtablewidgetitem26 = self.tableWidget_4.verticalHeaderItem(4)
         ___qtablewidgetitem26.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem27 = self.tableWidget_4.verticalHeaderItem(3)
+        ___qtablewidgetitem27 = self.tableWidget_4.verticalHeaderItem(5)
         ___qtablewidgetitem27.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem28 = self.tableWidget_4.verticalHeaderItem(4)
+        ___qtablewidgetitem28 = self.tableWidget_4.verticalHeaderItem(6)
         ___qtablewidgetitem28.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem29 = self.tableWidget_4.verticalHeaderItem(5)
+        ___qtablewidgetitem29 = self.tableWidget_4.verticalHeaderItem(7)
         ___qtablewidgetitem29.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem30 = self.tableWidget_4.verticalHeaderItem(6)
+        ___qtablewidgetitem30 = self.tableWidget_4.verticalHeaderItem(8)
         ___qtablewidgetitem30.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem31 = self.tableWidget_4.verticalHeaderItem(7)
+        ___qtablewidgetitem31 = self.tableWidget_4.verticalHeaderItem(9)
         ___qtablewidgetitem31.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem32 = self.tableWidget_4.verticalHeaderItem(8)
+        ___qtablewidgetitem32 = self.tableWidget_4.verticalHeaderItem(10)
         ___qtablewidgetitem32.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem33 = self.tableWidget_4.verticalHeaderItem(9)
+        ___qtablewidgetitem33 = self.tableWidget_4.verticalHeaderItem(11)
         ___qtablewidgetitem33.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem34 = self.tableWidget_4.verticalHeaderItem(10)
+        ___qtablewidgetitem34 = self.tableWidget_4.verticalHeaderItem(12)
         ___qtablewidgetitem34.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem35 = self.tableWidget_4.verticalHeaderItem(11)
+        ___qtablewidgetitem35 = self.tableWidget_4.verticalHeaderItem(13)
         ___qtablewidgetitem35.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem36 = self.tableWidget_4.verticalHeaderItem(12)
+        ___qtablewidgetitem36 = self.tableWidget_4.verticalHeaderItem(14)
         ___qtablewidgetitem36.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem37 = self.tableWidget_4.verticalHeaderItem(13)
+        ___qtablewidgetitem37 = self.tableWidget_4.verticalHeaderItem(15)
         ___qtablewidgetitem37.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem38 = self.tableWidget_4.verticalHeaderItem(14)
+        ___qtablewidgetitem38 = self.tableWidget_4.verticalHeaderItem(16)
         ___qtablewidgetitem38.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem39 = self.tableWidget_4.verticalHeaderItem(15)
+        ___qtablewidgetitem39 = self.tableWidget_4.verticalHeaderItem(17)
         ___qtablewidgetitem39.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem40 = self.tableWidget_4.verticalHeaderItem(16)
-        ___qtablewidgetitem40.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem41 = self.tableWidget_4.verticalHeaderItem(17)
-        ___qtablewidgetitem41.setText(QCoreApplication.translate("Form", u"New Row", None));
 #if QT_CONFIG(statustip)
         self.tableWidget_4.setStatusTip("")
 #endif // QT_CONFIG(statustip)
@@ -1441,16 +1443,16 @@ class Ui_Form(object):
         self.expense_id.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
         self.label_52.setText(QCoreApplication.translate("Form", u"ID", None))
         self.label_53.setText(QCoreApplication.translate("Form", u"Ammount", None))
-        ___qtablewidgetitem42 = self.tableWidget_5.horizontalHeaderItem(0)
-        ___qtablewidgetitem42.setText(QCoreApplication.translate("Form", u"ID", None));
-        ___qtablewidgetitem43 = self.tableWidget_5.horizontalHeaderItem(1)
-        ___qtablewidgetitem43.setText(QCoreApplication.translate("Form", u"Name", None));
-        ___qtablewidgetitem44 = self.tableWidget_5.horizontalHeaderItem(2)
-        ___qtablewidgetitem44.setText(QCoreApplication.translate("Form", u"Category", None));
-        ___qtablewidgetitem45 = self.tableWidget_5.horizontalHeaderItem(3)
-        ___qtablewidgetitem45.setText(QCoreApplication.translate("Form", u"Price", None));
-        ___qtablewidgetitem46 = self.tableWidget_5.horizontalHeaderItem(4)
-        ___qtablewidgetitem46.setText(QCoreApplication.translate("Form", u"Quantity", None));
+        ___qtablewidgetitem40 = self.tableWidget_5.horizontalHeaderItem(0)
+        ___qtablewidgetitem40.setText(QCoreApplication.translate("Form", u"ID", None));
+        ___qtablewidgetitem41 = self.tableWidget_5.horizontalHeaderItem(1)
+        ___qtablewidgetitem41.setText(QCoreApplication.translate("Form", u"Name", None));
+        ___qtablewidgetitem42 = self.tableWidget_5.horizontalHeaderItem(2)
+        ___qtablewidgetitem42.setText(QCoreApplication.translate("Form", u"Category", None));
+        ___qtablewidgetitem43 = self.tableWidget_5.horizontalHeaderItem(3)
+        ___qtablewidgetitem43.setText(QCoreApplication.translate("Form", u"Price", None));
+        ___qtablewidgetitem44 = self.tableWidget_5.horizontalHeaderItem(4)
+        ___qtablewidgetitem44.setText(QCoreApplication.translate("Form", u"Quantity", None));
 #if QT_CONFIG(statustip)
         self.expense_clear_btn.setStatusTip(QCoreApplication.translate("Form", u"btn_frm", None))
 #endif // QT_CONFIG(statustip)
