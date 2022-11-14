@@ -81,7 +81,7 @@ class Controller:
             self.seller_panel.show()     
             self.login.close()
             #self.seller_panel.switch_window.connect(self.show_login)
-        elif role == None:  #invalid user_name or password
+        elif role is None:  #invalid user_name or password
             print('acc introuvable')
         else:
             print('invalid role')

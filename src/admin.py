@@ -1,8 +1,9 @@
-from .style_sheets import *
+import time, datetime
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtCore import QDate, Qt
-import time, datetime
+from .style_sheets import *
+
 
 
 class Admin(QtWidgets.QWidget):
@@ -33,12 +34,19 @@ class Admin(QtWidgets.QWidget):
         self.users_add_btn.clicked.connect(self.add_user)
         self.users_delete_btn.clicked.connect(self.delete_user)
         #initialization the table
-        self.update_table()
+        self.update_users_table()
         self.users_table.selectionModel().selectionChanged.connect(lambda: self.new_selection(self.users_table.currentRow()))
 
         #categories frame
+        self.update_categories_table()
         self.categories_clear_btn.clicked.connect(lambda: self.clear(self.categories_frame))
         self.categories_search_btn.clicked.connect(self.search_category)
+        self.categories_add_btn.clicked.connect(self.add_category)
+        self.categories_delete_btn.clicked.connect(self.delete_category)
+        self.categories_update_btn.clicked.connect(self.update_category)
+        self.categories_table.selectionModel().selectionChanged.connect(lambda: self.new_category_selection(self.categories_table.currentRow()))
+
+
     
     def logout(self):
         self.switch_window.emit()
@@ -64,7 +72,7 @@ class Admin(QtWidgets.QWidget):
     def search_user(self):
         id = self.users_search_id.text()
         if id == '':
-            self.update_table()
+            self.update_users_table()
         table = self.users_table
         cursor = self.db.cursor()
         cursor.execute("SELECT * FROM accounts WHERE account_id = %s", (id,))
@@ -140,7 +148,7 @@ class Admin(QtWidgets.QWidget):
                     cursor.execute('DELETE FROM admins WHERE (account_id = %s)', (id,))
                     cursor.execute('INSERT INTO sellers VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                     self.db.commit()
-            self.update_table()
+            self.update_users_table()
             self.users_table.selectRow(selected_row)
         except:
             print("something went wrong")
@@ -180,7 +188,7 @@ class Admin(QtWidgets.QWidget):
                 add_seller = 'INSERT INTO sellers VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
                 cursor.execute(add_seller, (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                 self.db.commit()
-            self.update_table()
+            self.update_users_table()
         except Exception as e:
             print("something went wrong",e)
 
@@ -206,24 +214,17 @@ class Admin(QtWidgets.QWidget):
         cursor.execute('DELETE FROM accounts WHERE (account_id = %s)', (id,))
         self.db.commit()
         cursor = self.db.cursor()
-        self.update_table()
-
-    def search_category(self):
-        cursor = self.db.cursor()
-        category_id = self.category_id.text()
-        cursor.execute('SELECT * FROM categories WHERE category_id = %s', (category_id,))
-        print(cursor.fetchone()) #µµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµ
-
-    def clear_table(self):
-        table = self.users_table
+        self.update_users_table()
+     
+    def clear_table(self, table):
         table.clearSelection()
         while table.rowCount() >= 1:
             table.clearSelection()
             table.removeRow(table.rowCount()-1)
 
-    def update_table(self):
+    def update_users_table(self):
         table = self.users_table
-        self.clear_table()
+        self.clear_table(table)
         try:
             cursor = self.db.cursor()
             cursor.execute('SELECT * FROM admins JOIN accounts USING(account_id) UNION SELECT * FROM sellers JOIN accounts USING(account_id) ORDER BY account_id')
@@ -233,8 +234,7 @@ class Admin(QtWidgets.QWidget):
             return
 
         table = self.users_table
-        while table.rowCount() >= 1:
-            table.removeRow(table.rowCount()-1)
+        self.clear_table(table)
         for result in results:
             rowPosition = table.rowCount()
             table.insertRow(rowPosition)
@@ -268,3 +268,62 @@ class Admin(QtWidgets.QWidget):
 
     def account_exist(self, id):
         return True
+
+    def update_categories_table(self):
+        table = self.categories_table
+        cursor = self.db.cursor()
+        cursor.execute('SELECT * FROM categories')
+        results = cursor.fetchall()
+        self.clear_table(table)
+        for result in results:
+            rowPosition = table.rowCount()
+            table.insertRow(rowPosition)
+            table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+            table.setItem(rowPosition , 1, QTableWidgetItem(result[1]))
+            table.setItem(rowPosition , 2, QTableWidgetItem(result[2]))
+
+
+    def search_category(self):
+        table = self.categories_table
+        cursor = self.db.cursor()
+        category_id = self.category_id.text()
+        if category_id.strip() =='':
+            self.update_categories_table()
+        else:
+            cursor = self.db.cursor()
+            cursor.execute('SELECT * FROM categories WHERE category_id = %s', (category_id,))
+            result = cursor.fetchone()
+            self.clear_table(table)
+            table.insertRow(0)
+            table.setItem(0 , 0, QTableWidgetItem(str(result[0])))
+            table.setItem(0 , 1, QTableWidgetItem(result[1]))
+            table.setItem(0 , 2, QTableWidgetItem(result[2]))
+
+    def add_category(self):
+        cursor = self.db.cursor()
+        id = self.category_id.text()
+        name = self.category_name.text()
+        desc = self.category_description.toPlainText()
+        cursor.execute('INSERT INTO categories VALUES (%s, %s, %s)', (id, name, desc))
+        self.db.commit()
+        self.update_categories_table()
+    def new_category_selection(self, current_row):
+        self.category_id.setText(self.categories_table.item(current_row,0).text())
+        self.category_name.setText(self.categories_table.item(current_row,1).text()) 
+        self.category_description.setText(self.categories_table.item(current_row,2).text()) 
+
+    def delete_category(self):
+        id = self.category_id.text()
+        cursor = self.db.cursor()
+        cursor.execute('DELETE FROM categories WHERE category_id = %s', (id,))
+        self.db.commit()
+        self.update_categories_table()
+
+    def update_category(self):
+        id = self.category_id.text()
+        name = self.category_name.text()
+        desc = self.category_description.toPlainText()
+        cursor = self.db.cursor()
+        cursor.execute('UPDATE categories SET name = %s, description = %s WHERE category_id = %s', (name, desc, id))
+        self.db.commit()
+        self.update_categories_table()

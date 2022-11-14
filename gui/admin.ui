@@ -831,7 +831,7 @@ font-size: 18px;</string>
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="tableWidget_2">
+    <widget class="QTableWidget" name="categories_table">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -864,6 +864,12 @@ font-size: 18px;</string>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>
      </property>
@@ -872,6 +878,9 @@ font-size: 18px;</string>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>209</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
      </attribute>
      <column>
       <property name="text">
@@ -908,7 +917,7 @@ font-size: 18px;</string>
       <string>search</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_2">
+    <widget class="QTextEdit" name="category_description">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -3415,9 +3424,9 @@ QPushButton:pressed{
   <tabstop>categories_add_btn</tabstop>
   <tabstop>categories_update_btn</tabstop>
   <tabstop>categories_delete_btn</tabstop>
-  <tabstop>tableWidget_2</tabstop>
+  <tabstop>categories_table</tabstop>
   <tabstop>categories_search_btn</tabstop>
-  <tabstop>textEdit_2</tabstop>
+  <tabstop>category_description</tabstop>
   <tabstop>logout_btn</tabstop>
   <tabstop>products_btn</tabstop>
   <tabstop>pushButton_2</tabstop>
