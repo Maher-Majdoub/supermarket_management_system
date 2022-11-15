@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -203,7 +203,7 @@ QTableWidget{
     </widget>
    </widget>
    <widget class="QWidget" name="products_frame">
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="products_table">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -242,6 +242,9 @@ QTableWidget{
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
      <column>
       <property name="text">
        <string>ID</string>
@@ -349,6 +352,9 @@ QTableWidget{
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 border-bottom: 3px solid #154c79;
@@ -367,6 +373,9 @@ font-size: 18px;</string>
        <width>191</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -387,6 +396,9 @@ font-size: 18px;</string>
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 border-bottom: 3px solid #154c79;
@@ -406,6 +418,9 @@ font-size: 18px;</string>
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 border-bottom: 3px solid #154c79;
@@ -416,7 +431,7 @@ font-size: 18px;</string>
       <string>Enter Quantity</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="add_btn">
+    <widget class="QPushButton" name="products_add_btn">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -454,7 +469,7 @@ font-size: 18px;</string>
       <string>Update</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="delete_btn">
+    <widget class="QPushButton" name="products_delete_btn">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -541,7 +556,7 @@ QComboBox::down-arrow {
       </property>
      </item>
     </widget>
-    <widget class="QPushButton" name="clear_btn">
+    <widget class="QPushButton" name="products_clear_btn">
      <property name="geometry">
       <rect>
        <x>230</x>
@@ -3438,13 +3453,13 @@ QPushButton:pressed{
   <tabstop>product_price</tabstop>
   <tabstop>categories_btn</tabstop>
   <tabstop>users_btn</tabstop>
-  <tabstop>tableWidget</tabstop>
+  <tabstop>products_table</tabstop>
   <tabstop>product_quantity</tabstop>
-  <tabstop>add_btn</tabstop>
+  <tabstop>products_add_btn</tabstop>
   <tabstop>update_btn</tabstop>
-  <tabstop>delete_btn</tabstop>
+  <tabstop>products_delete_btn</tabstop>
   <tabstop>product_category</tabstop>
-  <tabstop>clear_btn</tabstop>
+  <tabstop>products_clear_btn</tabstop>
   <tabstop>categorie_id_9</tabstop>
   <tabstop>categorie_id_10</tabstop>
   <tabstop>categorie_id_11</tabstop>

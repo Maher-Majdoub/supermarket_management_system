@@ -46,6 +46,10 @@ class Admin(QtWidgets.QWidget):
         self.categories_update_btn.clicked.connect(self.update_category)
         self.categories_table.selectionModel().selectionChanged.connect(lambda: self.new_category_selection(self.categories_table.currentRow()))
 
+        #products frame
+        self.update_products_table()
+        self.products_add_btn.clicked.connect(self.add_product)
+        self.products_clear_btn.clicked.connect(lambda: self.clear(self.products_frame))
 
     
     def logout(self):
@@ -307,6 +311,9 @@ class Admin(QtWidgets.QWidget):
         cursor.execute('INSERT INTO categories VALUES (%s, %s, %s)', (id, name, desc))
         self.db.commit()
         self.update_categories_table()
+        self.update_products_table()
+
+
     def new_category_selection(self, current_row):
         self.category_id.setText(self.categories_table.item(current_row,0).text())
         self.category_name.setText(self.categories_table.item(current_row,1).text()) 
@@ -318,6 +325,8 @@ class Admin(QtWidgets.QWidget):
         cursor.execute('DELETE FROM categories WHERE category_id = %s', (id,))
         self.db.commit()
         self.update_categories_table()
+        self.update_products_table()
+
 
     def update_category(self):
         id = self.category_id.text()
@@ -327,3 +336,43 @@ class Admin(QtWidgets.QWidget):
         cursor.execute('UPDATE categories SET name = %s, description = %s WHERE category_id = %s', (name, desc, id))
         self.db.commit()
         self.update_categories_table()
+        self.update_products_table()
+
+    
+    def update_products_table(self):
+        table = self.products_table
+        self.clear_table(table)
+        cursor = self.db.cursor()
+        cursor.execute('SELECT name FROM categories')
+        categories = cursor.fetchall()
+        self.product_category.clear()
+        cat = [categories[i][0] for i in range(len(categories))]
+        self.product_category.addItems(cat)
+        cursor.execute('SELECT * FROM products')
+        products = cursor.fetchall()
+        for product in products:
+            rowPosition = table.rowCount()
+            cursor.execute('SELECT name FROM categories WHERE category_id = %s', (int(product[1]),))
+            cat = cursor.fetchone()
+            print(cat)
+            table.insertRow(rowPosition)
+            table.setItem(rowPosition , 0, QTableWidgetItem(str(product[0])))
+            table.setItem(rowPosition , 1, QTableWidgetItem(product[2]))
+            table.setItem(rowPosition , 2, QTableWidgetItem(cat[0]))
+            table.setItem(rowPosition , 3, QTableWidgetItem(format(product[3], ".15g")))
+            table.setItem(rowPosition , 4, QTableWidgetItem(str(product[4])))
+
+    def add_product(self):
+        id = self.product_id.text()
+        name = self.product_name.text()
+        price = self.product_price.text()
+        quantity = self.product_quantity.text()
+        cat = self.product_category.currentText()
+
+        cursor = self.db.cursor()
+        cursor.execute('SELECT category_id FROM categories WHERE name LIKE (%s)', (cat,))
+        cat_id = cursor.fetchone()[0]
+        cursor.execute('INSERT INTO products VALUES (%s, %s, %s, %s, %s)', (id, cat_id, name, price, quantity))
+        self.db.commit()
+        self.update_products_table()
+
