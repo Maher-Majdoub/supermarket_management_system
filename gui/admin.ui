@@ -236,6 +236,9 @@ QTableWidget{
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>
      </property>
@@ -450,7 +453,7 @@ font-size: 18px;</string>
       <string>Add</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="update_btn">
+    <widget class="QPushButton" name="products_update_btn">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -3456,7 +3459,7 @@ QPushButton:pressed{
   <tabstop>products_table</tabstop>
   <tabstop>product_quantity</tabstop>
   <tabstop>products_add_btn</tabstop>
-  <tabstop>update_btn</tabstop>
+  <tabstop>products_update_btn</tabstop>
   <tabstop>products_delete_btn</tabstop>
   <tabstop>product_category</tabstop>
   <tabstop>products_clear_btn</tabstop>
