@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGroupBox, QHeaderView,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpinBox, QTableWidget, QTableWidgetItem, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QGroupBox,
+    QHeaderView, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpinBox, QTableWidget, QTableWidgetItem,
+    QWidget)
 import icons_rc
 import icons_rc
 
@@ -25,7 +26,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1222, 840)
+        Form.resize(1222, 835)
         Form.setStyleSheet(u"QWiget{\n"
 "	background-color: #fff;\n"
 "}\n"
@@ -101,37 +102,45 @@ class Ui_Form(object):
         self.quantity = QSpinBox(Form)
         self.quantity.setObjectName(u"quantity")
         self.quantity.setGeometry(QRect(130, 380, 221, 31))
+        self.quantity.setMinimum(1)
+        self.quantity.setMaximum(9999)
+        self.quantity.setValue(1)
         self.add_btn = QPushButton(Form)
         self.add_btn.setObjectName(u"add_btn")
         self.add_btn.setGeometry(QRect(30, 420, 321, 41))
         self.products_table = QTableWidget(Form)
-        if (self.products_table.columnCount() < 4):
-            self.products_table.setColumnCount(4)
+        if (self.products_table.columnCount() < 3):
+            self.products_table.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
         self.products_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.products_table.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.products_table.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.products_table.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.products_table.setObjectName(u"products_table")
+        self.products_table.setEnabled(True)
         self.products_table.setGeometry(QRect(30, 480, 321, 301))
-        self.products_table.horizontalHeader().setDefaultSectionSize(79)
+        self.products_table.setSelectionMode(QAbstractItemView.NoSelection)
+        self.products_table.horizontalHeader().setMinimumSectionSize(56)
+        self.products_table.horizontalHeader().setDefaultSectionSize(106)
+        self.products_table.verticalHeader().setVisible(False)
         self.orders_table = QTableWidget(Form)
         if (self.orders_table.columnCount() < 4):
             self.orders_table.setColumnCount(4)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.orders_table.setHorizontalHeaderItem(0, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
-        self.orders_table.setHorizontalHeaderItem(0, __qtablewidgetitem4)
+        self.orders_table.setHorizontalHeaderItem(1, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
-        self.orders_table.setHorizontalHeaderItem(1, __qtablewidgetitem5)
+        self.orders_table.setHorizontalHeaderItem(2, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
-        self.orders_table.setHorizontalHeaderItem(2, __qtablewidgetitem6)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.orders_table.setHorizontalHeaderItem(3, __qtablewidgetitem7)
+        self.orders_table.setHorizontalHeaderItem(3, __qtablewidgetitem6)
         self.orders_table.setObjectName(u"orders_table")
-        self.orders_table.setGeometry(QRect(370, 40, 651, 741))
+        self.orders_table.setGeometry(QRect(370, 20, 651, 761))
+        self.orders_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.orders_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.orders_table.horizontalHeader().setDefaultSectionSize(162)
+        self.orders_table.verticalHeader().setVisible(False)
         self.orders_table.verticalHeader().setDefaultSectionSize(40)
         self.pushButton_2 = QPushButton(Form)
         self.pushButton_2.setObjectName(u"pushButton_2")
@@ -146,6 +155,7 @@ class Ui_Form(object):
         self.label_8 = QLabel(Form)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(1060, 170, 141, 271))
+        self.label_8.setFont(font)
         self.label_8.setPixmap(QPixmap(u":/icons/facture.png"))
         self.label_8.setScaledContents(True)
         self.date = QLabel(Form)
@@ -160,19 +170,16 @@ class Ui_Form(object):
         self.pushButton_3 = QPushButton(Form)
         self.pushButton_3.setObjectName(u"pushButton_3")
         self.pushButton_3.setGeometry(QRect(1100, 750, 93, 28))
-        self.pushButton_4 = QPushButton(Form)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-        self.pushButton_4.setGeometry(QRect(930, 790, 93, 31))
+        self.delete_btn = QPushButton(Form)
+        self.delete_btn.setObjectName(u"delete_btn")
+        self.delete_btn.setGeometry(QRect(930, 790, 93, 31))
         self.search_category = QComboBox(Form)
         self.search_category.setObjectName(u"search_category")
-        self.search_category.setGeometry(QRect(20, 790, 221, 31))
-        self.refersh_btn = QPushButton(Form)
-        self.refersh_btn.setObjectName(u"refersh_btn")
-        self.refersh_btn.setGeometry(QRect(250, 790, 93, 28))
-        self.label_10 = QLabel(Form)
-        self.label_10.setObjectName(u"label_10")
-        self.label_10.setGeometry(QRect(1100, 60, 101, 31))
-        self.label_10.setAlignment(Qt.AlignCenter)
+        self.search_category.setGeometry(QRect(30, 790, 321, 31))
+        self.total_lbl = QLabel(Form)
+        self.total_lbl.setObjectName(u"total_lbl")
+        self.total_lbl.setGeometry(QRect(1100, 60, 101, 31))
+        self.total_lbl.setAlignment(Qt.AlignCenter)
 
         self.retranslateUi(Form)
 
@@ -191,28 +198,25 @@ class Ui_Form(object):
         self.label_6.setText(QCoreApplication.translate("Form", u"Quantity", None))
         self.add_btn.setText(QCoreApplication.translate("Form", u"Add To List", None))
         ___qtablewidgetitem = self.products_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"category", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"product", None));
         ___qtablewidgetitem1 = self.products_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"product", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"unit price", None));
         ___qtablewidgetitem2 = self.products_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"unit price", None));
-        ___qtablewidgetitem3 = self.products_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"in stock", None));
-        ___qtablewidgetitem4 = self.orders_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Category", None));
-        ___qtablewidgetitem5 = self.orders_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Product", None));
-        ___qtablewidgetitem6 = self.orders_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Unit Price", None));
-        ___qtablewidgetitem7 = self.orders_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Quantity", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"in stock", None));
+        ___qtablewidgetitem3 = self.orders_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Category", None));
+        ___qtablewidgetitem4 = self.orders_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Product", None));
+        ___qtablewidgetitem5 = self.orders_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Unit Price", None));
+        ___qtablewidgetitem6 = self.orders_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Quantity", None));
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"confirm", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"Total:", None))
         self.label_8.setText("")
         self.date.setText("")
         self.pushButton_3.setText(QCoreApplication.translate("Form", u"print bill", None))
-        self.pushButton_4.setText(QCoreApplication.translate("Form", u"Delete", None))
-        self.refersh_btn.setText(QCoreApplication.translate("Form", u"refresh", None))
-        self.label_10.setText("")
+        self.delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
+        self.total_lbl.setText("")
     # retranslateUi
 
