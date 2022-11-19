@@ -21,7 +21,7 @@ mydb = mysql.connector.connect(
     host = 'localhost',
     user = 'root',
     passwd = 'admin',
-    database = 'supermarket'
+    database = 'mydb'
 )
 
 
@@ -63,7 +63,7 @@ class Controller:
 
 
         if role == 'admin':
-            cursor.execute("SELECT first_name, last_name FROM admins WHERE %s = account_id",(id,))      
+            cursor.execute("SELECT first_name, last_name FROM admins WHERE account_id = %s",(id,))      
             info = cursor.fetchone()                  
             name = info[0] + ' ' + info[1]
             self.admin_panel = Admin(mydb, name)            
@@ -77,7 +77,7 @@ class Controller:
             cursor.execute("SELECT first_name, last_name FROM sellers WHERE %s = account_id",(id,))      
             info = cursor.fetchone()                  
             name = info[0] + ' ' + info[1]
-            self.seller_panel = Seller(mydb, name)            
+            self.seller_panel = Seller(mydb,id, name)            
             self.seller_panel.show()     
             self.login.close()
             #self.seller_panel.switch_window.connect(self.show_login)

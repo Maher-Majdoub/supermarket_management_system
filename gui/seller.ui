@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1222</width>
+    <width>1232</width>
     <height>835</height>
    </rect>
   </property>
@@ -230,6 +230,14 @@ font:bold;</string>
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>Add To List</string>
    </property>
@@ -243,7 +251,7 @@ font:bold;</string>
      <x>30</x>
      <y>480</y>
      <width>321</width>
-     <height>301</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="selectionMode">
@@ -280,8 +288,13 @@ font:bold;</string>
      <x>370</x>
      <y>20</y>
      <width>651</width>
-     <height>761</height>
+     <height>801</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>7</pointsize>
+    </font>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::SingleSelection</enum>
@@ -319,14 +332,22 @@ font:bold;</string>
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="confirm_btn">
    <property name="geometry">
     <rect>
      <x>1100</x>
-     <y>710</y>
-     <width>93</width>
-     <height>28</height>
+     <y>590</y>
+     <width>111</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>confirm</string>
@@ -389,6 +410,14 @@ font:bold;</string>
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color:  #154c79;
 color : #fff;
@@ -405,40 +434,25 @@ font-size: 16px;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>1100</x>
-     <y>750</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>print bill</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="delete_btn">
    <property name="geometry">
     <rect>
-     <x>930</x>
-     <y>790</y>
-     <width>93</width>
-     <height>31</height>
+     <x>1030</x>
+     <y>740</y>
+     <width>101</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>Delete</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="search_category">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>790</y>
-     <width>321</width>
-     <height>31</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLabel" name="total_lbl">

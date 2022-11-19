@@ -6,8 +6,9 @@ import time, datetime
 
 class Seller(QtWidgets.QWidget):
     switch_window = QtCore.pyqtSignal()
-    def __init__(self, db, name):
+    def __init__(self, db, id,name):
         self.db = db   #db = data_base
+        self.id = id
         self.name = name
         self.total = 0.0
         QtWidgets.QWidget.__init__(self)
@@ -22,8 +23,9 @@ class Seller(QtWidgets.QWidget):
         self.product.currentTextChanged.connect(self.product_changed)
         self.add_btn.clicked.connect(self.add_order)
         self.delete_btn.clicked.connect(self.delete_order)
+        self.confirm_btn.clicked.connect(self.confirm_order)
         self.total_lbl.setText('{:.2f}    $'.format(self.total))
-        self.search_category.currentTextChanged.connect(self.refresh_category)
+        self.category.currentTextChanged.connect(self.refresh_category)
 
     def load_categories(self):
         cursor = self.db.cursor()
@@ -31,7 +33,6 @@ class Seller(QtWidgets.QWidget):
         results = cursor.fetchall()
         categories = [result[0] for result in results]
         self.category.addItems(categories)
-        self.search_category.addItems(categories)
         self.update()
         self.product_changed()
 
@@ -86,7 +87,7 @@ class Seller(QtWidgets.QWidget):
         
     def refresh_category(self):
         table = self.products_table
-        category = self.search_category.currentText()
+        category = self.category.currentText()
         cursor = self.db.cursor()
         cursor.execute('SELECT category_id FROM categories WHERE name = %s', (category ,))
         result = cursor.fetchone()
@@ -116,4 +117,30 @@ class Seller(QtWidgets.QWidget):
             table.removeRow(table.currentRow())
             self.total -= float(unit_price) * int(quantity)
             self.total_lbl.setText('{:.2f}    $'.format(self.total))
+            
+    def confirm_order(self):
+        cursor = self.db.cursor()
+        table = self.orders_table
+        date = datetime.date.today().strftime('%Y-%m-%d')
+        for i in range(table.rowCount()):
+            product = table.item(i, 1).text()
+            unit_price = table.item(i, 2).text()
+            quantity = table.item(i, 3).text()
+            cursor.execute('SELECT product_id FROM products WHERE name = %s', (product,))
+            product_id = cursor.fetchone()[0]
+            cursor.execute('SELECT MAX(sell_id) FROM sells')
+            result = cursor.fetchone()[0] 
+            id = int(result) +1 if result else 0
+            cursor.execute('INSERT INTO sells VALUES (%s, %s, %s, %s, %s, %s)', (id, self.id, product_id, unit_price, quantity, date))
+            cursor.execute('SELECT quantity FROM products WHERE product_id = %s', (product_id,))
+            previous_quantity = int(cursor.fetchone()[0])
+            cursor.execute('UPDATE products SET quantity = %s - %s WHERE product_id = %s', (previous_quantity, quantity, product_id))
+            self.db.commit()
+        self.total = 0.0
+        self.total_lbl.setText('{:.2f}    $'.format(self.total))    
+        print('done ...')
+        self.clear(table)
+        self.refresh_category()
+            
+        
             

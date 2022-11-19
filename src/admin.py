@@ -153,13 +153,14 @@ class Admin(QtWidgets.QWidget):
                     self.db.commit()
 
                 elif role == 'seller' and previous_role == 'admin':
-                    cursor.execute('DELETE FROM admins WHERE (account_id = %s)', (id,))
+                    cursor.execute('DELETE FROM admins WHERE account_id = %s', (id,))
                     cursor.execute('INSERT INTO sellers VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                     self.db.commit()
             self.update_users_table()
             self.users_table.selectRow(selected_row)
-        except:
+        except Exception as e:
             print("something went wrong")
+            print(e)
 
 
 
