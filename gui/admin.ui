@@ -136,7 +136,7 @@ font:bold;</string>
   <widget class="QStackedWidget" name="containor">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>270</x>
      <y>20</y>
      <width>961</width>
      <height>751</height>
@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -1767,7 +1767,7 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_44">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>70</x>
        <y>70</y>
        <width>141</width>
        <height>131</height>
@@ -1786,7 +1786,7 @@ font-size: 18px;</string>
     <widget class="QLabel" name="label_45">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>100</x>
        <y>10</y>
        <width>91</width>
        <height>31</height>
@@ -1805,7 +1805,7 @@ font: bold;
     <widget class="QLabel" name="label_46">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>290</x>
        <y>50</y>
        <width>31</width>
        <height>31</height>
@@ -1820,14 +1820,17 @@ font: bold;
       <string>ID</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_9">
+    <widget class="QLineEdit" name="incomes_id">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>390</x>
        <y>40</y>
        <width>161</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1835,14 +1838,17 @@ border-bottom: 3px solid #154c79;
 color: #154c79;
 font-size: 18px;</string>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="placeholderText">
-      <string>Enter User Name</string>
+      <string>Sell Id</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_47">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>290</x>
        <y>100</y>
        <width>91</width>
        <height>31</height>
@@ -1854,33 +1860,15 @@ font-size: 18px;</string>
       </font>
      </property>
      <property name="text">
-      <string>Seller Name</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_48">
-     <property name="geometry">
-      <rect>
-       <x>670</x>
-       <y>50</y>
-       <width>41</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Date</string>
+      <string>Seller Id</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_49">
      <property name="geometry">
       <rect>
-       <x>670</x>
-       <y>100</y>
-       <width>91</width>
+       <x>640</x>
+       <y>150</y>
+       <width>101</width>
        <height>31</height>
       </rect>
      </property>
@@ -1890,55 +1878,45 @@ font-size: 18px;</string>
       </font>
      </property>
      <property name="text">
-      <string>Total price</string>
+      <string>Total Income</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_10">
+    <widget class="QLineEdit" name="incomes_seller_id">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>390</x>
        <y>90</y>
        <width>161</width>
        <height>41</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 border-bottom: 3px solid #154c79;
 color: #154c79;
 font-size: 18px;</string>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="placeholderText">
-      <string>Enter User Name</string>
+      <string>Seller Id</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="categorie_id_11">
+    <widget class="QLineEdit" name="incomes_total_income">
      <property name="geometry">
       <rect>
-       <x>780</x>
-       <y>40</y>
+       <x>760</x>
+       <y>140</y>
        <width>161</width>
        <height>41</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">border: none;
-border-bottom: 3px solid #154c79;
-color: #154c79;
-font-size: 18px;</string>
-     </property>
-     <property name="placeholderText">
-      <string>Enter User Name</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="categorie_id_12">
-     <property name="geometry">
-      <rect>
-       <x>780</x>
-       <y>90</y>
-       <width>161</width>
-       <height>41</height>
-      </rect>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -1946,16 +1924,19 @@ border-bottom: 3px solid #154c79;
 color: #154c79;
 font-size: 18px;</string>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="placeholderText">
-      <string>Enter User Name</string>
+      <string>Total Income</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="sellings_search_btn">
+    <widget class="QPushButton" name="incomes_search_btn">
      <property name="geometry">
       <rect>
-       <x>810</x>
-       <y>170</y>
-       <width>131</width>
+       <x>470</x>
+       <y>200</y>
+       <width>81</width>
        <height>41</height>
       </rect>
      </property>
@@ -1969,13 +1950,13 @@ font-size: 18px;</string>
       <string>Search</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="sellings_delete_btn">
+    <widget class="QPushButton" name="incomes_delete_btn">
      <property name="geometry">
       <rect>
-       <x>660</x>
-       <y>170</y>
-       <width>131</width>
-       <height>41</height>
+       <x>850</x>
+       <y>210</y>
+       <width>71</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="statusTip">
@@ -1988,16 +1969,16 @@ font-size: 18px;</string>
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="tableWidget_4">
+    <widget class="QTableWidget" name="incomes_table">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>240</y>
+       <y>260</y>
        <width>921</width>
-       <height>491</height>
+       <height>471</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -2103,19 +2084,19 @@ font-size: 18px;</string>
       <bool>false</bool>
      </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>6</number>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>216</number>
+      <number>141</number>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>216</number>
+      <number>141</number>
      </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -2141,96 +2122,6 @@ font-size: 18px;</string>
      <attribute name="verticalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string/>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>New Row</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>Sell ID</string>
@@ -2238,19 +2129,182 @@ font-size: 18px;</string>
      </column>
      <column>
       <property name="text">
-       <string>Seller Name</string>
+       <string>Seller Id</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>date</string>
+       <string>Product Id</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Total</string>
+       <string>Quantity</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>Unit Price</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Total Income</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="label_57">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>150</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Product Id</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="incomes_product_id">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>140</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Product Id</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_58">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>50</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Quantity</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_59">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>100</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Unit Price</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="incomes_unit_price">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>90</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Unit Price</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="incomes_quantity">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>40</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Quantity</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="incomes_date">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>200</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="accelerated">
+      <bool>false</bool>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="expenses_frame">
@@ -3463,13 +3517,12 @@ QPushButton:pressed{
   <tabstop>products_delete_btn</tabstop>
   <tabstop>product_category</tabstop>
   <tabstop>products_clear_btn</tabstop>
-  <tabstop>categorie_id_9</tabstop>
-  <tabstop>categorie_id_10</tabstop>
-  <tabstop>categorie_id_11</tabstop>
-  <tabstop>categorie_id_12</tabstop>
-  <tabstop>sellings_search_btn</tabstop>
-  <tabstop>sellings_delete_btn</tabstop>
-  <tabstop>tableWidget_4</tabstop>
+  <tabstop>incomes_id</tabstop>
+  <tabstop>incomes_seller_id</tabstop>
+  <tabstop>incomes_total_income</tabstop>
+  <tabstop>incomes_search_btn</tabstop>
+  <tabstop>incomes_delete_btn</tabstop>
+  <tabstop>incomes_table</tabstop>
   <tabstop>expense_delete_btn</tabstop>
   <tabstop>expense_id</tabstop>
   <tabstop>tableWidget_5</tabstop>

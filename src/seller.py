@@ -130,7 +130,7 @@ class Seller(QtWidgets.QWidget):
             product_id = cursor.fetchone()[0]
             cursor.execute('SELECT MAX(sell_id) FROM sells')
             result = cursor.fetchone()[0] 
-            id = int(result) +1 if result else 0
+            id = int(result) +1 if result else 1
             cursor.execute('INSERT INTO sells VALUES (%s, %s, %s, %s, %s, %s)', (id, self.id, product_id, unit_price, quantity, date))
             cursor.execute('SELECT quantity FROM products WHERE product_id = %s', (product_id,))
             previous_quantity = int(cursor.fetchone()[0])

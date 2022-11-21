@@ -54,6 +54,13 @@ class Admin(QtWidgets.QWidget):
         self.products_delete_btn.clicked.connect(self.delete_product)
         self.products_search_btn.clicked.connect(self.search_product)
         self.products_table.selectionModel().selectionChanged.connect(lambda: self.new_product_selection(self.products_table.currentRow()))
+        
+        #incomes frame
+        tm = time.localtime()
+        self.incomes_date.setDate(datetime.datetime.now())
+        self.incomes_search_btn.clicked.connect(self.update_incomes_table)
+        self.incomes_table.selectionModel().selectionChanged.connect(lambda: self.new_income_selection(self.incomes_table.currentRow()))
+        self.incomes_delete_btn.clicked.connect(self.delete_income)
 
     
     def logout(self):
@@ -430,7 +437,47 @@ class Admin(QtWidgets.QWidget):
             table.setItem(0 , 3, QTableWidgetItem(format(result[3], ".15g")))
             table.setItem(0 , 4, QTableWidgetItem(str(result[4])))
 
-
+    def update_incomes_table(self):
+        cursor = self.db.cursor()
+        table = self.incomes_table
+        date = datetime.datetime.strptime(self.incomes_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+        cursor.execute('SELECT sell_id, account_id, product_id, quantity, unit_price FROM sells WHERE date = %s', (date,))
+        results = cursor.fetchall()
+        if results:  #if result not None
+            self.clear_table(table)
+            for result in results:
+                rowPosition = table.rowCount()
+                table.insertRow(rowPosition)
+                table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+                table.setItem(rowPosition , 1, QTableWidgetItem(str(result[1])))
+                table.setItem(rowPosition , 2, QTableWidgetItem(str(result[2])))
+                table.setItem(rowPosition , 3, QTableWidgetItem(str(result[3])))
+                table.setItem(rowPosition , 4, QTableWidgetItem(str(result[4])))
+                table.setItem(rowPosition , 5, QTableWidgetItem(str(result[3] * result[4])))
+            table.selectRow(0)
+            self.new_income_selection(0)
+        else:
+            self.clear_table(table)
+    
+    def new_income_selection(self, current_row):
+        table = self.incomes_table
+        self.incomes_id.setText(table.item(current_row,0).text())
+        self.incomes_seller_id.setText(table.item(current_row,1).text())
+        self.incomes_product_id.setText(table.item(current_row,2).text())
+        self.incomes_quantity.setText(table.item(current_row,3).text())
+        self.incomes_unit_price.setText(table.item(current_row,4).text())
+        self.incomes_total_income.setText(table.item(current_row,5).text())
+        
+    def delete_income(self):
+        id = self.incomes_id.text().strip()
+        if id != '':
+            cursor = self.db.cursor()
+            cursor.execute('DELETE FROM sells WHERE sell_id = %s', (id,))
+            self.db.commit()
+            self.update_incomes_table()
+            
+        else :
+            print('please enter ID')
 
 
         
