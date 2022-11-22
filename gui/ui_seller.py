@@ -181,6 +181,18 @@ class Ui_Form(object):
         self.total_lbl.setObjectName(u"total_lbl")
         self.total_lbl.setGeometry(QRect(1100, 60, 101, 31))
         self.total_lbl.setAlignment(Qt.AlignCenter)
+        self.logout_btn = QPushButton(Form)
+        self.logout_btn.setObjectName(u"logout_btn")
+        self.logout_btn.setGeometry(QRect(20, 20, 31, 41))
+        self.logout_btn.setFont(font)
+        self.logout_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.logout_btn.setMouseTracking(False)
+        self.logout_btn.setTabletTracking(False)
+        self.logout_btn.setStyleSheet(u"QPushButton{\n"
+"	border-image: url(:/icons/logout.png);\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"}\n"
+"")
 
         self.retranslateUi(Form)
 
@@ -218,5 +230,6 @@ class Ui_Form(object):
         self.date.setText("")
         self.delete_btn.setText(QCoreApplication.translate("Form", u"Delete", None))
         self.total_lbl.setText("")
+        self.logout_btn.setText("")
     # retranslateUi
 

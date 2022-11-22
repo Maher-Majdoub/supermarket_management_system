@@ -13,8 +13,9 @@ class Seller(QtWidgets.QWidget):
         self.total = 0.0
         QtWidgets.QWidget.__init__(self)
         uic.loadUi('.\\gui\\seller.ui', self)
-        self.show() 
         self.seller_name.setText(name)
+        self.show() 
+        self.logout_btn.clicked.connect(self.logout)
         tm = time.localtime()
         self.date.setText(str(tm.tm_year)+ '-' + str(tm.tm_mon) + '-' + str(tm.tm_mday))
         self.load_categories()
@@ -141,6 +142,10 @@ class Seller(QtWidgets.QWidget):
         print('done ...')
         self.clear(table)
         self.refresh_category()
+    
+    def logout(self):
+        self.switch_window.emit()
+        self.close()
             
         
             

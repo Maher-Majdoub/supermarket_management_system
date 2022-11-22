@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -2087,7 +2087,7 @@ font-size: 18px;</string>
       <number>6</number>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>false</bool>
@@ -2369,10 +2369,13 @@ font: bold;
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>250</y>
+       <y>220</y>
        <width>191</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -2383,15 +2386,18 @@ font-size: 18px;</string>
      <property name="inputMethodHints">
       <set>Qt::ImhDigitsOnly</set>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="placeholderText">
-      <string>Enter Id</string>
+      <string>Expense ID</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_52">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>260</y>
+       <y>230</y>
        <width>51</width>
        <height>31</height>
       </rect>
@@ -2423,7 +2429,7 @@ font-size: 18px;</string>
       <string>Ammount</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="tableWidget_5">
+    <widget class="QTableWidget" name="expenses_table">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -2456,12 +2462,27 @@ font-size: 18px;</string>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>
      </property>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>104</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>104</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
      <column>
       <property name="text">
        <string>ID</string>
@@ -2469,22 +2490,27 @@ font-size: 18px;</string>
      </column>
      <column>
       <property name="text">
-       <string>Name</string>
+       <string>Admin Id</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Category</string>
+       <string>Ammount</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Price</string>
+       <string>Type</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Quantity</string>
+       <string>Date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Description</string>
       </property>
      </column>
     </widget>
@@ -2492,7 +2518,7 @@ font-size: 18px;</string>
      <property name="geometry">
       <rect>
        <x>230</x>
-       <y>570</y>
+       <y>590</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -2529,8 +2555,8 @@ font-size: 18px;</string>
     <widget class="QPushButton" name="expense_search_btn">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>570</y>
+       <x>130</x>
+       <y>590</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -2549,10 +2575,13 @@ font-size: 18px;</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>470</y>
+       <y>480</y>
        <width>191</width>
        <height>91</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: 2px solid #154c79;
@@ -2567,7 +2596,7 @@ font-size: 18px;</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>470</y>
+       <y>480</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -2585,10 +2614,13 @@ font-size: 18px;</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>310</y>
+       <y>320</y>
        <width>191</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -2626,7 +2658,7 @@ font-size: 18px;</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>370</y>
+       <y>380</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -2651,7 +2683,7 @@ border: 2px solid #154c79;</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>370</y>
+       <y>380</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -2669,7 +2701,7 @@ border: 2px solid #154c79;</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>420</y>
+       <y>430</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -2693,7 +2725,7 @@ font-size: 18px;</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>420</y>
+       <y>430</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -2705,6 +2737,79 @@ font-size: 18px;</string>
      </property>
      <property name="text">
       <string>Date</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_60">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>270</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Admin ID</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="expense_admin_id">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>270</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string>del</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+border-bottom: 3px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Admin ID</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="expense_search_date">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>590</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid #154c79;
+color: #154c79;
+font-size: 18px;</string>
+     </property>
+     <property name="accelerated">
+      <bool>false</bool>
+     </property>
+     <property name="displayFormat">
+      <string>M/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -3525,7 +3630,7 @@ QPushButton:pressed{
   <tabstop>incomes_table</tabstop>
   <tabstop>expense_delete_btn</tabstop>
   <tabstop>expense_id</tabstop>
-  <tabstop>tableWidget_5</tabstop>
+  <tabstop>expenses_table</tabstop>
   <tabstop>expense_clear_btn</tabstop>
   <tabstop>expense_update_btn</tabstop>
   <tabstop>expense_search_btn</tabstop>

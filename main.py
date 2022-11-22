@@ -63,10 +63,11 @@ class Controller:
 
 
         if role == 'admin':
-            cursor.execute("SELECT first_name, last_name FROM admins WHERE account_id = %s",(id,))      
-            info = cursor.fetchone()                  
-            name = info[0] + ' ' + info[1]
-            self.admin_panel = Admin(mydb, name)            
+            cursor.execute("SELECT account_id, first_name, last_name FROM admins WHERE account_id = %s",(id,))      
+            info = cursor.fetchone()     
+            id = info[0]             
+            name = info[1] + ' ' + info[2]
+            self.admin_panel = Admin(mydb, id, name)            
             self.admin_panel.show()     
             self.login.close()
             self.admin_panel.switch_window.connect(self.show_login)
@@ -80,7 +81,7 @@ class Controller:
             self.seller_panel = Seller(mydb,id, name)            
             self.seller_panel.show()     
             self.login.close()
-            #self.seller_panel.switch_window.connect(self.show_login)
+            self.seller_panel.switch_window.connect(self.show_login)
         elif role is None:  #invalid user_name or password
             print('acc introuvable')
         else:

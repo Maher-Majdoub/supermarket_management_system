@@ -8,9 +8,10 @@ from .style_sheets import *
 
 class Admin(QtWidgets.QWidget):
     switch_window = QtCore.pyqtSignal()
-    def __init__(self, db, name):
+    def __init__(self, db,id, name):
         self.db = db   #db = data_base
         self.name = name
+        self.id = id
         QtWidgets.QWidget.__init__(self)
         uic.loadUi('.\\gui\\admin.ui', self)
         self.show() 
@@ -18,6 +19,7 @@ class Admin(QtWidgets.QWidget):
         self.containor.setCurrentWidget(self.stats_frame)
         tm = time.localtime()
         self.expense_date.setDate(QDate(tm.tm_year, tm.tm_mon, tm.tm_mday))  #Current date set as default
+        self.expense_search_date.setDate(QDate(tm.tm_year, tm.tm_mon, tm.tm_mday))
         self.stats_btn.clicked.connect(lambda : self.switch_btn_clicked(self.stats_frame, self.stats_lbl))
         self.products_btn.clicked.connect(lambda : self.switch_btn_clicked(self.products_frame, self.products_lbl))
         self.categories_btn.clicked.connect(lambda : self.switch_btn_clicked(self.categories_frame, self.categories_lbl))
@@ -61,6 +63,15 @@ class Admin(QtWidgets.QWidget):
         self.incomes_search_btn.clicked.connect(self.update_incomes_table)
         self.incomes_table.selectionModel().selectionChanged.connect(lambda: self.new_income_selection(self.incomes_table.currentRow()))
         self.incomes_delete_btn.clicked.connect(self.delete_income)
+        self.update_incomes_table()
+        
+        #expenses frame
+        self.expense_add_btn.clicked.connect(self.add_expense)
+        self.expense_update_btn.clicked.connect(self.update_expense)
+        self.expense_delete_btn.clicked.connect(self.delete_expense)
+        self.expense_search_btn.clicked.connect(self.search_expense)
+        self.expense_clear_btn.clicked.connect(self.clear_expenses)
+        self.expenses_table.selectionModel().selectionChanged.connect(lambda: self.new_expense_selection(self.expenses_table.currentRow()))
 
     
     def logout(self):
@@ -478,6 +489,81 @@ class Admin(QtWidgets.QWidget):
             
         else :
             print('please enter ID')
+            
+    
 
+    def add_expense(self):
+        cursor = self.db.cursor()
+        cursor.execute('SELECT MAX(expense_id) FROM expenses')
+        result = cursor.fetchone()
+        if result[0] != None: 
+            expense_id = int(result[0]) + 1 
+        else:
+            expense_id = 1  
+        admin_id = self.id
+        ammount = int(self.expense_ammount.text())
+        type_ = self.expense_type.currentText()
+        date = datetime.datetime.strptime(self.expense_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+        desc = self.expense_description.toPlainText().strip()
+        cursor.execute('INSERT INTO expenses VALUES (%s, %s, %s, %s, %s, %s)', (expense_id, admin_id, ammount, type_, date, desc if desc != '' else None))
+        self.db.commit()
+        self.search_expense()
+        
+    def update_expense(self):
+        cursor = self.db.cursor()
+        expense_id = self.expense_id.text()
+        ammount = int(self.expense_ammount.text())
+        type_ = self.expense_type.currentText()
+        date = datetime.datetime.strptime(self.expense_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+        desc = self.expense_description.toPlainText().strip()
+        cursor.execute('UPDATE expenses SET ammount = %s, type = %s, date = %s, description = %s WHERE expense_id = %s', (ammount, type_, date, desc, expense_id))
+        self.db.commit()
+        self.search_expense()
+        
+    def delete_expense(self):
+        cursor = self.db.cursor()
+        expense_id = self.expense_id.text()
+        cursor.execute('DELETE FROM expenses WHERE expense_id = %s', (expense_id,))
+        self.db.commit()
+        self.search_expense()
+        
+    def search_expense(self):
+        cursor = self.db.cursor()
+        table = self.expenses_table
+        date = self.expense_search_date.date().toPyDate()
+        year = date.year
+        month = date.month
+        
+        cursor.execute('SELECT * FROM expenses WHERE YEAR(date) = %s AND MONTH(date) = %s', (year, month))
+        results = cursor.fetchall()
+        if results:
+            self.clear_table(table)
+            for result in results:
+                rowPosition = table.rowCount()
+                table.insertRow(rowPosition)
+                table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+                table.setItem(rowPosition , 1, QTableWidgetItem(str(result[1])))
+                table.setItem(rowPosition , 2, QTableWidgetItem(str(result[2])))
+                table.setItem(rowPosition , 3, QTableWidgetItem(str(result[3])))
+                table.setItem(rowPosition , 4, QTableWidgetItem(str(result[4])))
+                table.setItem(rowPosition , 5, QTableWidgetItem(str(result[5])))
+            table.selectRow(0)
+        else:
+            self.clear_table(table)
+            self.clear(self.expenses_frame)
+                
+    def new_expense_selection(self, current_row):
+        table = self.expenses_table
+        self.expense_id.setText(table.item(current_row, 0).text())
+        self.expense_admin_id.setText(table.item(current_row, 1).text())
+        self.expense_ammount.setText(table.item(current_row, 2).text())
+        self.expense_type.setCurrentText(table.item(current_row, 3).text())
+        self.expense_date.setDate(datetime.datetime.strptime(table.item(current_row, 4).text(),'%Y-%m-%d').date())
+        self.expense_description.setText(table.item(current_row, 5).text())
+        
+    def clear_expenses(self):
+        self.clear_table(self.expenses_table)
+        self.clear(self.expenses_frame)
+        
 
         
