@@ -179,7 +179,7 @@ QTableWidget{
     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="stats_frame">
     <property name="autoFillBackground">
@@ -687,6 +687,12 @@ font: bold;
      <property name="statusTip">
       <string>del</string>
      </property>
+     <property name="accessibleName">
+      <string>text Category name</string>
+     </property>
+     <property name="accessibleDescription">
+      <string/>
+     </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 border-bottom: 3px solid #154c79;
@@ -708,6 +714,9 @@ font-size: 18px;</string>
      </property>
      <property name="statusTip">
       <string>del</string>
+     </property>
+     <property name="accessibleName">
+      <string>id Category ID</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -947,6 +956,12 @@ font-size: 18px;</string>
      <property name="statusTip">
       <string>del</string>
      </property>
+     <property name="accessibleName">
+      <string/>
+     </property>
+     <property name="accessibleDescription">
+      <string/>
+     </property>
      <property name="styleSheet">
       <string notr="true">border: 2px solid #154c79;
 color: #154c79;
@@ -987,6 +1002,9 @@ font-size: 18px;</string>
      </property>
      <property name="statusTip">
       <string>del</string>
+     </property>
+     <property name="accessibleName">
+      <string/>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
@@ -3544,7 +3562,7 @@ QPushButton:pressed{
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="param">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -3576,7 +3594,6 @@ QPushButton:pressed{
   </widget>
  </widget>
  <tabstops>
-  <tabstop>users_id</tabstop>
   <tabstop>users_first_name</tabstop>
   <tabstop>users_last_name</tabstop>
   <tabstop>users_birth_date</tabstop>
@@ -3584,6 +3601,7 @@ QPushButton:pressed{
   <tabstop>users_salary</tabstop>
   <tabstop>users_male</tabstop>
   <tabstop>users_female</tabstop>
+  <tabstop>users_search_id</tabstop>
   <tabstop>users_adress</tabstop>
   <tabstop>users_user_name</tabstop>
   <tabstop>users_password</tabstop>
@@ -3606,7 +3624,7 @@ QPushButton:pressed{
   <tabstop>category_description</tabstop>
   <tabstop>logout_btn</tabstop>
   <tabstop>products_btn</tabstop>
-  <tabstop>pushButton_2</tabstop>
+  <tabstop>param</tabstop>
   <tabstop>stats_btn</tabstop>
   <tabstop>incomes_btn</tabstop>
   <tabstop>expenses_btn</tabstop>
@@ -3639,6 +3657,13 @@ QPushButton:pressed{
   <tabstop>expense_add_btn</tabstop>
   <tabstop>expense_type</tabstop>
   <tabstop>expense_date</tabstop>
+  <tabstop>users_id</tabstop>
+  <tabstop>incomes_product_id</tabstop>
+  <tabstop>incomes_unit_price</tabstop>
+  <tabstop>incomes_quantity</tabstop>
+  <tabstop>incomes_date</tabstop>
+  <tabstop>expense_admin_id</tabstop>
+  <tabstop>expense_search_date</tabstop>
  </tabstops>
  <resources>
   <include location="icons/icons.qrc"/>

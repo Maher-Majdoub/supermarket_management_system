@@ -179,7 +179,7 @@ class Ui_Form(object):
         self.delete_btn.setFont(font)
         self.total_lbl = QLabel(Form)
         self.total_lbl.setObjectName(u"total_lbl")
-        self.total_lbl.setGeometry(QRect(1100, 60, 101, 31))
+        self.total_lbl.setGeometry(QRect(1080, 60, 141, 31))
         self.total_lbl.setAlignment(Qt.AlignCenter)
         self.logout_btn = QPushButton(Form)
         self.logout_btn.setObjectName(u"logout_btn")

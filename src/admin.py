@@ -1,8 +1,11 @@
 import time, datetime
+from . import tools
 from PyQt5 import QtWidgets, uic, QtCore
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
 from PyQt5.QtCore import QDate, Qt
 from .style_sheets import *
+
+
 
 
 
@@ -27,7 +30,7 @@ class Admin(QtWidgets.QWidget):
         self.incomes_btn.clicked.connect(lambda : self.switch_btn_clicked(self.incomes_frame, self.incomes_lbl))
         self.expenses_btn.clicked.connect(lambda : self.switch_btn_clicked(self.expenses_frame, self.expenses_lbl))
         self.logout_btn.clicked.connect(self.logout)
-
+        self.param.clicked.connect(lambda: self.throw_error('fech taaml'))
 
         #users frame
         self.users_clear_btn.clicked.connect(lambda: self.clear(self.users_frame))
@@ -97,8 +100,10 @@ class Admin(QtWidgets.QWidget):
           
     def search_user(self):
         id = self.users_search_id.text()
-        if id == '':
+        if not tools.verify_id(id, 'ID') : 
+            self.users_search_id.setText('')
             self.update_users_table()
+            return
         table = self.users_table
         cursor = self.db.cursor()
         cursor.execute("SELECT * FROM accounts WHERE account_id = %s", (id,))
@@ -111,9 +116,10 @@ class Admin(QtWidgets.QWidget):
                 cursor.execute("SELECT * FROM sellers WHERE account_id = %s", (id,))
                 infos = cursor.fetchone()
             else:
-                print('error')
+                tools.throw_error('Something went wrong')
+                return
         
-            self.clear_table()
+            self.clear_table(table)
             table.insertRow(0)
             table.setItem(0 , 0, QTableWidgetItem(str(infos[0])))
             table.setItem(0 , 1, QTableWidgetItem(infos[1]))
@@ -128,7 +134,9 @@ class Admin(QtWidgets.QWidget):
             table.setItem(0 , 10, QTableWidgetItem(acc[2]))
             table.selectRow(0)
         else:
-            print('no acc')        
+            tools.throw_error(f'There\'s not an account with ID = {id}')      
+            self.users_search_id.setText('')  
+            self.update_users_table()
                 
     def update_user(self):
         selected_row = self.users_table.currentRow()
@@ -327,10 +335,13 @@ class Admin(QtWidgets.QWidget):
             table.setItem(0 , 2, QTableWidgetItem(result[2]))
 
     def add_category(self):
+        if not tools.verify_entries(self.categories_frame):
+            return
         cursor = self.db.cursor()
-        id = self.category_id.text()
-        name = self.category_name.text()
-        desc = self.category_description.toPlainText()
+        id = self.category_id.text().strip()
+        name = self.category_name.text().strip()
+        desc = self.category_description.toPlainText().strip()
+        desc = None if desc == '' else desc
         cursor.execute('INSERT INTO categories VALUES (%s, %s, %s)', (id, name, desc))
         self.db.commit()
         self.update_categories_table()
@@ -377,7 +388,6 @@ class Admin(QtWidgets.QWidget):
             rowPosition = table.rowCount()
             cursor.execute('SELECT name FROM categories WHERE category_id = %s', (int(product[1]),))
             cat = cursor.fetchone()
-            print(cat)
             table.insertRow(rowPosition)
             table.setItem(rowPosition , 0, QTableWidgetItem(str(product[0])))
             table.setItem(rowPosition , 1, QTableWidgetItem(product[2]))
@@ -566,4 +576,11 @@ class Admin(QtWidgets.QWidget):
         self.clear(self.expenses_frame)
         
 
-        
+    def throw_error(self, message):
+        msg = QMessageBox() 
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText(message)
+        msg.setWindowTitle('Warning')
+        msg.setStandardButtons(QMessageBox.Ok)
+        test = msg.exec_()
+
