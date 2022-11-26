@@ -321,31 +321,64 @@ class Admin(QtWidgets.QWidget):
     def search_category(self):
         table = self.categories_table
         cursor = self.db.cursor()
-        category_id = self.category_id.text()
+        category_id = self.category_search_id.text()
+        if not tools.verify_id(category_id, 'Category ID'): 
+            self.clear(self.categories_frame)
+            self.update_categories_table()
+            table.selectRow(0)
+            return
         if category_id.strip() =='':
             self.update_categories_table()
         else:
-            cursor = self.db.cursor()
-            cursor.execute('SELECT * FROM categories WHERE (category_id = %s)', (category_id,))
-            result = cursor.fetchone()
-            self.clear_table(table)
-            table.insertRow(0)
-            table.setItem(0 , 0, QTableWidgetItem(str(result[0])))
-            table.setItem(0 , 1, QTableWidgetItem(result[1]))
-            table.setItem(0 , 2, QTableWidgetItem(result[2]))
+            try:
+                cursor = self.db.cursor()
+                cursor.execute('SELECT * FROM categories WHERE (category_id = %s)', (category_id,))
+                result = cursor.fetchone()
+            except:
+                tools.throw_error('Something Went Wrong')
+                return
+            if result:
+                self.clear_table(table)
+                table.insertRow(0)
+                table.setItem(0 , 0, QTableWidgetItem(str(result[0])))
+                table.setItem(0 , 1, QTableWidgetItem(result[1]))
+                table.setItem(0 , 2, QTableWidgetItem(result[2]))
+                table.selectRow(0)
+            else:
+                tools.throw_error(f'There\'s no category with ID = {category_id}')
+                self.clear(self.categories_frame)
+                self.update_categories_table()
+                table.selectRow(0)
 
     def add_category(self):
         if not tools.verify_entries(self.categories_frame):
             return
-        cursor = self.db.cursor()
-        id = self.category_id.text().strip()
+        if tools.throw_quetion('Add Category', 'Are you sure want to add this category?') == 4194304 : return
         name = self.category_name.text().strip()
         desc = self.category_description.toPlainText().strip()
         desc = None if desc == '' else desc
-        cursor.execute('INSERT INTO categories VALUES (%s, %s, %s)', (id, name, desc))
-        self.db.commit()
-        self.update_categories_table()
-        self.update_products_table()
+        cursor = self.db.cursor() 
+        try:
+            # checking if there's a category that has the same name in the db
+            cursor.execute('SELECT * FROM categories WHERE name = %s', (name,))  
+            r = cursor.fetchone()
+            if r:  #if there's a category
+                tools.throw_error(f'There\'s a category named {name} already exists')     
+                return
+            
+
+            #getting the id
+            cursor.execute('SELECT MAX(category_id) FROM categories')
+            r = cursor.fetchone()
+            id = int(r[0]) + 1 if r else 1
+            # inserting the category
+            cursor.execute('INSERT INTO categories VALUES (%s, %s, %s)', (id, name, desc))
+            self.db.commit()
+            self.update_categories_table()
+            self.update_products_table()
+            tools.throw_info('Category added Successfuly')
+        except:
+            tools.throw_error('Something Went Wrong')
 
 
     def new_category_selection(self, current_row):
@@ -355,22 +388,46 @@ class Admin(QtWidgets.QWidget):
 
     def delete_category(self):
         id = self.category_id.text()
+        if id == '': 
+            tools.throw_error('Please select a category to Delete it')
+            return
+        if tools.throw_quetion('Delete Category', 'Are you sure want to delete this category') == 4194304 : return
         cursor = self.db.cursor()
-        cursor.execute('DELETE FROM categories WHERE category_id = %s', (id,))
-        self.db.commit()
-        self.update_categories_table()
-        self.update_products_table()
+        cursor.execute('SELECT * FROM products WHERE category_id = %s', (id,))
+        r = cursor.fetchone()
+        if r : 
+            tools.throw_error('Cannot delete this category because there\'s products with this category.. Delete those products first')
+            return
+        try:
+            cursor.execute('DELETE FROM categories WHERE category_id = %s', (id,))
+            self.db.commit()
+            self.update_categories_table()
+            self.update_products_table()
+            self.clear(self.categories_frame)
+            tools.throw_info('Category deleted Successfuly')
+        except:
+            tools.throw_error('Something Went Wrong!')
 
 
     def update_category(self):
         id = self.category_id.text()
+        if id == '': 
+            tools.throw_error('Please select a category to update it')
+            return
+        if not tools.verify_entries(self.categories_frame): return
         name = self.category_name.text()
         desc = self.category_description.toPlainText()
-        cursor = self.db.cursor()
-        cursor.execute('UPDATE categories SET name = %s, description = %s WHERE category_id = %s', (name, desc, id))
-        self.db.commit()
-        self.update_categories_table()
-        self.update_products_table()
+        if tools.throw_quetion('Update Category', 'Are you sure want to update this category') == 4194304 : return
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('UPDATE categories SET name = %s, description = %s WHERE category_id = %s', (name, desc, id))
+            self.db.commit()
+            self.update_categories_table()
+            self.update_products_table()
+            self.clear(self.categories_frame)
+            tools.throw_info('Category Updated Successfuly')
+        except:
+            tools.throw_error('Something Went Wrong')
 
     
     def update_products_table(self):
@@ -582,5 +639,5 @@ class Admin(QtWidgets.QWidget):
         msg.setText(message)
         msg.setWindowTitle('Warning')
         msg.setStandardButtons(QMessageBox.Ok)
-        test = msg.exec_()
+        msg.exec_()
 

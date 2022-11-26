@@ -10,7 +10,7 @@ class Seller(QtWidgets.QWidget):
         self.db = db   #db = data_base
         self.id = id
         self.name = name
-        self.total = 0.0
+        self.total = 0.0  # total price
         QtWidgets.QWidget.__init__(self)
         uic.loadUi('.\\gui\\seller.ui', self)
         self.seller_name.setText(name)

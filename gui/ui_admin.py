@@ -285,6 +285,7 @@ class Ui_Form(object):
 "border-bottom: 3px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
+        self.category_id.setReadOnly(True)
         self.label_28 = QLabel(self.categories_frame)
         self.label_28.setObjectName(u"label_28")
         self.label_28.setGeometry(QRect(20, 400, 91, 31))
@@ -350,6 +351,14 @@ class Ui_Form(object):
         self.category_description.setStyleSheet(u"border: 2px solid #154c79;\n"
 "color: #154c79;\n"
 "font-size: 18px;")
+        self.category_search_id = QLineEdit(self.categories_frame)
+        self.category_search_id.setObjectName(u"category_search_id")
+        self.category_search_id.setGeometry(QRect(30, 510, 111, 31))
+        self.category_search_id.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
+        self.category_search_id.setReadOnly(False)
         self.containor.addWidget(self.categories_frame)
         self.users_frame = QWidget()
         self.users_frame.setObjectName(u"users_frame")
@@ -1300,7 +1309,7 @@ class Ui_Form(object):
         self.category_id.setStatusTip(QCoreApplication.translate("Form", u"del", None))
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(accessibility)
-        self.category_id.setAccessibleName(QCoreApplication.translate("Form", u"id Category ID", None))
+        self.category_id.setAccessibleName("")
 #endif // QT_CONFIG(accessibility)
         self.category_id.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Id", None))
         self.label_28.setText(QCoreApplication.translate("Form", u"Description", None))
@@ -1342,6 +1351,10 @@ class Ui_Form(object):
         self.category_description.setAccessibleDescription("")
 #endif // QT_CONFIG(accessibility)
         self.category_description.setPlaceholderText(QCoreApplication.translate("Form", u"Enter Description", None))
+#if QT_CONFIG(statustip)
+        self.category_search_id.setStatusTip(QCoreApplication.translate("Form", u"del", None))
+#endif // QT_CONFIG(statustip)
+        self.category_search_id.setPlaceholderText(QCoreApplication.translate("Form", u"Id", None))
         self.label_31.setText(QCoreApplication.translate("Form", u"User ID", None))
 #if QT_CONFIG(statustip)
         self.users_id.setStatusTip(QCoreApplication.translate("Form", u"del", None))

@@ -1,12 +1,13 @@
-from PyQt5 import QtWidgets, uic, QtCore
-from PyQt5.QtWidgets import QMessageBox, QTableWidget, QLineEdit, QTextEdit
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+
 def verify_entries(frame):
     for child in frame.findChildren(QtWidgets.QWidget):
         print(child.accessibleName())
         type_ = child.accessibleName()[:child.accessibleName().find(' ')]
         name = child.accessibleName()[child.accessibleName().find(' ') + 1 : ]
         try:
-            val = child.text()
+            val = child.text().strip()
         except:
             continue
 
@@ -15,8 +16,8 @@ def verify_entries(frame):
             case 'id': test = verify_id(val, name)
             case 'text' :test =  verify_text(val, name)
             case 'decimal':test =  verify_decimal(val, name)
+            case 'password':test = verify_password(val, name)
             
-
         if test == False:
             return False
     return True
@@ -55,16 +56,35 @@ def verify_decimal(dec, name):
             return False
     return True
     
-    
-  
-  
-    
+def verify_password(pwd, name):
+    if len(pwd) < 6:
+        throw_error(f'The {name} must contains at least 6 characters')
+        return False
+    return True 
+
+
 def throw_error(message):
     msg = QMessageBox() 
     msg.setIcon(QMessageBox.Warning)
     msg.setText(message)
     msg.setWindowTitle('Warning')
     msg.setStandardButtons(QMessageBox.Ok)
+    msg.exec_()
+
+def throw_quetion(title ,message):
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Question)
+    msg.setText(message)
+    msg.setWindowTitle(title)
+    msg.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+    r = msg.exec_()   
+    return r
+
+def throw_info(message):
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.setWindowTitle(' ')
+    msg.setText(message)
     msg.exec_()
     
 
