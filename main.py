@@ -24,7 +24,6 @@ mydb = mysql.connector.connect(
     database = 'mydb'
 )
 
-
 class Controller:
     def check_entries(x,y): #verfying the inputs
         return True
@@ -61,7 +60,6 @@ class Controller:
         except TypeError: #in case that theres not an acc 
             pass
 
-
         if role == 'admin':
             cursor.execute("SELECT account_id, first_name, last_name FROM admins WHERE account_id = %s",(id,))      
             info = cursor.fetchone()     
@@ -72,8 +70,6 @@ class Controller:
             self.login.close()
             self.admin_panel.switch_window.connect(self.show_login)
 
-
-
         elif role == 'seller':
             cursor.execute("SELECT first_name, last_name FROM sellers WHERE %s = account_id",(id,))      
             info = cursor.fetchone()                  
@@ -82,12 +78,10 @@ class Controller:
             self.seller_panel.show()     
             self.login.close()
             self.seller_panel.switch_window.connect(self.show_login)
-        elif role is None:  #invalid user_name or password
-            print('acc introuvable')
+        elif role == 'none':  #invalid user_name or password
+            print('acc deleted')
         else:
             print('invalid role')
-
-
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

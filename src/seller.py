@@ -1,7 +1,9 @@
+from . import tools
 from .style_sheets import *
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem
 import time, datetime
+
 
 
 class Seller(QtWidgets.QWidget):
@@ -63,7 +65,9 @@ class Seller(QtWidgets.QWidget):
         product = self.product.currentText()
         unit_price = self.unit_price.text()
         quantity = self.quantity.value()
-        if quantity == 0: return
+        if quantity == 0:
+            tools.throw_error('Cannot add an order with quantity = 0')
+            return
         table = self.orders_table
         
         #cheking if the table contains this product
@@ -103,8 +107,11 @@ class Seller(QtWidgets.QWidget):
                     table.setItem(row_position, 0, QTableWidgetItem(product[0]))
                     table.setItem(row_position, 1, QTableWidgetItem(format(product[1], ".15g")))
                     table.setItem(row_position, 2, QTableWidgetItem(str(product[2])))
+            else:
+                self.quantity.setValue(0)
+                self.clear(table)
                     
-    def clear(slef, table):
+    def clear(self,table):
         table.clearSelection()
         while table.rowCount() >= 1:
             table.clearSelection()
@@ -118,32 +125,43 @@ class Seller(QtWidgets.QWidget):
             table.removeRow(table.currentRow())
             self.total -= float(unit_price) * int(quantity)
             self.total_lbl.setText('{:.2f}    $'.format(self.total))
+        else:
+            tools.throw_error('Please select a Row from the table to delete it')
             
     def confirm_order(self):
-        cursor = self.db.cursor()
         table = self.orders_table
+        if table.rowCount() == 0:
+            tools.throw_error('Theres no orders')
+            return
+            
+        if tools.throw_quetion('Confirm order', 'Are you sure want to Confirm this order?') == 4194304 : return
         date = datetime.date.today().strftime('%Y-%m-%d')
-        for i in range(table.rowCount()):
-            product = table.item(i, 1).text()
-            unit_price = table.item(i, 2).text()
-            quantity = table.item(i, 3).text()
-            cursor.execute('SELECT product_id FROM products WHERE name = %s', (product,))
-            product_id = cursor.fetchone()[0]
-            cursor.execute('SELECT MAX(sell_id) FROM sells')
-            result = cursor.fetchone()[0] 
-            id = int(result) +1 if result else 1
-            cursor.execute('INSERT INTO sells VALUES (%s, %s, %s, %s, %s, %s)', (id, self.id, product_id, unit_price, quantity, date))
-            cursor.execute('SELECT quantity FROM products WHERE product_id = %s', (product_id,))
-            previous_quantity = int(cursor.fetchone()[0])
-            cursor.execute('UPDATE products SET quantity = %s - %s WHERE product_id = %s', (previous_quantity, quantity, product_id))
-            self.db.commit()
-        self.total = 0.0
-        self.total_lbl.setText('{:.2f}    $'.format(self.total))    
-        print('done ...')
-        self.clear(table)
-        self.refresh_category()
+        try:
+            cursor = self.db.cursor()
+            for i in range(table.rowCount()):
+                product = table.item(i, 1).text()
+                unit_price = table.item(i, 2).text()
+                quantity = table.item(i, 3).text()
+                cursor.execute('SELECT product_id FROM products WHERE name = %s', (product,))
+                product_id = cursor.fetchone()[0]
+                cursor.execute('SELECT MAX(sell_id) FROM sells')
+                result = cursor.fetchone()[0] 
+                id = int(result) +1 if result else 1
+                cursor.execute('INSERT INTO sells VALUES (%s, %s, %s, %s, %s, %s)', (id, self.id, product_id, unit_price, quantity, date))
+                cursor.execute('SELECT quantity FROM products WHERE product_id = %s', (product_id,))
+                previous_quantity = int(cursor.fetchone()[0])
+                cursor.execute('UPDATE products SET quantity = %s - %s WHERE product_id = %s', (previous_quantity, quantity, product_id))
+                self.db.commit()
+            tools.throw_info('Order Confirmed Successfully')
+            self.total = 0.0
+            self.total_lbl.setText('{:.2f}    $'.format(self.total))    
+            self.clear(table)
+            self.refresh_category()
+        except:
+            tools.throw_error('Something Went Wrong')
     
     def logout(self):
+        if tools.throw_quetion('Logout', 'Are you sure want to Logout?') == 4194304 : return
         self.switch_window.emit()
         self.close()
             

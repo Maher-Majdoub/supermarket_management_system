@@ -23,14 +23,12 @@ class Admin(QtWidgets.QWidget):
         tm = time.localtime()
         self.expense_date.setDate(QDate(tm.tm_year, tm.tm_mon, tm.tm_mday))  #Current date set as default
         self.expense_search_date.setDate(QDate(tm.tm_year, tm.tm_mon, tm.tm_mday))
-        self.stats_btn.clicked.connect(lambda : self.switch_btn_clicked(self.stats_frame, self.stats_lbl))
         self.products_btn.clicked.connect(lambda : self.switch_btn_clicked(self.products_frame, self.products_lbl))
         self.categories_btn.clicked.connect(lambda : self.switch_btn_clicked(self.categories_frame, self.categories_lbl))
         self.users_btn.clicked.connect(lambda : self.switch_btn_clicked(self.users_frame, self.users_lbl))
         self.incomes_btn.clicked.connect(lambda : self.switch_btn_clicked(self.incomes_frame, self.incomes_lbl))
         self.expenses_btn.clicked.connect(lambda : self.switch_btn_clicked(self.expenses_frame, self.expenses_lbl))
-        self.logout_btn.clicked.connect(self.logout)
-        self.param.clicked.connect(lambda: self.throw_error('fech taaml'))
+        self.logout_btn.clicked.connect(self.logout_btn_clicked)
 
         #users frame
         self.users_clear_btn.clicked.connect(lambda: self.clear(self.users_frame))
@@ -63,7 +61,7 @@ class Admin(QtWidgets.QWidget):
         #incomes frame
         tm = time.localtime()
         self.incomes_date.setDate(datetime.datetime.now())
-        self.incomes_search_btn.clicked.connect(self.update_incomes_table)
+        self.incomes_date.dateTimeChanged.connect(self.update_incomes_table)
         self.incomes_table.selectionModel().selectionChanged.connect(lambda: self.new_income_selection(self.incomes_table.currentRow()))
         self.incomes_delete_btn.clicked.connect(self.delete_income)
         self.update_incomes_table()
@@ -72,11 +70,15 @@ class Admin(QtWidgets.QWidget):
         self.expense_add_btn.clicked.connect(self.add_expense)
         self.expense_update_btn.clicked.connect(self.update_expense)
         self.expense_delete_btn.clicked.connect(self.delete_expense)
-        self.expense_search_btn.clicked.connect(self.search_expense)
+        self.expense_search_date.dateTimeChanged.connect(self.search_expense)
         self.expense_clear_btn.clicked.connect(self.clear_expenses)
         self.expenses_table.selectionModel().selectionChanged.connect(lambda: self.new_expense_selection(self.expenses_table.currentRow()))
+        self.search_expense()
+        
 
-    
+    def logout_btn_clicked(self):
+        if tools.throw_quetion('Logout', 'Are you sure want to Logout?') == 4194304 : return
+        self.logout()
     def logout(self):
         self.switch_window.emit()
         self.close()
@@ -99,48 +101,53 @@ class Admin(QtWidgets.QWidget):
                 children.setText('')
           
     def search_user(self):
-        id = self.users_search_id.text()
-        if not tools.verify_id(id, 'ID') : 
-            self.users_search_id.setText('')
+        id = self.users_search_id.text().strip()
+        if id == '':
             self.update_users_table()
-            return
+        if not tools.verify_integer(id, 'ID') : return
         table = self.users_table
-        cursor = self.db.cursor()
-        cursor.execute("SELECT * FROM accounts WHERE account_id = %s", (id,))
-        acc = cursor.fetchone()
-        if acc != None:
-            if acc[3] == 'admin':
-                cursor.execute("SELECT * FROM admins WHERE account_id = %s", (id,))
-                infos = cursor.fetchone()
-            elif acc[3] == 'seller':
-                cursor.execute("SELECT * FROM sellers WHERE account_id = %s", (id,))
-                infos = cursor.fetchone()
+        try:
+            cursor = self.db.cursor()
+            cursor.execute("SELECT * FROM accounts WHERE account_id = %s", (id,))
+            acc = cursor.fetchone()
+            if acc != None:
+                if acc[3] == 'admin':
+                    cursor.execute("SELECT * FROM admins WHERE account_id = %s", (id,))
+                    infos = cursor.fetchone()
+                elif acc[3] == 'seller':
+                    cursor.execute("SELECT * FROM sellers WHERE account_id = %s", (id,))
+                    infos = cursor.fetchone()
+                elif acc[3] == 'none':
+                    tools.throw_error('Account Deleted')
+                    return
+                else:
+                    tools.throw_error('Something went wrong')
+                    return
+            
+                self.clear_table(table)
+                table.insertRow(0)
+                table.setItem(0 , 0, QTableWidgetItem(str(infos[0])))
+                table.setItem(0 , 1, QTableWidgetItem(infos[1]))
+                table.setItem(0 , 2, QTableWidgetItem(infos[2]))
+                table.setItem(0 , 3, QTableWidgetItem(infos[3].strftime('%Y-%m-%d')))
+                table.setItem(0 , 4, QTableWidgetItem(infos[4]))
+                table.setItem(0 , 5, QTableWidgetItem(format(infos[5], ".15g")))
+                table.setItem(0 , 6, QTableWidgetItem(infos[6]))
+                table.setItem(0 , 7, QTableWidgetItem(infos[7]))
+                table.setItem(0 , 8, QTableWidgetItem(acc[3]))
+                table.setItem(0 , 9, QTableWidgetItem(acc[1]))
+                table.setItem(0 , 10, QTableWidgetItem(acc[2]))
+                table.selectRow(0)
             else:
-                tools.throw_error('Something went wrong')
-                return
-        
-            self.clear_table(table)
-            table.insertRow(0)
-            table.setItem(0 , 0, QTableWidgetItem(str(infos[0])))
-            table.setItem(0 , 1, QTableWidgetItem(infos[1]))
-            table.setItem(0 , 2, QTableWidgetItem(infos[2]))
-            table.setItem(0 , 3, QTableWidgetItem(infos[3].strftime('%Y-%m-%d')))
-            table.setItem(0 , 4, QTableWidgetItem(infos[4]))
-            table.setItem(0 , 5, QTableWidgetItem(format(infos[5], ".15g")))
-            table.setItem(0 , 6, QTableWidgetItem(infos[6]))
-            table.setItem(0 , 7, QTableWidgetItem(infos[7]))
-            table.setItem(0 , 8, QTableWidgetItem(acc[3]))
-            table.setItem(0 , 9, QTableWidgetItem(acc[1]))
-            table.setItem(0 , 10, QTableWidgetItem(acc[2]))
-            table.selectRow(0)
-        else:
-            tools.throw_error(f'There\'s not an account with ID = {id}')      
-            self.users_search_id.setText('')  
-            self.update_users_table()
+                tools.throw_error(f'There\'s not an account with ID = {id}')      
+                self.users_search_id.setText('')  
+                self.update_users_table()
+        except:
+            tools.throw_error('Something Went Wrong')
                 
     def update_user(self):
-        selected_row = self.users_table.currentRow()
-        id = self.users_id.text()
+        if not tools.verify_entries(self.users_frame): return
+        id = self.users_id.text().strip()
         first_name = self.users_first_name.text()
         last_name = self.users_last_name.text()
         birth_date = datetime.datetime.strptime(self.users_birth_date.date().toString(Qt.ISODate), '%Y-%m-%d')
@@ -152,6 +159,7 @@ class Admin(QtWidgets.QWidget):
         password = self.users_password.text()
         role = self.users_role.currentText().lower()
         
+        if tools.throw_quetion('Update User', f'Are you sure want to update this user?') == 4194304 : return
         try:
             cursor = self.db.cursor()
             #getting the previous role
@@ -182,19 +190,15 @@ class Admin(QtWidgets.QWidget):
                     cursor.execute('DELETE FROM admins WHERE account_id = %s', (id,))
                     cursor.execute('INSERT INTO sellers VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                     self.db.commit()
+            tools.throw_info('User Updated Successfully')
             self.update_users_table()
-            self.users_table.selectRow(selected_row)
-        except Exception as e:
-            print("something went wrong")
-            print(e)
+            self.clear(self.users_frame)
+        except:
+            tools.throw_error('Something Went Wrong')
 
-
-
-    #add a users
+    #add a user
     def add_user(self):
-        #verify all inputs
-
-        #id = self.users_id.text()
+        if not tools.verify_entries(self.users_frame): return
         first_name = self.users_first_name.text()
         last_name = self.users_last_name.text()
         birth_date = datetime.datetime.strptime(self.users_birth_date.date().toString(Qt.ISODate), '%Y-%m-%d')
@@ -205,16 +209,20 @@ class Admin(QtWidgets.QWidget):
         user_name = self.users_user_name.text()
         password = self.users_password.text()
         role = self.users_role.currentText().lower()
-
-
+        if tools.throw_quetion('Add New User', f'Are you sure want to add a new user with Role = *{role}*') == 4194304 : return
+        
         try:
             cursor = self.db.cursor()
+            cursor.execute('SELECT * FROM accounts WHERE user_name = %s OR password = %s', (user_name, password))
+            r = cursor.fetchone()
+            if r: 
+                tools.throw_error('User Name or Password used in another account !')
+                return
             cursor.execute('SELECT MAX(account_id) FROM accounts')
             id = cursor.fetchone()[0]  + 1
             add_acc = 'INSERT INTO accounts VALUES (%s, %s, %s, %s)'        
             cursor.execute(add_acc,(id,user_name, password, role))
             
-
             if role == 'admin':
                 add_admin = 'INSERT INTO admins VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
                 cursor.execute(add_admin, (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
@@ -224,32 +232,41 @@ class Admin(QtWidgets.QWidget):
                 cursor.execute(add_seller, (id, first_name, last_name, birth_date, phone_number, salary, gender, adress))
                 self.db.commit()
             self.update_users_table()
-        except Exception as e:
-            print("something went wrong",e)
-
+            tools.throw_info(f'{role.capitalize()} added Successfully')
+        except:
+            tools.throw_error('Something Went Wrong')
 
     def delete_user(self):
-        #check if the acc is not this acc!
-
-        if self.users_id.text().strip() == '':
-            return
-
-        id = self.users_id.text()
-        if not(self.account_exist(id)): return
+        id = self.users_id.text().strip()
         
-        cursor = self.db.cursor(prepared=True)
-        cursor.execute("SELECT role FROM accounts WHERE (account_id = %s)", (id,))
-        role = cursor.fetchone()[0]
-        if role == 'admin':
-            cursor.execute('DELETE FROM admins WHERE (account_id = %s)', (id,))
-        elif role == 'seller':
-            cursor.execute('DELETE FROM sellers WHERE (account_id = %s)', (id,))
-        else:
+        if self.users_id.text().strip() == '':
+            tools.throw_error('Please select a user to delete it')
             return
-        cursor.execute('DELETE FROM accounts WHERE (account_id = %s)', (id,))
-        self.db.commit()
-        cursor = self.db.cursor()
-        self.update_users_table()
+        
+        current_acc = False
+        if id == str(self.id):
+            if tools.throw_quetion('Delete User', f'Are you sure want to delete your account?') == 4194304 : return
+            current_acc = True
+        else:
+            if tools.throw_quetion('Delete User', f'Are you sure want to delete this user?') == 4194304 : return
+        
+        try:
+            cursor = self.db.cursor()
+            cursor.execute("SELECT role FROM accounts WHERE (account_id = %s)", (id,))
+            role = cursor.fetchone()[0]
+            if role == 'admin':
+                cursor.execute('DELETE FROM admins WHERE (account_id = %s)', (id,))
+            elif role == 'seller':
+                cursor.execute('DELETE FROM sellers WHERE (account_id = %s)', (id,))
+            else:
+                return
+            cursor.execute('UPDATE accounts SET role = "none" WHERE (account_id = %s)', (id,))
+            self.db.commit()
+            tools.throw_info('Account Deleted Successfully')
+            if current_acc: self.logout()
+            self.update_users_table()
+        except:
+            tools.throw_error('Something Went Wrong')
      
     def clear_table(self, table):
         table.clearSelection()
@@ -259,16 +276,14 @@ class Admin(QtWidgets.QWidget):
 
     def update_users_table(self):
         table = self.users_table
-        self.clear_table(table)
         try:
             cursor = self.db.cursor()
             cursor.execute('SELECT * FROM admins JOIN accounts USING(account_id) UNION SELECT * FROM sellers JOIN accounts USING(account_id) ORDER BY account_id')
             results = cursor.fetchall()    
         except:
-            print("error")
+            tools.throw_error('Something Went Wrong')
             return
 
-        table = self.users_table
         self.clear_table(table)
         for result in results:
             rowPosition = table.rowCount()
@@ -285,7 +300,6 @@ class Admin(QtWidgets.QWidget):
             table.setItem(rowPosition , 9, QTableWidgetItem(result[8]))
             table.setItem(rowPosition , 10, QTableWidgetItem(result[9]))
 
-
     def new_selection(self, current_row):
         #display data from the selected row
         self.users_id.setText(self.users_table.item(current_row,0).text())
@@ -300,34 +314,35 @@ class Admin(QtWidgets.QWidget):
         self.users_user_name.setText(self.users_table.item(current_row,9).text().lower().capitalize())
         self.users_password.setText(self.users_table.item(current_row,10).text().lower().capitalize())
 
-
     def account_exist(self, id):
         return True
 
     def update_categories_table(self):
         table = self.categories_table
-        cursor = self.db.cursor()
-        cursor.execute('SELECT * FROM categories')
-        results = cursor.fetchall()
-        self.clear_table(table)
-        for result in results:
-            rowPosition = table.rowCount()
-            table.insertRow(rowPosition)
-            table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
-            table.setItem(rowPosition , 1, QTableWidgetItem(result[1]))
-            table.setItem(rowPosition , 2, QTableWidgetItem(result[2]))
-
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('SELECT * FROM categories')
+            results = cursor.fetchall()
+            self.clear_table(table)
+            for result in results:
+                rowPosition = table.rowCount()
+                table.insertRow(rowPosition)
+                table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+                table.setItem(rowPosition , 1, QTableWidgetItem(result[1]))
+                table.setItem(rowPosition , 2, QTableWidgetItem(result[2]))
+        except:
+            tools.throw_error('Something Went Wrong')
 
     def search_category(self):
         table = self.categories_table
+        category_id = self.category_search_id.text().strip()
         cursor = self.db.cursor()
-        category_id = self.category_search_id.text()
         if not tools.verify_id(category_id, 'Category ID'): 
             self.clear(self.categories_frame)
             self.update_categories_table()
             table.selectRow(0)
             return
-        if category_id.strip() =='':
+        if category_id =='':
             self.update_categories_table()
         else:
             try:
@@ -351,8 +366,7 @@ class Admin(QtWidgets.QWidget):
                 table.selectRow(0)
 
     def add_category(self):
-        if not tools.verify_entries(self.categories_frame):
-            return
+        if not tools.verify_entries(self.categories_frame): return
         if tools.throw_quetion('Add Category', 'Are you sure want to add this category?') == 4194304 : return
         name = self.category_name.text().strip()
         desc = self.category_description.toPlainText().strip()
@@ -380,14 +394,13 @@ class Admin(QtWidgets.QWidget):
         except:
             tools.throw_error('Something Went Wrong')
 
-
     def new_category_selection(self, current_row):
         self.category_id.setText(self.categories_table.item(current_row,0).text())
         self.category_name.setText(self.categories_table.item(current_row,1).text()) 
         self.category_description.setText(self.categories_table.item(current_row,2).text()) 
 
     def delete_category(self):
-        id = self.category_id.text()
+        id = self.category_id.text().strip()
         if id == '': 
             tools.throw_error('Please select a category to Delete it')
             return
@@ -396,7 +409,7 @@ class Admin(QtWidgets.QWidget):
         cursor.execute('SELECT * FROM products WHERE category_id = %s', (id,))
         r = cursor.fetchone()
         if r : 
-            tools.throw_error('Cannot delete this category because there\'s products with this category.. Delete those products first')
+            tools.throw_error('Cannot delete this category because there\'s products with this category.. Please Delete those products first')
             return
         try:
             cursor.execute('DELETE FROM categories WHERE category_id = %s', (id,))
@@ -407,7 +420,6 @@ class Admin(QtWidgets.QWidget):
             tools.throw_info('Category deleted Successfuly')
         except:
             tools.throw_error('Something Went Wrong!')
-
 
     def update_category(self):
         id = self.category_id.text()
@@ -429,51 +441,78 @@ class Admin(QtWidgets.QWidget):
         except:
             tools.throw_error('Something Went Wrong')
 
-    
     def update_products_table(self):
-        table = self.products_table
-        self.clear_table(table)
-        cursor = self.db.cursor()
-        cursor.execute('SELECT name FROM categories')
-        categories = cursor.fetchall()
-        self.product_category.clear()
-        cat = [categories[i][0] for i in range(len(categories))]
-        self.product_category.addItems(cat)
-        cursor.execute('SELECT * FROM products')
-        products = cursor.fetchall()
-        for product in products:
-            rowPosition = table.rowCount()
-            cursor.execute('SELECT name FROM categories WHERE category_id = %s', (int(product[1]),))
-            cat = cursor.fetchone()
-            table.insertRow(rowPosition)
-            table.setItem(rowPosition , 0, QTableWidgetItem(str(product[0])))
-            table.setItem(rowPosition , 1, QTableWidgetItem(product[2]))
-            table.setItem(rowPosition , 2, QTableWidgetItem(cat[0]))
-            table.setItem(rowPosition , 3, QTableWidgetItem(format(product[3], ".15g")))
-            table.setItem(rowPosition , 4, QTableWidgetItem(str(product[4])))
+        try:
+            table = self.products_table
+            self.clear_table(table)
+            cursor = self.db.cursor()
+            cursor.execute('SELECT name FROM categories')
+            categories = cursor.fetchall()
+            self.product_category.clear()
+            cat = [categories[i][0] for i in range(len(categories))]
+            self.product_category.addItems(cat)
+            cursor.execute('SELECT * FROM products')
+            products = cursor.fetchall()
+            for product in products:
+                rowPosition = table.rowCount()
+                cursor.execute('SELECT name FROM categories WHERE category_id = %s', (int(product[1]),))
+                cat = cursor.fetchone()
+                table.insertRow(rowPosition)
+                table.setItem(rowPosition , 0, QTableWidgetItem(str(product[0])))
+                table.setItem(rowPosition , 1, QTableWidgetItem(product[2]))
+                table.setItem(rowPosition , 2, QTableWidgetItem(cat[0]))
+                table.setItem(rowPosition , 3, QTableWidgetItem(format(product[3], ".15g")))
+                table.setItem(rowPosition , 4, QTableWidgetItem(str(product[4])))
+        except:
+            tools.throw_error('Something Went Wrong')
 
     def add_product(self):
-        id = self.product_id.text()
+        if not tools.verify_entries(self.products_frame):
+            return
+        if tools.throw_quetion('Add Product', 'Are you sure want to add this Product?') == 4194304 : return
         name = self.product_name.text()
         price = self.product_price.text()
         quantity = self.product_quantity.text()
         cat = self.product_category.currentText()
+        try:
+            cursor = self.db.cursor()
+            # checking if there's a product that has the same name in the db
+            cursor.execute('SELECT * FROM products WHERE name = %s', (name,))  
+            r = cursor.fetchone()
+            if r:  #if there's a category
+                tools.throw_error(f'There\'s a product named {name} already exists')     
+                return
+            
 
-        cursor = self.db.cursor()
-        cursor.execute('SELECT category_id FROM categories WHERE name LIKE (%s)', (cat,))
-        cat_id = cursor.fetchone()[0]
-        cursor.execute('INSERT INTO products VALUES (%s, %s, %s, %s, %s)', (id, cat_id, name, price, quantity))
-        self.db.commit()
-        self.clear(self.products_frame)
-        self.update_products_table()
-
+            #getting the id
+            cursor.execute('SELECT MAX(product_id) FROM products')
+            r = cursor.fetchone()
+            id = int(r[0]) + 1 if r else 1
+            cursor.execute('SELECT category_id FROM categories WHERE name LIKE (%s)', (cat,))
+            cat_id = cursor.fetchone()[0]
+            cursor.execute('INSERT INTO products VALUES (%s, %s, %s, %s, %s)', (id, cat_id, name, price, quantity))
+            self.db.commit()
+            self.clear(self.products_frame)
+            tools.throw_info('Product Added Successfully')
+            self.update_products_table()
+        except:
+            tools.throw_error('Something Went Wrong')
+            
     def delete_product(self):
-        id = self.product_id.text()
-        cursor = self.db.cursor()
-        cursor.execute('DELETE FROM products WHERE (product_id = %s)', (id,))
-        self.db.commit()
-        self.update_products_table()
-        self.clear(self.products_frame)
+        id = self.product_id.text().strip()
+        if id == '': 
+            tools.throw_error('Please select a product to Delete it')
+            return
+        if tools.throw_quetion('Delete Product', 'Are you sure want to Delete this Product?') == 4194304 : return
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('DELETE FROM products WHERE (product_id = %s)', (id,))
+            self.db.commit()
+            tools.throw_info('Product Deleted Successfully')
+            self.update_products_table()
+            self.clear(self.products_frame)
+        except:
+            tools.throw_error('Something Went Wrong')
     
     def new_product_selection(self, current_row):
         self.product_id.setText(self.products_table.item(current_row,0).text())
@@ -483,59 +522,82 @@ class Admin(QtWidgets.QWidget):
         self.product_quantity.setText(self.products_table.item(current_row, 4).text())
 
     def update_product(self):
-        id = self.product_id.text()
-        name = self.product_name.text()
-        price = self.product_price.text()
-        quantity = self.product_quantity.text()
-        cat = self.product_category.currentText()
-        cursor = self.db.cursor()
-        cursor.execute('SELECT category_id FROM categories WHERE name LIKE (%s)', (cat,))
-        cat_id = cursor.fetchone()[0]
-        cursor.execute('UPDATE products SET category_id = %s, name = %s, unit_price = %s, quantity = %s WHERE product_id = %s', (cat_id, name, price, quantity, id))
-        self.db.commit()
-        self.update_products_table()
+        id = self.product_id.text().strip()
+        if id == '': 
+            tools.throw_error('Please select a product to update it')
+            return
+        if tools.throw_quetion('Update Product', 'Are you sure want to Update this Product?') == 4194304 : return
+        if not tools.verify_entries(self.products_frame): return
+        name = self.product_name.text().strip()
+        price = self.product_price.text().strip()
+        quantity = self.product_quantity.text().strip()
+        cat = self.product_category.currentText().strip()
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('SELECT category_id FROM categories WHERE name LIKE (%s)', (cat,))
+            cat_id = cursor.fetchone()[0]
+            cursor.execute('UPDATE products SET category_id = %s, name = %s, unit_price = %s, quantity = %s WHERE product_id = %s', (cat_id, name, price, quantity, id))
+            self.db.commit()
+            tools.throw_info('Product Updated Successfully')
+            self.update_products_table()
+            self.clear(self.products_frame)
+            
+        except:
+            tools.throw_error('Something Went Wrong')
 
     def search_product(self):
         table = self.products_table
-        product_id = self.product_id.text().strip()
+        product_id = self.product_search_id.text().strip()
         if product_id  =='':
             self.update_products_table()
+            return
+        if not tools.verify_integer(product_id, 'Product ID') : return
         else:
-            cursor = self.db.cursor()
-            cursor.execute('SELECT * FROM products WHERE (product_id = %s)', (product_id,))
-            result = cursor.fetchone()
-            cat_id = result[1]
-            cursor.execute('SELECT name FROM categories WHERE category_id = %s', (cat_id,))
-            cat = cursor.fetchone()[0]
-            self.clear_table(table)
-            table.insertRow(0)
-            table.setItem(0 , 0, QTableWidgetItem(str(result[0])))       
-            table.setItem(0 , 1, QTableWidgetItem(result[2]))
-            table.setItem(0 , 2, QTableWidgetItem(cat))     
-            table.setItem(0 , 3, QTableWidgetItem(format(result[3], ".15g")))
-            table.setItem(0 , 4, QTableWidgetItem(str(result[4])))
+            try:
+                cursor = self.db.cursor()
+                cursor.execute('SELECT * FROM products WHERE (product_id = %s)', (product_id,))
+                result = cursor.fetchone()
+                if result:
+                    cat_id = result[1]
+                    cursor.execute('SELECT name FROM categories WHERE category_id = %s', (cat_id,))
+                    cat = cursor.fetchone()[0]
+                    self.clear_table(table)
+                    table.insertRow(0)
+                    table.setItem(0 , 0, QTableWidgetItem(str(result[0])))       
+                    table.setItem(0 , 1, QTableWidgetItem(result[2]))
+                    table.setItem(0 , 2, QTableWidgetItem(cat))     
+                    table.setItem(0 , 3, QTableWidgetItem(format(result[3], ".15g")))
+                    table.setItem(0 , 4, QTableWidgetItem(str(result[4])))
+                else:
+                    tools.throw_error(f'There\'s no product with ID = {product_id}')
+            except:
+                tools.throw_error('Something Went Wrong')
 
     def update_incomes_table(self):
-        cursor = self.db.cursor()
-        table = self.incomes_table
-        date = datetime.datetime.strptime(self.incomes_date.date().toString(Qt.ISODate), '%Y-%m-%d')
-        cursor.execute('SELECT sell_id, account_id, product_id, quantity, unit_price FROM sells WHERE date = %s', (date,))
-        results = cursor.fetchall()
-        if results:  #if result not None
-            self.clear_table(table)
-            for result in results:
-                rowPosition = table.rowCount()
-                table.insertRow(rowPosition)
-                table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
-                table.setItem(rowPosition , 1, QTableWidgetItem(str(result[1])))
-                table.setItem(rowPosition , 2, QTableWidgetItem(str(result[2])))
-                table.setItem(rowPosition , 3, QTableWidgetItem(str(result[3])))
-                table.setItem(rowPosition , 4, QTableWidgetItem(str(result[4])))
-                table.setItem(rowPosition , 5, QTableWidgetItem(str(result[3] * result[4])))
-            table.selectRow(0)
-            self.new_income_selection(0)
-        else:
-            self.clear_table(table)
+        try:
+            table = self.incomes_table
+            date = datetime.datetime.strptime(self.incomes_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+            cursor = self.db.cursor()
+            cursor.execute('SELECT sell_id, account_id, product_id, quantity, unit_price FROM sells WHERE date = %s', (date,))
+            results = cursor.fetchall()
+            if results:  #if result not None
+                self.clear_table(table)
+                for result in results:
+                    rowPosition = table.rowCount()
+                    table.insertRow(rowPosition)
+                    table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+                    table.setItem(rowPosition , 1, QTableWidgetItem(str(result[1])))
+                    table.setItem(rowPosition , 2, QTableWidgetItem(str(result[2])))
+                    table.setItem(rowPosition , 3, QTableWidgetItem(str(result[3])))
+                    table.setItem(rowPosition , 4, QTableWidgetItem(str(result[4])))
+                    table.setItem(rowPosition , 5, QTableWidgetItem(str(result[3] * result[4])))
+                table.selectRow(0)
+                self.new_income_selection(0)
+            else:
+                self.clear_table(table)
+            self.update_total_incomes()
+        except:
+            tools.throw_error('Something Went Wrong')
     
     def new_income_selection(self, current_row):
         table = self.incomes_table
@@ -548,76 +610,103 @@ class Admin(QtWidgets.QWidget):
         
     def delete_income(self):
         id = self.incomes_id.text().strip()
-        if id != '':
+        if id == '':
+            tools.throw_error('Please select an income to delete it')
+            return
+        if tools.throw_quetion('Delete income', 'Are you sure want to Delete this income?') == 4194304 : return
+        try:
             cursor = self.db.cursor()
             cursor.execute('DELETE FROM sells WHERE sell_id = %s', (id,))
             self.db.commit()
+            tools.throw_info('Income Deleted Successfully')
             self.update_incomes_table()
-            
-        else :
-            print('please enter ID')
-            
-    
-
+        except:
+            tools.throw_error('Something Went Wrong')
+                    
     def add_expense(self):
-        cursor = self.db.cursor()
-        cursor.execute('SELECT MAX(expense_id) FROM expenses')
-        result = cursor.fetchone()
-        if result[0] != None: 
-            expense_id = int(result[0]) + 1 
-        else:
-            expense_id = 1  
-        admin_id = self.id
-        ammount = int(self.expense_ammount.text())
-        type_ = self.expense_type.currentText()
-        date = datetime.datetime.strptime(self.expense_date.date().toString(Qt.ISODate), '%Y-%m-%d')
-        desc = self.expense_description.toPlainText().strip()
-        cursor.execute('INSERT INTO expenses VALUES (%s, %s, %s, %s, %s, %s)', (expense_id, admin_id, ammount, type_, date, desc if desc != '' else None))
-        self.db.commit()
-        self.search_expense()
+        if not tools.verify_entries(self.expenses_frame): return
+        if tools.throw_quetion('Add expense', 'Are you sure want to add this expense?') == 4194304 : return    
+        try:   
+            cursor = self.db.cursor()
+            cursor.execute('SELECT MAX(expense_id) FROM expenses')
+            result = cursor.fetchone() 
+            expense_id = int(result[0]) + 1 if result else 1
+            admin_id = self.id
+            ammount = float(self.expense_ammount.text().strip())
+            type_ = self.expense_type.currentText()
+            date = datetime.datetime.strptime(self.expense_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+            desc = self.expense_description.toPlainText().strip()
+            cursor.execute('INSERT INTO expenses VALUES (%s, %s, %s, %s, %s, %s)', (expense_id, admin_id, ammount, type_, date, desc if desc != '' else None))
+            self.db.commit()
+            tools.throw_info('Expense Added Successfully')
+            self.search_expense()
+        except:
+            tools.throw_error('Something Went Wrong')
         
     def update_expense(self):
-        cursor = self.db.cursor()
+        if not tools.verify_entries(self.expenses_frame): return
         expense_id = self.expense_id.text()
-        ammount = int(self.expense_ammount.text())
+        ammount = self.expense_ammount.text().strip()
         type_ = self.expense_type.currentText()
         date = datetime.datetime.strptime(self.expense_date.date().toString(Qt.ISODate), '%Y-%m-%d')
+        date = datetime.datetime.strptime(self.expense_date.date().toString(Qt.ISODate), '%Y-%m-%d')
         desc = self.expense_description.toPlainText().strip()
-        cursor.execute('UPDATE expenses SET ammount = %s, type = %s, date = %s, description = %s WHERE expense_id = %s', (ammount, type_, date, desc, expense_id))
-        self.db.commit()
-        self.search_expense()
+        if tools.throw_quetion('Update expense', 'Are you sure want to update this expense?') == 4194304 : return  
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('UPDATE expenses SET ammount = %s, type = %s, date = %s, description = %s WHERE expense_id = %s', (ammount, type_, date, desc, expense_id))
+            self.db.commit()
+            tools.throw_info('Expense Updated Successfully')
+            self.search_expense()
+        except:
+            tools.throw_error('Something Went Wrong')
         
     def delete_expense(self):
-        cursor = self.db.cursor()
-        expense_id = self.expense_id.text()
-        cursor.execute('DELETE FROM expenses WHERE expense_id = %s', (expense_id,))
-        self.db.commit()
-        self.search_expense()
+        expense_id = self.expense_id.text().strip()
+        if expense_id == '':
+            tools.throw_error('Please Select an expense to delete it')
+            return
+        
+        if tools.throw_quetion('Delete expense', 'Are you sure want to delete this expense?') == 4194304 : return  
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('DELETE FROM expenses WHERE expense_id = %s', (expense_id,))
+            self.db.commit()
+            tools.throw_info('Expense Deleted Successfully')
+            self.search_expense()
+            
+        except:
+            tools.throw_error('Something Went Wrong')
         
     def search_expense(self):
-        cursor = self.db.cursor()
-        table = self.expenses_table
-        date = self.expense_search_date.date().toPyDate()
-        year = date.year
-        month = date.month
-        
-        cursor.execute('SELECT * FROM expenses WHERE YEAR(date) = %s AND MONTH(date) = %s', (year, month))
-        results = cursor.fetchall()
-        if results:
-            self.clear_table(table)
-            for result in results:
-                rowPosition = table.rowCount()
-                table.insertRow(rowPosition)
-                table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
-                table.setItem(rowPosition , 1, QTableWidgetItem(str(result[1])))
-                table.setItem(rowPosition , 2, QTableWidgetItem(str(result[2])))
-                table.setItem(rowPosition , 3, QTableWidgetItem(str(result[3])))
-                table.setItem(rowPosition , 4, QTableWidgetItem(str(result[4])))
-                table.setItem(rowPosition , 5, QTableWidgetItem(str(result[5])))
-            table.selectRow(0)
-        else:
-            self.clear_table(table)
-            self.clear(self.expenses_frame)
+        try:
+            cursor = self.db.cursor()
+            table = self.expenses_table
+            date = self.expense_search_date.date().toPyDate()
+            year = date.year
+            month = date.month
+            
+            cursor.execute('SELECT * FROM expenses WHERE YEAR(date) = %s AND MONTH(date) = %s', (year, month))
+            results = cursor.fetchall()
+            if results:
+                self.clear_table(table)
+                for result in results:
+                    rowPosition = table.rowCount()
+                    table.insertRow(rowPosition)
+                    table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+                    table.setItem(rowPosition , 1, QTableWidgetItem(str(result[1])))
+                    table.setItem(rowPosition , 2, QTableWidgetItem(str(result[2])))
+                    table.setItem(rowPosition , 3, QTableWidgetItem(str(result[3])))
+                    table.setItem(rowPosition , 4, QTableWidgetItem(str(result[4])))
+                    table.setItem(rowPosition , 5, QTableWidgetItem(str(result[5])))
+                table.selectRow(0)
+            else:
+                self.clear_table(table)
+                self.clear(self.expenses_frame)
+            self.update_total_expenses()
+        except Exception as e:
+            print(e)
+            tools.throw_error('Something Went wrong')
                 
     def new_expense_selection(self, current_row):
         table = self.expenses_table
@@ -631,13 +720,20 @@ class Admin(QtWidgets.QWidget):
     def clear_expenses(self):
         self.clear_table(self.expenses_table)
         self.clear(self.expenses_frame)
+    
+    def update_total_expenses(self):
+        total = 0
+        table = self.expenses_table
+        for i in range(table.rowCount()):
+            total += float(table.item(i, 2).text())
         
-
-    def throw_error(self, message):
-        msg = QMessageBox() 
-        msg.setIcon(QMessageBox.Warning)
-        msg.setText(message)
-        msg.setWindowTitle('Warning')
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.exec_()
+        self.total_expenses_lbl.setText(str(total) + '  $')
+    
+    def update_total_incomes(self):
+        total = 0
+        table = self.incomes_table
+        for i in range(table.rowCount()):
+            total += float(table.item(i, 5).text())
+        
+        self.total_incomes_lbl.setText(str(total) + '  $')
 

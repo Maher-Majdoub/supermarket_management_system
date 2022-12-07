@@ -26,7 +26,12 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1232, 835)
+        Form.resize(1230, 835)
+        Form.setMinimumSize(QSize(1230, 835))
+        Form.setMaximumSize(QSize(1230, 835))
+        icon = QIcon()
+        icon.addFile(u":/icons/seller.png", QSize(), QIcon.Normal, QIcon.Off)
+        Form.setWindowIcon(icon)
         Form.setStyleSheet(u"QWiget{\n"
 "	background-color: #fff;\n"
 "}\n"
@@ -56,6 +61,21 @@ class Ui_Form(object):
 "	color: #154c79;\n"
 "	font: bold;\n"
 "	font-size: 16px;\n"
+"}\n"
+"QlineEdit{\n"
+"	color: #154c79;\n"
+"	font: bold;\n"
+"	font-size: 16px;\n"
+"}\n"
+"QTableWidget{\n"
+"	alternate-background-color: rgba(21, 76, 121, 120);\n"
+"	background-color: rgba(21, 76, 121, 80);\n"
+"}\n"
+"QTableWidget[enabled = \"false\"]{\n"
+"	color: #000;\n"
+"	alternate-background-color: rgba(21, 76, 121, 120);\n"
+"	background-color: rgba(21, 7"
+                        "6, 121, 80);\n"
 "}")
         self.groupBox = QGroupBox(Form)
         self.groupBox.setObjectName(u"groupBox")
@@ -83,18 +103,30 @@ class Ui_Form(object):
         self.category = QComboBox(Form)
         self.category.setObjectName(u"category")
         self.category.setGeometry(QRect(130, 200, 221, 31))
+        self.category.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
         self.label_4 = QLabel(Form)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(30, 260, 71, 31))
         self.product = QComboBox(Form)
         self.product.setObjectName(u"product")
         self.product.setGeometry(QRect(130, 260, 221, 31))
+        self.product.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
         self.label_5 = QLabel(Form)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(30, 320, 81, 31))
         self.unit_price = QLineEdit(Form)
         self.unit_price.setObjectName(u"unit_price")
         self.unit_price.setGeometry(QRect(130, 320, 221, 31))
+        self.unit_price.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
         self.unit_price.setReadOnly(True)
         self.label_6 = QLabel(Form)
         self.label_6.setObjectName(u"label_6")
@@ -102,6 +134,10 @@ class Ui_Form(object):
         self.quantity = QSpinBox(Form)
         self.quantity.setObjectName(u"quantity")
         self.quantity.setGeometry(QRect(130, 380, 221, 31))
+        self.quantity.setStyleSheet(u"border: none;\n"
+"border-bottom: 3px solid #154c79;\n"
+"color: #154c79;\n"
+"font-size: 18px;")
         self.quantity.setMinimum(1)
         self.quantity.setMaximum(9999)
         self.quantity.setValue(1)
@@ -124,7 +160,20 @@ class Ui_Form(object):
         self.products_table.setObjectName(u"products_table")
         self.products_table.setEnabled(True)
         self.products_table.setGeometry(QRect(30, 480, 321, 341))
+        font1 = QFont()
+        font1.setPointSize(12)
+        self.products_table.setFont(font1)
+        self.products_table.setMouseTracking(False)
+        self.products_table.setAutoFillBackground(True)
+        self.products_table.setInputMethodHints(Qt.ImhNone)
+        self.products_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.products_table.setTabKeyNavigation(True)
+        self.products_table.setDragDropOverwriteMode(True)
+        self.products_table.setAlternatingRowColors(True)
         self.products_table.setSelectionMode(QAbstractItemView.NoSelection)
+        self.products_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.products_table.setTextElideMode(Qt.ElideNone)
+        self.products_table.setWordWrap(True)
         self.products_table.horizontalHeader().setMinimumSectionSize(56)
         self.products_table.horizontalHeader().setDefaultSectionSize(106)
         self.products_table.verticalHeader().setVisible(False)
@@ -140,10 +189,11 @@ class Ui_Form(object):
         __qtablewidgetitem6 = QTableWidgetItem()
         self.orders_table.setHorizontalHeaderItem(3, __qtablewidgetitem6)
         self.orders_table.setObjectName(u"orders_table")
-        self.orders_table.setGeometry(QRect(370, 20, 651, 801))
-        font1 = QFont()
-        font1.setPointSize(7)
+        self.orders_table.setGeometry(QRect(370, 20, 651, 751))
         self.orders_table.setFont(font1)
+        self.orders_table.setAutoFillBackground(True)
+        self.orders_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.orders_table.setAlternatingRowColors(True)
         self.orders_table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.orders_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.orders_table.horizontalHeader().setDefaultSectionSize(162)
@@ -151,7 +201,7 @@ class Ui_Form(object):
         self.orders_table.verticalHeader().setDefaultSectionSize(40)
         self.confirm_btn = QPushButton(Form)
         self.confirm_btn.setObjectName(u"confirm_btn")
-        self.confirm_btn.setGeometry(QRect(1100, 590, 111, 41))
+        self.confirm_btn.setGeometry(QRect(1100, 730, 111, 41))
         self.confirm_btn.setFont(font)
         self.label_7 = QLabel(Form)
         self.label_7.setObjectName(u"label_7")
@@ -175,7 +225,7 @@ class Ui_Form(object):
         self.date.setAlignment(Qt.AlignCenter)
         self.delete_btn = QPushButton(Form)
         self.delete_btn.setObjectName(u"delete_btn")
-        self.delete_btn.setGeometry(QRect(1030, 740, 101, 41))
+        self.delete_btn.setGeometry(QRect(910, 790, 111, 31))
         self.delete_btn.setFont(font)
         self.total_lbl = QLabel(Form)
         self.total_lbl.setObjectName(u"total_lbl")
@@ -200,7 +250,7 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"Seller", None))
         self.groupBox.setTitle("")
         self.label.setText("")
         self.seller_name.setText(QCoreApplication.translate("Form", u"seller name here", None))
@@ -224,7 +274,7 @@ class Ui_Form(object):
         ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Unit Price", None));
         ___qtablewidgetitem6 = self.orders_table.horizontalHeaderItem(3)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Quantity", None));
-        self.confirm_btn.setText(QCoreApplication.translate("Form", u"confirm", None))
+        self.confirm_btn.setText(QCoreApplication.translate("Form", u"Confirm", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"Total:", None))
         self.label_8.setText("")
         self.date.setText("")
