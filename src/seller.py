@@ -1,9 +1,7 @@
 from . import tools
-from .style_sheets import *
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem
 import time, datetime
-
 
 
 class Seller(QtWidgets.QWidget):
@@ -31,40 +29,52 @@ class Seller(QtWidgets.QWidget):
         self.category.currentTextChanged.connect(self.refresh_category)
 
     def load_categories(self):
-        cursor = self.db.cursor()
-        cursor.execute('SELECT name FROM categories')
-        results = cursor.fetchall()
-        categories = [result[0] for result in results]
-        self.category.addItems(categories)
-        self.update()
-        self.product_changed()
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('SELECT name FROM categories')
+            results = cursor.fetchall()
+            if results:
+                categories = [result[0] for result in results]
+                self.category.addItems(categories)
+                self.update()
+                self.product_changed()
+        except:
+            tools.throw_error('Something Went Wrong')
 
     def update(self):
-        cat = self.category.currentText()
-        cursor = self.db.cursor()
-        cursor.execute('select category_id from categories where name = %s', (cat,))
-        cat_id = cursor.fetchone()[0]
-        cursor.execute('select name from products where category_id = %s', (cat_id,))
-        results = cursor.fetchall()
-        products = [result[0] for result in results]
-        self.product.clear()
-        self.product.addItems(products)
+        try:
+            cat = self.category.currentText()
+            cursor = self.db.cursor()
+            cursor.execute('select category_id from categories where name = %s', (cat,))
+            cat_id = cursor.fetchone()[0]
+            cursor.execute('select name from products where category_id = %s', (cat_id,))
+            results = cursor.fetchall()
+            products = [result[0] for result in results]
+            self.product.clear()
+            self.product.addItems(products)
+        except:
+            tools.throw_info('Something Went Wrong')
 
     def product_changed(self):
-        cursor = self.db.cursor()
-        cursor.execute('SELECT unit_price, quantity FROM products WHERE name = %s', (self.product.currentText(),))
-
-        result = cursor.fetchone()
-        if result:
-            self.unit_price.setText(str(result[0]))
-            self.quantity.setMaximum(int(result[1]))
-            self.quantity.setValue(1) if int(result[1]) != 0 else 0
+        try:
+            cursor = self.db.cursor()
+            cursor.execute('SELECT unit_price, quantity FROM products WHERE name = %s', (self.product.currentText(),))
+            result = cursor.fetchone()
+            if result:
+                self.unit_price.setText(str(result[0]))
+                self.quantity.setMaximum(int(result[1]))
+                self.quantity.setValue(1) if int(result[1]) != 0 else 0
+        except:
+            tools.throw_info('Something Went Wrong')
     
     def add_order(self):
         category = self.category.currentText()
         product = self.product.currentText()
         unit_price = self.unit_price.text()
         quantity = self.quantity.value()
+        if product == '':
+            tools.throw_error('Please Select a Product')
+            return
         if quantity == 0:
             tools.throw_error('Cannot add an order with quantity = 0')
             return
@@ -91,25 +101,28 @@ class Seller(QtWidgets.QWidget):
         self.total_lbl.setText('{:.2f}    $'.format(self.total))
         
     def refresh_category(self):
-        table = self.products_table
-        category = self.category.currentText()
-        cursor = self.db.cursor()
-        cursor.execute('SELECT category_id FROM categories WHERE name = %s', (category ,))
-        result = cursor.fetchone()
-        if result:
-            cursor.execute('SELECT name, unit_price, quantity FROM products WHERE category_id = %s', (result[0],))
-            products = cursor.fetchall()
-            if products:
-                self.clear(table)
-                for product in products:
-                    row_position = table.rowCount()
-                    table.insertRow(row_position)
-                    table.setItem(row_position, 0, QTableWidgetItem(product[0]))
-                    table.setItem(row_position, 1, QTableWidgetItem(format(product[1], ".15g")))
-                    table.setItem(row_position, 2, QTableWidgetItem(str(product[2])))
-            else:
-                self.quantity.setValue(0)
-                self.clear(table)
+        try:
+            table = self.products_table
+            category = self.category.currentText()
+            cursor = self.db.cursor()
+            cursor.execute('SELECT category_id FROM categories WHERE name = %s', (category ,))
+            result = cursor.fetchone()
+            if result:
+                cursor.execute('SELECT name, unit_price, quantity FROM products WHERE category_id = %s', (result[0],))
+                products = cursor.fetchall()
+                if products:
+                    self.clear(table)
+                    for product in products:
+                        row_position = table.rowCount()
+                        table.insertRow(row_position)
+                        table.setItem(row_position, 0, QTableWidgetItem(product[0]))
+                        table.setItem(row_position, 1, QTableWidgetItem(format(product[1], ".15g")))
+                        table.setItem(row_position, 2, QTableWidgetItem(str(product[2])))
+                else:
+                    self.quantity.setValue(0)
+                    self.clear(table)
+        except:
+            tools.throw_info('Something Went Wrong')
                     
     def clear(self,table):
         table.clearSelection()
@@ -163,7 +176,4 @@ class Seller(QtWidgets.QWidget):
     def logout(self):
         if tools.throw_quetion('Logout', 'Are you sure want to Logout?') == 4194304 : return
         self.switch_window.emit()
-        self.close()
-            
-        
-            
+        self.close()  

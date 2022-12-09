@@ -7,22 +7,15 @@ the project is not finished yet
 
 #imports
 import sys
+from src import tools
 from src.admin import Admin
 from src.seller import Seller
 from src.login import Login
 from gui.icons import icons
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
-import sys
 import mysql.connector
 
-#connecting to db
-mydb = mysql.connector.connect(
-    host = 'localhost',
-    user = 'root',
-    passwd = 'admin',
-    database = 'mydb'
-)
 
 class Controller:
     def check_entries(x,y): #verfying the inputs
@@ -78,13 +71,28 @@ class Controller:
             self.seller_panel.show()     
             self.login.close()
             self.seller_panel.switch_window.connect(self.show_login)
-        elif role == 'none':  #invalid user_name or password
-            print('acc deleted')
         else:
-            print('invalid role')
+            tools.throw_error('Invalid User Name or Password')
+ 
+def connect_to_db():
+    #connecting to db
+    try:
+        mydb = mysql.connector.connect(
+            host = 'localhost',
+            user = 'maher',
+            password = '*Zyw2Z(x28LJ)6Kq',
+            database = 'mydb'
+        )
+        return mydb
+    except:
+        app = QtWidgets.QApplication(sys.argv)
+        tools.throw_error('Error Establishing a Database Connection')
+        sys.exit(app.exec_())
         
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    controller = Controller()
-    controller.show_login()
-    sys.exit(app.exec_())
+    mydb = connect_to_db()
+    if mydb:  
+        app = QtWidgets.QApplication(sys.argv)
+        controller = Controller()
+        controller.show_login()
+        sys.exit(app.exec_())

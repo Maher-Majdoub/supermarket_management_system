@@ -6,9 +6,6 @@ from PyQt5.QtCore import QDate, Qt
 from .style_sheets import *
 
 
-
-
-
 class Admin(QtWidgets.QWidget):
     switch_window = QtCore.pyqtSignal()
     def __init__(self, db,id, name):
@@ -260,7 +257,7 @@ class Admin(QtWidgets.QWidget):
                 cursor.execute('DELETE FROM sellers WHERE (account_id = %s)', (id,))
             else:
                 return
-            cursor.execute('UPDATE accounts SET role = "none" WHERE (account_id = %s)', (id,))
+            cursor.execute('DELETE FROM accounts WHERE (account_id = %s)', (id,))
             self.db.commit()
             tools.throw_info('Account Deleted Successfully')
             if current_acc: self.logout()
@@ -283,22 +280,23 @@ class Admin(QtWidgets.QWidget):
         except:
             tools.throw_error('Something Went Wrong')
             return
-
+        
         self.clear_table(table)
-        for result in results:
-            rowPosition = table.rowCount()
-            table.insertRow(rowPosition)
-            table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
-            table.setItem(rowPosition , 1, QTableWidgetItem(result[1]))
-            table.setItem(rowPosition , 2, QTableWidgetItem(result[2]))
-            table.setItem(rowPosition , 3, QTableWidgetItem(result[3].strftime('%Y-%m-%d')))
-            table.setItem(rowPosition , 4, QTableWidgetItem(result[4]))
-            table.setItem(rowPosition , 5, QTableWidgetItem(format(result[5], ".15g")))
-            table.setItem(rowPosition , 6, QTableWidgetItem(result[6]))
-            table.setItem(rowPosition , 7, QTableWidgetItem(result[7]))
-            table.setItem(rowPosition , 8, QTableWidgetItem(result[10]))
-            table.setItem(rowPosition , 9, QTableWidgetItem(result[8]))
-            table.setItem(rowPosition , 10, QTableWidgetItem(result[9]))
+        if results:
+            for result in results:
+                rowPosition = table.rowCount()
+                table.insertRow(rowPosition)
+                table.setItem(rowPosition , 0, QTableWidgetItem(str(result[0])))
+                table.setItem(rowPosition , 1, QTableWidgetItem(result[1]))
+                table.setItem(rowPosition , 2, QTableWidgetItem(result[2]))
+                table.setItem(rowPosition , 3, QTableWidgetItem(result[3].strftime('%Y-%m-%d')))
+                table.setItem(rowPosition , 4, QTableWidgetItem(result[4]))
+                table.setItem(rowPosition , 5, QTableWidgetItem(format(result[5], ".15g")))
+                table.setItem(rowPosition , 6, QTableWidgetItem(result[6]))
+                table.setItem(rowPosition , 7, QTableWidgetItem(result[7]))
+                table.setItem(rowPosition , 8, QTableWidgetItem(result[10]))
+                table.setItem(rowPosition , 9, QTableWidgetItem(result[8]))
+                table.setItem(rowPosition , 10, QTableWidgetItem(result[9]))
 
     def new_selection(self, current_row):
         #display data from the selected row
@@ -313,10 +311,8 @@ class Admin(QtWidgets.QWidget):
         self.users_role.setCurrentText(self.users_table.item(current_row,8).text().lower().capitalize())
         self.users_user_name.setText(self.users_table.item(current_row,9).text().lower().capitalize())
         self.users_password.setText(self.users_table.item(current_row,10).text().lower().capitalize())
-
-    def account_exist(self, id):
-        return True
-
+        
+        
     def update_categories_table(self):
         table = self.categories_table
         try:
@@ -384,7 +380,7 @@ class Admin(QtWidgets.QWidget):
             #getting the id
             cursor.execute('SELECT MAX(category_id) FROM categories')
             r = cursor.fetchone()
-            id = int(r[0]) + 1 if r else 1
+            id = int(r[0]) + 1 if r[0] else 1
             # inserting the category
             cursor.execute('INSERT INTO categories VALUES (%s, %s, %s)', (id, name, desc))
             self.db.commit()
@@ -453,16 +449,17 @@ class Admin(QtWidgets.QWidget):
             self.product_category.addItems(cat)
             cursor.execute('SELECT * FROM products')
             products = cursor.fetchall()
-            for product in products:
-                rowPosition = table.rowCount()
-                cursor.execute('SELECT name FROM categories WHERE category_id = %s', (int(product[1]),))
-                cat = cursor.fetchone()
-                table.insertRow(rowPosition)
-                table.setItem(rowPosition , 0, QTableWidgetItem(str(product[0])))
-                table.setItem(rowPosition , 1, QTableWidgetItem(product[2]))
-                table.setItem(rowPosition , 2, QTableWidgetItem(cat[0]))
-                table.setItem(rowPosition , 3, QTableWidgetItem(format(product[3], ".15g")))
-                table.setItem(rowPosition , 4, QTableWidgetItem(str(product[4])))
+            if products:
+                for product in products:
+                    rowPosition = table.rowCount()
+                    cursor.execute('SELECT name FROM categories WHERE category_id = %s', (int(product[1]),))
+                    cat = cursor.fetchone()
+                    table.insertRow(rowPosition)
+                    table.setItem(rowPosition , 0, QTableWidgetItem(str(product[0])))
+                    table.setItem(rowPosition , 1, QTableWidgetItem(product[2]))
+                    table.setItem(rowPosition , 2, QTableWidgetItem(cat[0]))
+                    table.setItem(rowPosition , 3, QTableWidgetItem(format(product[3], ".15g")))
+                    table.setItem(rowPosition , 4, QTableWidgetItem(str(product[4])))
         except:
             tools.throw_error('Something Went Wrong')
 
@@ -487,7 +484,7 @@ class Admin(QtWidgets.QWidget):
             #getting the id
             cursor.execute('SELECT MAX(product_id) FROM products')
             r = cursor.fetchone()
-            id = int(r[0]) + 1 if r else 1
+            id = int(r[0]) + 1 if r[0] else 1
             cursor.execute('SELECT category_id FROM categories WHERE name LIKE (%s)', (cat,))
             cat_id = cursor.fetchone()[0]
             cursor.execute('INSERT INTO products VALUES (%s, %s, %s, %s, %s)', (id, cat_id, name, price, quantity))
@@ -630,7 +627,7 @@ class Admin(QtWidgets.QWidget):
             cursor = self.db.cursor()
             cursor.execute('SELECT MAX(expense_id) FROM expenses')
             result = cursor.fetchone() 
-            expense_id = int(result[0]) + 1 if result else 1
+            expense_id = int(result[0]) + 1 if result[0] else 1
             admin_id = self.id
             ammount = float(self.expense_ammount.text().strip())
             type_ = self.expense_type.currentText()
@@ -704,8 +701,7 @@ class Admin(QtWidgets.QWidget):
                 self.clear_table(table)
                 self.clear(self.expenses_frame)
             self.update_total_expenses()
-        except Exception as e:
-            print(e)
+        except:
             tools.throw_error('Something Went wrong')
                 
     def new_expense_selection(self, current_row):

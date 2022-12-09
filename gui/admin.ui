@@ -32,7 +32,7 @@
    <string>Admin</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="icons/icons.qrc">
     <normaloff>:/icons/admin.png</normaloff>:/icons/admin.png</iconset>
   </property>
   <property name="statusTip">
@@ -91,7 +91,7 @@ QFrame[statusTip = &quot;option&quot;][enabled = &quot;false&quot;]{
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/icons/admin.png</pixmap>
+     <pixmap resource="icons/icons.qrc">:/icons/admin.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -595,7 +595,7 @@ QComboBox::down-arrow {
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>:/icons/products_c.png</pixmap>
+      <pixmap resource="icons/icons.qrc">:/icons/products_c.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -698,7 +698,7 @@ font: bold;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>:/icons/categories_c.png</pixmap>
+      <pixmap resource="icons/icons.qrc">:/icons/categories_c.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1135,6 +1135,9 @@ font-size: 18px;</string>
      <property name="accelerated">
       <bool>false</bool>
      </property>
+     <property name="displayFormat">
+      <string>d/M/yyyy</string>
+     </property>
      <property name="calendarPopup">
       <bool>true</bool>
      </property>
@@ -1569,7 +1572,7 @@ font-size: 18px;</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>:/icons/employee_c.png</pixmap>
+      <pixmap resource="icons/icons.qrc">:/icons/employee_c.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1903,7 +1906,7 @@ font-size: 18px;</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>:/icons/sellings_c.png</pixmap>
+      <pixmap resource="icons/icons.qrc">:/icons/sellings_c.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -2197,7 +2200,7 @@ font-size: 18px;</string>
       <number>6</number>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>false</bool>
@@ -2412,6 +2415,9 @@ font-size: 18px;</string>
      <property name="accelerated">
       <bool>false</bool>
      </property>
+     <property name="displayFormat">
+      <string>d/M/yyyy</string>
+     </property>
      <property name="calendarPopup">
       <bool>true</bool>
      </property>
@@ -2470,7 +2476,7 @@ font-size: 18px;</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>:/icons/bills_c.png</pixmap>
+      <pixmap resource="icons/icons.qrc">:/icons/bills_c.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -2853,6 +2859,9 @@ font-size: 18px;</string>
      <property name="accelerated">
       <bool>false</bool>
      </property>
+     <property name="displayFormat">
+      <string>d/M/yyyy</string>
+     </property>
      <property name="calendarPopup">
       <bool>true</bool>
      </property>
@@ -3074,7 +3083,7 @@ font-size: 18px;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/products.png</pixmap>
+        <pixmap resource="icons/icons.qrc">:/icons/products.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -3202,7 +3211,7 @@ background-color: rgba(0,0,0,0);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/categories.png</pixmap>
+        <pixmap resource="icons/icons.qrc">:/icons/categories.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -3342,7 +3351,7 @@ background-color: rgba(0,0,0,0);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/employee.png</pixmap>
+        <pixmap resource="icons/icons.qrc">:/icons/employee.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -3410,7 +3419,7 @@ background-color: rgba(0,0,0,0);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/sellings.png</pixmap>
+        <pixmap resource="icons/icons.qrc">:/icons/sellings.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -3523,7 +3532,7 @@ background-color: rgba(0,0,0,0);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/icons/bills.png</pixmap>
+        <pixmap resource="icons/icons.qrc">:/icons/bills.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
